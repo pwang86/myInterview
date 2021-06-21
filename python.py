@@ -1,4 +1,7 @@
- # spiral matrix II 
+from typing import List
+
+class Solution:
+    # spiral matrix II 
     def generateMatrix(self, n: int) -> List[List[int]]:
         res = [[0] * n for i in range(n)]
         loop = n // 2
