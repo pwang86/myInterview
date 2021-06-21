@@ -1,4 +1,5 @@
-// spiral matrix II
+public class Solution {
+    // spiral matrix II
     public int[][] GenerateMatrix(int n) {
         
         int[][] res = new int[n][];
@@ -46,3 +47,4 @@
         
         return res;
     }
+} 
