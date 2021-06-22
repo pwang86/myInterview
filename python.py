@@ -37,3 +37,26 @@ class Solution:
             res[mid][mid] = count
         
         return res
+        
+    # Remove Linked List Elements
+
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        if head == None:
+            return head
+        
+        dummy = ListNode(next=head)
+        pre = dummy
+        cur = head
+        
+        while cur != None:
+            if cur.val == val:
+                pre.next = cur.next
+            else:
+                pre = cur
+            cur = cur.next
+        return dummy.next
