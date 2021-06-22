@@ -45,3 +45,35 @@
   
   return res;
 };
+
+// Remove Linked List Elements
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+ var removeElements = function(head, val) {
+    if (head == null) return head;
+    
+    var dummy = new ListNode(-1, head);
+    var pre = dummy;
+    var cur = head;
+    
+    while (cur != null) {
+        if (cur.val == val) {
+            pre.next = cur.next;
+        } else {
+            pre = cur;
+        }
+        cur = cur.next;
+    }
+    
+    return dummy.next;
+};
