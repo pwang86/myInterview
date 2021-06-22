@@ -44,4 +44,37 @@ class solution {
         return res
     }
 
+    // Remove Linked List Elements
+    /**
+    * Definition for singly-linked list.
+    * public class ListNode {
+    *     public var val: Int
+    *     public var next: ListNode?
+    *     public init() { self.val = 0; self.next = nil; }
+    *     public init(_ val: Int) { self.val = val; self.next = nil; }
+    *     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+    * }
+    */
+     func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+        if head == nil {
+            return head
+        }
+        
+        let dummy = ListNode(0)
+        dummy.next = head
+        var pre: ListNode? = dummy
+        var cur: ListNode? = head
+        
+        while cur != nil {
+            if cur?.val == val {
+                pre.next = cur?.next
+            } else {
+                pre = cur!
+            }
+            cur = cur?.next
+        }
+        
+        return dummy.next
+    }
+
 }
