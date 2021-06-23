@@ -78,3 +78,76 @@ class solution {
     }
 
 }
+
+// Deisgn Linked List
+class ListNode {
+    var val: Int
+    var next: ListNode?
+    init(_ val: Int) {
+        self.val = val
+    }    
+}
+
+class MyLinkedList {
+    var head: ListNode?
+    var size = 0
+    
+    /** Initialize your data structure here. */
+    init() {
+        self.head = ListNode(0)
+    }
+    
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    func get(_ index: Int) -> Int {
+        if index >= self.size || index < 0 {
+            return -1
+        }
+        var cur = self.head
+        for i in 0...index {
+            cur = cur?.next
+        }
+        return cur!.val
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    func addAtHead(_ val: Int) {
+        self.addAtIndex(0, val)
+    }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    func addAtTail(_ val: Int) {
+        self.addAtIndex(self.size, val)
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    func addAtIndex(_ index: Int, _ val: Int) {
+        var tmp = index
+        if index < 0 {
+            tmp = 0
+        }
+        if index > self.size {
+            return
+        }
+        self.size += 1
+        var pre = self.head
+        for i in 0..<tmp {
+            pre = pre?.next
+        }
+        var cur = ListNode(val)
+        cur.next = pre?.next
+        pre?.next = cur
+    }
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    func deleteAtIndex(_ index: Int) {
+        if index < 0 || index >= self.size {
+            return
+        }
+        self.size -= 1
+        var pre = self.head
+        for i in 0..<index {
+            pre = pre?.next
+        }
+        pre?.next = pre?.next?.next
+    }
+}
