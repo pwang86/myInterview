@@ -77,6 +77,20 @@ class solution {
         return dummy.next
     }
 
+    // reverse linked list
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        var pre: ListNode? = nil
+        var tmp: ListNode? = nil
+        var cur = head
+        while cur != nil {
+            tmp = cur?.next
+            cur?.next = pre
+            pre = cur
+            cur = tmp
+        }
+        return pre
+    }
+
 }
 
 // Deisgn Linked List
