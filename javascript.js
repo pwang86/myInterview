@@ -78,6 +78,24 @@ var removeElements = function (head, val) {
     return dummy.next;
 };
 
+// reverse linked list
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+ var reverseList = function(head) {
+    let tmp = null;
+    let pre = null;
+    let cur = head;
+    while (cur != null) {
+        tmp = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = tmp;
+    }
+    return pre;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
