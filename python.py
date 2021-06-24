@@ -60,6 +60,18 @@ class Solution:
                 pre = cur
             cur = cur.next
         return dummy.next
+    
+    # reverse linked list
+    def reverseList(self, head: ListNode) -> ListNode:
+        pre = None
+        tmp = None
+        cur = head
+        while cur != None:
+            tmp = cur.next
+            cur.next = pre
+            pre = cur
+            cur = tmp
+        return pre
 
 # Deisgn Linked List
 class ListNode:
