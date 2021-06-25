@@ -91,6 +91,26 @@ class solution {
         return pre
     }
 
+    // swap nodes in pairs
+    func swapPairs(_ head: ListNode?) -> ListNode? {
+        if head == nil || head?.next == nil {
+            return head
+        }
+        
+        let dummy = ListNode(0, head)
+        var pre = dummy
+        var cur = head
+        while cur != nil && cur?.next != nil {
+            var tmp = cur?.next?.next
+            pre.next = cur?.next
+            cur?.next?.next = cur
+            cur?.next = tmp
+            pre = cur!
+            cur = cur?.next
+        }
+        return dummy.next
+    }
+
 }
 
 // Deisgn Linked List
