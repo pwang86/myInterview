@@ -96,6 +96,29 @@ var removeElements = function (head, val) {
     return pre;
 };
 
+
+// swap nodes in pairs
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+ var swapPairs = function(head) {
+    if (head == null || head.next == null) return head;
+    
+    let dummy = new ListNode(0, head);
+    let pre = dummy;
+    let cur = head;
+    while (cur != null && cur.next != null) {
+        let tmp = cur.next.next;
+        pre.next = cur.next;
+        cur.next.next = cur;
+        cur.next = tmp;
+        pre = cur;
+        cur = cur.next;
+    }
+    return dummy.next;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
