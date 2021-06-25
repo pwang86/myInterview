@@ -90,6 +90,26 @@ public class Solution {
             cur = tmp;
         }
         return pre;
+    }
+
+    // swap nodes in pairs
+    public ListNode SwapPairs(ListNode head) {
+        if (head == null || head.next == null) return head;
+        
+        ListNode dummy = new ListNode(0, head);
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            ListNode tmp = cur.next.next;
+            pre.next = cur.next;
+            cur.next.next = cur;
+            cur.next = tmp;
+            pre = cur;
+            cur = cur.next;
+        }
+        
+        return dummy.next;
+        
     } 
 } 
 
