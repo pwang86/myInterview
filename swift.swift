@@ -111,6 +111,22 @@ class solution {
         return dummy.next
     }
 
+    // remove nth node from end of list
+    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+        var dummy = ListNode(0, head)
+        var slow: ListNode? = dummy
+        var fast: ListNode? = dummy
+        for _ in 1...n {
+            fast = fast?.next
+        }
+        fast = fast?.next
+        while fast != nil {
+            fast = fast?.next
+            slow = slow?.next
+        }
+        slow?.next = slow?.next?.next
+        return dummy.next
+    }
 }
 
 // Deisgn Linked List
