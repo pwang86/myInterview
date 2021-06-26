@@ -118,6 +118,28 @@ var removeElements = function (head, val) {
     }
     return dummy.next;
 };
+// remove nth node from end of list
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+ var removeNthFromEnd = function(head, n) {
+    let dummy = new ListNode(0, head);
+    let slow = dummy;
+    let fast = dummy;
+    while (n > 0) {
+        fast = fast.next;
+        n--;
+    }
+    fast = fast.next;
+    while (fast != null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    slow.next = slow.next.next;
+    return dummy.next;
+};
 
 // Design Linked List
 class ListNode {
