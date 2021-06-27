@@ -105,6 +105,34 @@ class Solution:
             slow = slow.next
         slow.next = slow.next.next
         return dummy.next
+    
+    # intersection of two linked lists
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        lenA, lenB = 0, 0
+        curA, curB = headA, headB
+        while curA != None:
+            lenA += 1
+            curA = curA.next
+        while curB != None:
+            lenB += 1
+            curB = curB.next
+        curA = headA
+        curB = headB
+        
+        if lenB > lenA:
+            lenA, lenB = lenB, lenA
+            curA, curB = curB, curA
+        
+        gap = lenA - lenB
+        while gap > 0:
+            gap -= 1
+            curA = curA.next
+        while curA != None:
+            if curA == curB:
+                return curA
+            curA = curA.next
+            curB = curB.next
+        return None
 
 # Deisgn Linked List
 class ListNode:
