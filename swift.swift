@@ -127,6 +127,44 @@ class solution {
         slow?.next = slow?.next?.next
         return dummy.next
     }
+
+    // intersection of two linked lists
+    func getIntersectionNode(_ headA: ListNode?, _ headB: ListNode?) -> ListNode? {
+        var curA: ListNode? = headA
+        var curB: ListNode? = headB
+        var lenA = 0
+        var lenB = 0
+        while curA != nil {
+            lenA += 1
+            curA = curA?.next
+        }
+        while curB != nil {
+            lenB += 1
+            curB = curB?.next
+        }
+        curA = headA
+        curB = headB
+        
+        if lenB > lenA {
+            swap(&lenA, &lenB)
+            swap(&curA, &curB)
+        }
+        
+        var gap = lenA - lenB
+        while gap > 0 {
+            gap -= 1
+            curA = curA?.next
+        }
+        while curA != nil {
+            // compare two reference in swift using === or !==
+            if curA === curB {
+                return curA
+            }
+            curA = curA?.next
+            curB = curB?.next
+        }
+        return nil
+    }
 }
 
 // Deisgn Linked List
