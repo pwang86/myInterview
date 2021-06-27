@@ -141,6 +141,45 @@ var removeElements = function (head, val) {
     return dummy.next;
 };
 
+// intersection of two linked lists
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+ var getIntersectionNode = function(headA, headB) {
+    let lenA = 0, lenB = 0;
+    let curA = headA, curB = headB;
+    while (curA != null) {
+        curA = curA.next;
+        lenA++;
+    }
+    while (curB != null) {
+        curB = curB.next;
+        lenB++;
+    }
+    curA = headA;
+    curB = headB;
+    
+    if (lenB > lenA) {
+        [lenA, lenB] = [lenB, lenA];
+        [curA, curB] = [curB, curA];
+    }
+    let gap = lenA - lenB;
+    while (gap > 0) {
+        gap--;
+        curA = curA.next;
+    }
+    while (curA != null) {
+        if (curA == curB) {
+            return curA;
+        }
+        curA = curA.next;
+        curB = curB.next;
+    }
+    return null;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
