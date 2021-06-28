@@ -165,6 +165,26 @@ class solution {
         }
         return nil
     }
+
+    // linked list cycle ii
+    func detectCycle(_ head: ListNode?) -> ListNode? {
+        var fast: ListNode? = head
+        var slow: ListNode? = head
+        while fast != nil && fast?.next != nil {
+            fast = fast?.next?.next
+            slow = slow?.next
+            if fast === slow {
+                var index1: ListNode? = fast
+                var index2: ListNode? = head
+                while index1 !== index2 {
+                    index1 = index1?.next
+                    index2 = index2?.next
+                }
+                return index2
+            }
+        }
+        return nil
+    }
 }
 
 // Deisgn Linked List
