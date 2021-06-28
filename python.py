@@ -134,6 +134,21 @@ class Solution:
             curB = curB.next
         return None
 
+    # Linked list cycle II
+    def detectCycle(self, head: ListNode) -> ListNode:
+        fast, slow = head, head
+        while fast and fast.next: 
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                index1 = fast
+                index2 = head
+                while index1 != index2:
+                    index1 = index1.next
+                    index2 = index2.next
+                return index2 
+        return None
+
 # Deisgn Linked List
 class ListNode:
     def __init__(self, val):
