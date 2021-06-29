@@ -185,6 +185,28 @@ class solution {
         }
         return nil
     }
+
+    // valid anagram
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+        if s.count != t.count {
+            return false
+        }
+        var record = [Int](repeating: 0, count: 26)
+        for i in s {
+            var diff = Int(i.asciiValue! - Character("a").asciiValue!)
+            record[diff] += 1
+        }
+        for i in t {
+            var diff =  Int(i.asciiValue! - Character("a").asciiValue!)
+            record[diff] -= 1
+        }
+        for i in 0..<26 {
+            if record[i] != 0 {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 // Deisgn Linked List
