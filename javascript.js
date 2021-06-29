@@ -179,6 +179,7 @@ var removeElements = function (head, val) {
     }
     return null;
 };
+
 // linked list cycle II
 /**
  * @param {ListNode} head
@@ -201,6 +202,29 @@ var removeElements = function (head, val) {
         }
     }
     return null;
+};
+
+// valid anagram
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ var isAnagram = function(s, t) {
+    if (s.length != t.length)
+        return false;
+    let record = new Array(26).fill(0);
+    for (let i of s) {
+        record[i.charCodeAt() - 'a'.charCodeAt()] += 1;
+    }
+    for (let i of t) {
+        record[i.charCodeAt() - 'a'.charCodeAt()] -= 1;
+    }
+    for (let i = 0; i < 26; i++) {
+        if (record[i] != 0)
+            return false;
+    }
+    return true;
 };
 
 // Design Linked List
