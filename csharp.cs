@@ -194,6 +194,28 @@ public class Solution {
         }
         return null;
     }
+
+    // valid anagram
+    public bool IsAnagram(string s, string t) {
+        if(s.Length != t.Length){
+            return false;
+        }
+        
+        int[] record = new int[26];
+        foreach (char c in s.ToCharArray()) {
+            record[c - 'a'] += 1;
+        }
+        foreach (char c in t.ToCharArray()) {
+            record[c - 'a'] -= 1;
+        }
+        
+        for (int i = 0; i < record.Length; i++) {
+            if (record[i] != 0)
+                return false;
+        }
+        
+        return true;
+    }
 } 
 
 // Deisgn Linked List
