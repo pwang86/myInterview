@@ -207,6 +207,21 @@ class solution {
         }
         return true
     }
+
+    // intersection of two arrays
+    func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        if nums1 == nil || nums1.count == 0 || nums2 == nil || nums2.count == 0 {
+            return []
+        }
+        var set1: Set<Int> = Set(nums1)
+        var res = Set<Int>()
+        for num in nums2 {
+            if set1.contains(num) {
+                res.insert(num)
+            }
+        }
+        return Array(res)
+    }
 }
 
 // Deisgn Linked List
