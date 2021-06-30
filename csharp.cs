@@ -216,6 +216,27 @@ public class Solution {
         
         return true;
     }
+
+    // intersection of two arrays
+    public int[] Intersection(int[] nums1, int[] nums2) {
+        if (nums1.Length == 0 || nums1 == null || nums2.Length == 0 || nums2 == null)
+            return new int[0];
+        HashSet<int> set1 = new HashSet<int>(nums1);
+        HashSet<int> res = new HashSet<int>();
+        
+        foreach(int i in nums2) {
+            if (set1.Contains(i)) {
+                res.Add(i);
+            }
+        }
+        
+        int[] resArr = new int[res.Count];
+        int index = 0;
+        foreach (int i in res) {
+            resArr[index++] = i;
+        }
+        return resArr;
+    }
 } 
 
 // Deisgn Linked List
