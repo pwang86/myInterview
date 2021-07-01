@@ -172,6 +172,26 @@ class Solution:
             if n in set1:
                 res.add(n)
         return list(res)
+    
+    # happy number
+    def isHappy(self, n: int) -> bool:
+        mySet = set()
+        while 1:
+            n = self.getSum(n)
+            if n == 1:
+                return True
+            if n in mySet:
+                return False
+            else:
+                mySet.add(n)
+
+    def getSum(self, n: int) -> int:
+        sum = 0
+        while n > 0:
+            tmp = n % 10
+            sum += tmp * tmp
+            n //= 10
+        return sum
 
 # Deisgn Linked List
 class ListNode:
