@@ -222,6 +222,27 @@ class solution {
         }
         return Array(res)
     }
+
+    // happy number
+    func isHappy(_ n: Int) -> Bool {
+        var mySet = Set<Int>()
+        var res = n
+        while res != 1 && !mySet.contains(res) {
+            mySet.insert(res)
+            res = getSum(res)
+        }
+        return res == 1
+    }
+    func getSum(_ n: Int) -> Int {
+        var sum: Int = 0
+        var a = n
+        while a > 0 {
+            var tmp = a % 10
+            sum += tmp * tmp
+            a /= 10
+        }
+        return sum
+    }
 }
 
 // Deisgn Linked List
