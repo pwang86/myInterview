@@ -237,6 +237,25 @@ public class Solution {
         }
         return resArr;
     }
+
+    // happy number
+    public bool IsHappy(int n) {
+        HashSet<int> set = new HashSet<int>();
+        while (n != 1 && !set.Contains(n)) {
+            set.Add(n);
+            n = GetSum(n);
+        }
+        return n == 1;
+    }
+    public int GetSum(int n) {
+        int sum = 0;
+        while (n > 0) {
+            int tmp = n % 10;
+            sum += tmp * tmp;
+            n /= 10;
+        }
+        return sum;
+    }
 } 
 
 // Deisgn Linked List
