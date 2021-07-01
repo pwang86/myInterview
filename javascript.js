@@ -248,6 +248,30 @@ var removeElements = function (head, val) {
     return Array.from(res);
 };
 
+// happy number
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+ var isHappy = function(n) {
+    let mySet = new Set();
+    while (n != 1 && !mySet.has(n)) {
+        mySet.add(n);
+        n = getSum(n);
+    }
+    return n == 1;
+};
+
+function getSum(n) {
+    let sum = 0;
+    while (n > 0) {
+        let tmp = n % 10;
+        sum += tmp * tmp;
+        n = parseInt(n / 10);
+    }
+    return sum;
+} 
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
