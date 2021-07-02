@@ -272,6 +272,26 @@ function getSum(n) {
     return sum;
 } 
 
+// two sum
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+ var twoSum = function(nums, target) {
+    let res = new Array(2);
+    let myMap = new Map();
+    
+    for (let i = 0; i < nums.length; i++) {
+        let tmp = target - nums[i];
+        if (myMap.has(tmp)) {
+            return [i, myMap.get(tmp)];
+        }
+        myMap.set(nums[i], i);
+    }
+    return res;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
