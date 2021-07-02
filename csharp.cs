@@ -256,6 +256,23 @@ public class Solution {
         }
         return sum;
     }
+
+    // two sum
+    public int[] TwoSum(int[] nums, int target) {
+        int[] res = new int[2];
+
+        Dictionary<int, int> dic = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++) {
+            int tmp = target - nums[i];
+            if (dic.ContainsKey(tmp)) {
+                res[0] = i;
+                res[1] = dic[tmp];
+                return res;
+            }
+            dic.Add(nums[i], i);
+        }
+        return res;
+   }
 } 
 
 // Deisgn Linked List
