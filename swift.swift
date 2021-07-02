@@ -243,6 +243,19 @@ class solution {
         }
         return sum
     }
+
+    //two sum
+     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var dic: [Int: Int] = [:]
+        for (index, value) in nums.enumerated() {
+            var tmp = target - value
+            if dic[tmp] != nil {
+                return [index, dic[tmp]!]
+            }
+            dic[value] = index
+        }
+        return []
+    }
 }
 
 // Deisgn Linked List
