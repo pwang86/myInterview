@@ -192,6 +192,17 @@ class Solution:
             sum += tmp * tmp
             n //= 10
         return sum
+    
+    # two sum
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        res = [None] * 2
+        dic = {}
+        for i, num in enumerate(nums):
+            tmp = target - num
+            if dic.get(tmp) != None:
+                return [i, dic.get(tmp)]
+            dic[num] = i
+        return res
 
 # Deisgn Linked List
 class ListNode:
