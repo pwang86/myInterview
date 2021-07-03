@@ -292,6 +292,33 @@ function getSum(n) {
     return res;
 };
 
+// 4 sum II
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @param {number[]} nums3
+ * @param {number[]} nums4
+ * @return {number}
+ */
+ var fourSumCount = function(nums1, nums2, nums3, nums4) {
+    let myMap = new Map()
+    let res = 0
+    for (const i of nums1) {
+        for (const j of nums2) {
+            myMap.set(i + j, (myMap.get(i + j) || 0) + 1);
+        }
+    }
+    
+    for (const i of nums3) {
+        for (const j of nums4) {
+            if (myMap.has(0 - i - j)) {
+                res += myMap.get(0 - i - j);
+            }
+        }
+    }
+    return res;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
