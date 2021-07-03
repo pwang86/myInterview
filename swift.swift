@@ -256,6 +256,31 @@ class solution {
         }
         return []
     }
+
+    // 4 sum II
+    func fourSumCount(_ nums1: [Int], _ nums2: [Int], _ nums3: [Int], _ nums4: [Int]) -> Int {
+        var myMap: [Int : Int] = [:]
+        var res = 0
+        
+        for i in nums1 {
+            for j in nums2 {
+                if let value = myMap[i + j] {
+                    myMap[i + j] = value + 1
+                } else {
+                    myMap[i + j] = 1
+                }
+            }
+        } 
+        
+        for i in nums3 {
+            for j in nums4 {
+                if let value = myMap[0 - i - j] {
+                    res += value
+                }
+            }
+        }   
+        return res
+    }
 }
 
 // Deisgn Linked List
