@@ -203,6 +203,24 @@ class Solution:
                 return [i, dic.get(tmp)]
             dic[num] = i
         return res
+    
+    # 4sum II
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        myMap = dict()
+        for ni in nums1:
+            for j in nums2:
+                if i + j in myMap:
+                    myMap[i + j] += 1
+                else:
+                    myMap[i + j] = 1
+        
+        # if the -(a+b) exists in nums3 and nums4, we shall add the count
+        count = 0
+        for i in nums3:
+            for j in nums4:
+                if 0 - i - j in myMap:
+                    count += myMap[0 - i - j]
+        return count
 
 # Deisgn Linked List
 class ListNode:
