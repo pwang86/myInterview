@@ -273,6 +273,31 @@ public class Solution {
         }
         return res;
    }
+
+   // 4 sum II
+   public int FourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Dictionary<int, int> dic = new Dictionary<int, int>();
+        int res = 0;
+        
+        foreach (int i in nums1) {
+            foreach (int j in nums2) {
+                if (dic.ContainsKey(i + j)) {
+                    dic[i + j]++;
+                } else {
+                    dic.Add(i + j, 1);
+                }
+            }
+        }   
+        foreach (int i in nums3) {
+            foreach (int j in nums4) {
+                if (dic.ContainsKey(0 - i - j)) {
+                    res += dic[0 - i - j];
+                }
+            }
+        }
+        
+        return res;
+    }
 } 
 
 // Deisgn Linked List
