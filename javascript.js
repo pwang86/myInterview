@@ -319,6 +319,30 @@ function getSum(n) {
     return res;
 };
 
+// ransome note
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+ var canConstruct = function(ransomNote, magazine) {
+    let record = new Array(26).fill(0);
+    let tmp = 0;
+    for (const i of magazine) {
+        tmp = i.charCodeAt() - 'a'.charCodeAt();
+        record[tmp]++;
+    }
+    for (const i of ransomNote) {
+        tmp = i.charCodeAt() - 'a'.charCodeAt();
+        if (record[tmp] > 0) {
+            record[tmp]--;
+        } else {
+            return false;
+        }
+    }
+    return true;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
