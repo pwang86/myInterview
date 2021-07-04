@@ -221,6 +221,22 @@ class Solution:
                 if 0 - i - j in myMap:
                     count += myMap[0 - i - j]
         return count
+    
+    # ransome Note
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        record = [0] * 26
+        tmp = 0
+        
+        for i in magazine:
+            record[ord(i) - ord('a')] += 1
+                                
+        for i in ransomNote:
+            tmp = ord(i) - ord('a')
+            if record[tmp] > 0:
+                record[tmp] -= 1
+            else:
+                return False
+        return True
 
 # Deisgn Linked List
 class ListNode:
