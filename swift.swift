@@ -281,6 +281,27 @@ class solution {
         }   
         return res
     }
+
+    // ransome note
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        var record = Array(repeating: 0, count: 26)
+        var tmp = 0
+        
+        for i in magazine {
+            tmp = Int(i.asciiValue! - Character("a").asciiValue!)
+            record[tmp] += 1
+        }
+        
+        for i in ransomNote {
+            tmp = Int(i.asciiValue! - Character("a").asciiValue!)
+            if record[tmp] > 0 {
+                record[tmp] -= 1
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 // Deisgn Linked List
