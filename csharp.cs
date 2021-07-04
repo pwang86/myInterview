@@ -298,6 +298,24 @@ public class Solution {
         
         return res;
     }
+
+    // ransom note
+    public bool CanConstruct(string ransomNote, string magazine) {
+        int[] record = new int[26];
+        foreach (char i in magazine) {
+            record[i - 'a']++;
+        }
+        
+        foreach (char i in ransomNote) {
+            if (record[i - 'a'] > 0) {
+                record[i - 'a']--;
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 } 
 
 // Deisgn Linked List
