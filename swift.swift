@@ -302,6 +302,44 @@ class solution {
         }
         return true
     }
+
+    // 3 sum
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        var res:[[Int]] = []
+        var copy = nums.sorted()
+        
+        for i in 0..<copy.count {
+            if copy[i] > 0 {
+                return res
+            }
+            if i > 0 && copy[i - 1] == copy[i] {
+                continue
+            }
+            
+            var left = i + 1
+            var right = copy.count - 1
+            while right > left {
+                let tmp = copy[i] + copy[left] + copy[right]
+                if tmp > 0 {
+                    right -= 1
+                } else if tmp < 0 {
+                    left += 1
+                } else {
+                    res.append([copy[i], copy[left], copy[right]])
+                    while right > left && copy[right] == copy[right - 1] {
+                        right -= 1
+                    }
+                    while right > left && copy[left] == copy[left + 1] {
+                        left += 1
+                    }
+                    right -= 1
+                    left += 1
+                }
+            }
+        }
+        
+        return res
+    }
 }
 
 // Deisgn Linked List
