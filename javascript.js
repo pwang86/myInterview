@@ -343,6 +343,40 @@ function getSum(n) {
     return true;
 };
 
+
+// 3 sum
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var threeSum = function(nums) {
+    let res = [];
+    nums.sort((a, b) => a- b);
+    
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > 0) return res;
+        if (i > 0 && nums[i - 1] == nums[i]) continue;
+        
+        let left = i + 1;
+        let right = nums.length - 1;
+        while (right > left) {
+            let tmp = nums[i] + nums[left] + nums[right];
+            if (tmp > 0) {
+                right--;
+            } else if (tmp < 0) {
+                left++;
+            } else {
+                res.push([nums[i], nums[left], nums[right]]);
+                while (right > left && nums[right] == nums[right - 1]) right--;
+                while (right > left && nums[left] == nums[left + 1]) left++;
+                left++;
+                right--;
+            }
+        }
+    }
+    return res;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
