@@ -316,6 +316,37 @@ public class Solution {
         
         return true;
     }
+
+    // 3 sum
+     public IList<IList<int>> ThreeSum(int[] nums) {
+        IList<IList<int>> res = new List<IList<int>>();
+        Array.Sort(nums);
+        for (int i = 0; i < nums.Length; i++) {
+            if (nums[i] > 0) return res;
+            
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            
+            int left = i + 1;
+            int right = nums.Length - 1;
+            while (right > left) {
+                int tmp = nums[i] + nums[left] + nums[right];
+                if (tmp > 0) {
+                    right--;
+                } else if (tmp < 0) {
+                    left++;
+                } else {
+                    res.Add(new int[] {nums[i], nums[left], nums[right]}); 
+                    
+                    while (right > left && nums[right] == nums[right - 1]) right--;
+                    while (right > left && nums[left] == nums[left + 1]) left++;
+                    right--;
+                    left++;
+                }
+            }
+        }
+        
+        return res;
+    }
 } 
 
 // Deisgn Linked List
