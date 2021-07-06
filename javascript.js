@@ -377,6 +377,41 @@ function getSum(n) {
     return res;
 };
 
+// 4sum
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
+ var fourSum = function(nums, target) {
+    let res = [];
+    
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i - 1] == nums[i]) continue;
+        for (let j = i + 1; j < nums.length; j++) {
+            if ((j > i + 1) && nums[j - 1] == nums[j]) continue;
+            let left = j + 1;
+            let right = nums.length - 1;
+            while (right > left) {
+                let sum = nums[i] + nums[j] + nums[left] + nums[right];
+                if (sum > target) {
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    res.push([nums[i], nums[j], nums[left], nums[right]]);
+                    while (right > left && nums[right - 1] == nums[right]) right--;
+                    while (right > left && nums[left] == nums[left + 1]) left++;
+                    left++;
+                    right--;
+                }
+            }
+        }
+    }
+    return res;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
