@@ -347,6 +347,38 @@ public class Solution {
         
         return res;
     }
+
+    // 4 sum
+     public IList<IList<int>> FourSum(int[] nums, int target) {
+        IList<IList<int>> res = new List<IList<int>>();
+        Array.Sort(nums);
+        
+        for (int i = 0; i < nums.Length; i++) {
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            
+            for (int j = i + 1; j < nums.Length; j++) {
+                if ((j > i + 1) && nums[j - 1] == nums[j]) continue;
+                
+                int left = j + 1;
+                int right = nums.Length - 1;
+                while (right > left) {
+                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum > target) {
+                        right--;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        res.Add(new int[] {nums[i], nums[j], nums[left], nums[right]});
+                        while (right > left && nums[right - 1] == nums[right]) right--;
+                        while (right > left && nums[left + 1] == nums[left]) left++;
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 } 
 
 // Deisgn Linked List
