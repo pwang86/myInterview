@@ -340,6 +340,44 @@ class solution {
         
         return res
     }
+
+    // 4 sum
+     func fourSum(_ nums: [Int], _ target: Int) -> [[Int]] {
+        var res:[[Int]] = []
+        var copy = nums.sorted()
+        
+        for i in 0..<copy.count {
+            if i > 0 && copy[i - 1] == copy[i] {
+                continue
+            }
+            for j in i+1..<copy.count {
+                if j > i + 1 && copy[j - 1] == copy[j] {
+                    continue
+                }
+                var left = j + 1
+                var right = copy.count - 1
+                while right > left {
+                    let sum = copy[i] + copy[j] + copy[left] + copy[right]
+                    if sum > target {
+                        right -= 1
+                    } else if sum < target {
+                        left += 1
+                    } else {
+                        res.append([copy[i], copy[j], copy[left], copy[right]])
+                        while right > left && copy[right - 1] == copy[right] {
+                            right -= 1
+                        }
+                        while right > left && copy[left + 1] == copy[left] {
+                            left += 1 
+                        }
+                        right -= 1
+                        left += 1
+                    }
+                }
+            }
+        }
+        return res
+    }
 }
 
 // Deisgn Linked List
