@@ -267,6 +267,36 @@ class Solution:
                     left += 1
                 
         return res
+    
+    # 4 sum
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        res = []
+        nums.sort()
+        
+        for i in range(len(nums)):
+            if i > 0 and nums[i - 1] == nums[i]:
+                continue
+            for j in range(i + 1, len(nums)):
+                if j > i + 1 and nums[j - 1] == nums[j]:
+                    continue
+                left = j + 1
+                right = len(nums) - 1
+                while right > left:
+                    sum = nums[i] + nums[j] + nums[left] + nums[right]
+                
+                    if sum > target:
+                        right -= 1
+                    elif sum < target:
+                        left += 1
+                    else:
+                        res.append([nums[i], nums[j], nums[left], nums[right]])
+                        while right > left and nums[right - 1] == nums[right]:
+                            right -= 1
+                        while right > left and nums[left + 1] == nums[left]:
+                            left += 1
+                        left += 1
+                        right -= 1
+        return res
 
 # Deisgn Linked List
 class ListNode:
