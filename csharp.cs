@@ -379,6 +379,18 @@ public class Solution {
         }
         return res;
     }
+
+    // reverse string
+    public void ReverseString(char[] s) {
+        int l = 0, r = s.Length - 1;
+        while (l < r) {
+            s[l] ^= s[r];
+            s[r] ^= s[l];
+            s[l] ^= s[r];
+            l++;
+            r--;
+        }
+    }
 } 
 
 // Deisgn Linked List
