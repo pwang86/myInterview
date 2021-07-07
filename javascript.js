@@ -412,6 +412,20 @@ function getSum(n) {
     return res;
 };
 
+// reverse string
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+ var reverseString = function(s) {
+    let l = 0, r = s.length - 1;
+    while (l < r) {
+        [s[l], s[r]] = [s[r], s[l]];
+        r--;
+        l++;
+    }
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
