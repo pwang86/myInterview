@@ -426,6 +426,25 @@ function getSum(n) {
     }
 };
 
+// reverse string II
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {string}
+ */
+ var reverseStr = function(s, k) {
+    let tmp = s.split("");
+    for (let i = 0; i < tmp.length; i += 2 * k) {
+        let start = i, end = Math.min(start + k - 1, tmp.length - 1);
+        while (start < end) {
+            [tmp[start], tmp[end]] = [tmp[end], tmp[start]];
+            start++;
+            end--;
+        }
+    }
+    return tmp.join("");
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
