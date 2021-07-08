@@ -308,6 +308,20 @@ class Solution:
             s[l], s[r] = s[r], s[l]
             l += 1
             r -= 1
+    
+    # reverse string II
+    def reverseStr(self, s: str, k: int) -> str:
+        tmp = list(s)
+        for i in range(0, len(s), 2 * k):
+            start = i
+            a = start + k - 1
+            b = len(s) - 1
+            end = b if a >= b else a
+            while start < end:
+                tmp[start], tmp[end] = tmp[end], tmp[start]
+                start += 1
+                end -= 1
+        return ''.join(tmp)
 
 # Deisgn Linked List
 class ListNode:
