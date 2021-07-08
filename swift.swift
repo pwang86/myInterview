@@ -388,6 +388,23 @@ class solution {
             r -= 1
         }
     }
+
+    // reverse string II
+     func reverseStr(_ s: String, _ k: Int) -> String {
+        var tmp = Array(s)
+        for i in stride(from: 0, to: tmp.count, by: 2 * k) {
+            var start = i
+            let a = tmp.count - 1
+            let b = i + k - 1
+            var end = a >= b ? b : a
+            while start < end {
+                tmp.swapAt(start, end)
+                start += 1
+                end -= 1
+            }
+         }
+        return String(tmp)
+    }
 }
 
 // Deisgn Linked List
