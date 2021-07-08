@@ -391,6 +391,23 @@ public class Solution {
             r--;
         }
     }
+
+    // reverse string II
+    public string ReverseStr(string s, int k) {
+        char[] tmp = s.ToCharArray();
+        for (int i = 0; i < tmp.Length; i += 2 * k) {
+            int start = i;
+            int end = Math.Min(start + k - 1, tmp.Length - 1);
+            while (start < end) {
+                tmp[start] ^= tmp[end];
+                tmp[end] ^= tmp[start];
+                tmp[start] ^= tmp[end];
+                start++;
+                end--;
+            }
+        }
+        return new string(tmp);
+    }
 } 
 
 // Deisgn Linked List
