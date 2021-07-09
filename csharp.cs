@@ -408,6 +408,14 @@ public class Solution {
         }
         return new string(tmp);
     }
+
+    // implement strStr()
+    public int StrStr(string haystack, string needle) {
+        if (needle ==""){
+            return 0;             
+        }
+        return haystack.IndexOf(needle);
+    }
 } 
 
 // Deisgn Linked List
