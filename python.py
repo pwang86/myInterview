@@ -322,6 +322,15 @@ class Solution:
                 start += 1
                 end -= 1
         return ''.join(tmp)
+    
+    # implement strStr
+    def strStr(self, haystack: str, needle: str) -> int:
+        if not needle:
+            return 0
+        try:
+            return haystack.index(needle)
+        except:
+            return -1
 
 # Deisgn Linked List
 class ListNode:
