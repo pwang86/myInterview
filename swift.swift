@@ -405,6 +405,22 @@ class solution {
          }
         return String(tmp)
     }
+
+    // implement strStr()
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        if needle.isEmpty { return 0 }
+        let haystack = Array(haystack), needle = Array(needle)
+        for i in 0..<haystack.count where i + needle.count <= haystack.count {
+            var j = 0
+            while j < needle.count && haystack[i+j] == needle[j] {
+                j += 1
+            }
+            if j == needle.count {
+                return i
+            }
+        }
+        return -1
+    }
 }
 
 // Deisgn Linked List
