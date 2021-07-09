@@ -445,6 +445,18 @@ function getSum(n) {
     return tmp.join("");
 };
 
+// implement strStr
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+ var strStr = function(haystack, needle) {
+    if (needle == "")
+        return 0;
+    return haystack.indexOf(needle);
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
