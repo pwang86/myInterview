@@ -407,16 +407,37 @@ class solution {
     }
 
     // implement strStr()
-    func strStr(_ haystack: String, _ needle: String) -> Int {
-        if needle.isEmpty { return 0 }
-        let haystack = Array(haystack), needle = Array(needle)
-        for i in 0..<haystack.count where i + needle.count <= haystack.count {
-            var j = 0
-            while j < needle.count && haystack[i+j] == needle[j] {
+     func strStr(_ haystack: String, _ needle: String) -> Int {
+        if needle.count == 0 {
+            return 0
+        }
+        
+        let arrHay = Array(haystack)
+        let arrNeedle = Array(needle)
+        
+        var next = Array(repeating: 0, count: arrNeedle.count)
+        var j = -1
+        next[0] = j
+        for i in 1..<arrNeedle.count {
+            while j >= 0 && arrNeedle[i] != arrNeedle[j + 1] {
+                j = next[j]
+            }
+            if arrNeedle[i] == arrNeedle[j + 1] {
                 j += 1
             }
-            if j == needle.count {
-                return i
+            next[i] = j
+        }
+        
+        j = -1
+        for i in arrHay.indices {
+            while j >= 0 && arrHay[i] != arrNeedle[j + 1] {
+                j = next[j]
+            }
+            if arrHay[i] == arrNeedle[j + 1] {
+                j += 1
+            }
+            if j == arrNeedle.count - 1 {
+                return (i - arrNeedle.count + 1) 
             }
         }
         return -1
