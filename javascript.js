@@ -484,6 +484,49 @@ function getNext(next, s) {
     }
 }
 
+// reverse words in a string
+/**
+ * @param {string} s
+ * @return {string}
+ */
+ var reverseWords = function(s) {
+    let arr = removeSpace(s).split("");
+    reverseString(arr, 0, arr.length - 1);
+    reverseEachWord(arr);
+    return arr.join("");
+};
+function removeSpace(s) {
+    let l = 0, r = s.length - 1;
+    while (l <= r && s[l] == ' ') l++;
+    while (l <= r && s[r] == ' ') r--;
+    let res = "";
+    while (l <= r) {
+        if (s[l] != ' ' || res[res.length - 1] != ' ') {
+            res += s[l];   
+        }
+        l++;
+    }
+    return res;
+}
+function reverseString(arr, start, end) {
+    while (start < end) {
+        [arr[start], arr[end]] = [arr[end], arr[start]];
+        start++;
+        end--;
+    }
+}
+function reverseEachWord(arr) {
+    let start = 0, end = 0;
+    while (start < arr.length) {
+        while (end < arr.length && arr[end] != ' ') {
+            end++;
+        }
+        reverseString(arr, start, end - 1);
+        start = end + 1;
+        end++;
+    }
+}
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
