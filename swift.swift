@@ -442,6 +442,56 @@ class solution {
         }
         return -1
     }
+
+    // Reverse Words in a string
+    func reverseWords(_ s: String) -> String {
+        var res:[Character] = removeSpace(s)
+        res = reverseString(res, 0, res.count - 1)
+        res = reverseEachWord(res)
+        return String(res)
+    }
+    func removeSpace(_ s: String) -> [Character] {
+        var l = 0, r = s.count - 1
+        var tmp = Array(s)
+        while l <= r && tmp[l] == " " {
+            l += 1
+        }
+        while l <= r && tmp[r] == " " {
+            r -= 1
+        }
+        var res = [Character]()
+        while l <= r {
+            if tmp[l] != " " || res.last != " " {
+                res.append(tmp[l])
+            }
+            l += 1
+        }
+        return res
+    }
+    func reverseString(_ arr: [Character], _ start: Int, _ end: Int) -> [Character] {
+        var l = start, r = end
+        var res = arr
+        while l < r {
+            res.swapAt(l, r)
+            l += 1
+            r -= 1
+        }
+        return res
+    }
+    func reverseEachWord(_ arr: [Character]) -> [Character] {
+        var start = 0, end = 0
+        var res = arr
+        while start < res.count {
+            while end < res.count && res[end] != " " {
+                end += 1
+            }
+            res = reverseString(res, start, end - 1)
+            start = end + 1
+            end += 1
+        }
+        return res
+    }
+    
 }
 
 // Deisgn Linked List
