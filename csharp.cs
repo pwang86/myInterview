@@ -446,6 +446,45 @@ public class Solution {
         
         return -1;
     }
+
+    // Reverse Words in a string
+    public string ReverseWords(string s) {
+        StringBuilder res = RemoveSpace(s);
+        ReverseString(res, 0, res.Length - 1);
+        ReverseEachWord(res);
+        return res.ToString();            
+    }
+    public StringBuilder RemoveSpace(string s) {
+        int l = 0, r = s.Length - 1;
+        while (l <= r && s[l] == ' ') l++;
+        while (l <= r && s[r] == ' ') r--;
+        StringBuilder sb = new StringBuilder();
+        while (l <= r) {
+            if (s[l] != ' ' || sb[sb.Length - 1] != ' ')
+                sb.Append(s[l]);
+            l++;
+        }
+        return sb;
+    }
+    public void ReverseString(StringBuilder sb, int start, int end) {
+        while(start < end) {
+            sb[start] ^= sb[end];
+            sb[end] ^= sb[start];
+            sb[start] ^= sb[end];
+            start++;
+            end--;
+        }
+    }
+    public void ReverseEachWord(StringBuilder sb) {
+        int start = 0, end = 1;
+        while (start < sb.Length) {
+            while (end < sb.Length && sb[end] != ' ')
+                end++;
+            ReverseString(sb, start, end - 1);
+            start = end + 1;
+            end = start + 1;
+        }
+    }
 } 
 
 // Deisgn Linked List
