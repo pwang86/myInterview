@@ -150,7 +150,7 @@ class Solution:
         return None
 
     # valid anagram
-     def isAnagram(self, s: str, t: str) -> bool:
+    def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
         record = [0] * 26
@@ -339,7 +339,7 @@ class Solution:
                 return i - len(needle) + 1
         return -1
         
-    def getNext(slef, next: list[int], s: str) -> None:
+    def getNext(slef, next: List[int], s: str) -> None:
         j = -1
         next[0] = j
         for i in range(1, len(s)):
@@ -350,12 +350,12 @@ class Solution:
             next[i] = j
     
     # reverse words in a string
-     def reverseWords(self, s: str) -> str:
+    def reverseWords(self, s: str) -> str:
         res = self.removeSpace(s)
         self.reverseString(res, 0 , len(res) - 1)
         self.reverseEachWord(res)
         return ''.join(res)
-    def removeSpace(self, s: str) -> list[int]:
+    def removeSpace(self, s: str) -> List[int]:
         l, r = 0, len(s) - 1
         while l <= r and s[l] == ' ':
             l += 1
@@ -367,12 +367,12 @@ class Solution:
                 res.append(s[l])
             l += 1
         return res        
-    def reverseString(self, arr: list[int], start: int, end: int) -> None:
+    def reverseString(self, arr: List[int], start: int, end: int) -> None:
         while start < end:
             arr[start], arr[end] = arr[end], arr[start]
             start += 1
             end -= 1
-    def reverseEachWord(self, arr: list[int]) -> None:
+    def reverseEachWord(self, arr: List[int]) -> None:
         l = r = 0
         while l < len(arr):
             while r < len(arr) and arr[r] != ' ':
