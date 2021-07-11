@@ -348,7 +348,39 @@ class Solution:
             if s[i] == s[j + 1]:
                 j += 1
             next[i] = j
-            
+    
+    # reverse words in a string
+     def reverseWords(self, s: str) -> str:
+        res = self.removeSpace(s)
+        self.reverseString(res, 0 , len(res) - 1)
+        self.reverseEachWord(res)
+        return ''.join(res)
+    def removeSpace(self, s: str) -> list[int]:
+        l, r = 0, len(s) - 1
+        while l <= r and s[l] == ' ':
+            l += 1
+        while l <= r and s[r] == ' ':
+            r -= 1
+        res = []
+        while l <= r:
+            if s[l] != ' ' or res[- 1] != ' ':
+                res.append(s[l])
+            l += 1
+        return res        
+    def reverseString(self, arr: list[int], start: int, end: int) -> None:
+        while start < end:
+            arr[start], arr[end] = arr[end], arr[start]
+            start += 1
+            end -= 1
+    def reverseEachWord(self, arr: list[int]) -> None:
+        l = r = 0
+        while l < len(arr):
+            while r < len(arr) and arr[r] != ' ':
+                r += 1
+            self.reverseString(arr, l , r - 1)
+            l = r + 1
+            r += 1
+        
 
 # Deisgn Linked List
 class ListNode:
