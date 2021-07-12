@@ -527,6 +527,36 @@ function reverseEachWord(arr) {
     }
 }
 
+// Repeated Substring Pattern
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var repeatedSubstringPattern = function(s) {
+    const len = s.length;
+    if (len == 0) return false;
+    
+    var next = new Array(len);
+    getNext(next, s);
+    
+    if (next[len - 1] != -1 && len % (len - (next[len - 1] + 1)) == 0) 
+        return true;
+    return false;
+};
+function getNext(next, s) {
+    var j = -1
+    next[0] = j
+    for (let i = 1; i < s.length; i++) {
+        while (j >= 0 && s[i] != s[j + 1]) {
+            j = next[j];
+        }
+        if (s[i] == s[j + 1]) {
+            j++;
+        }
+        next[i] = j;
+    }
+}
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
