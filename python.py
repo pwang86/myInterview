@@ -380,7 +380,30 @@ class Solution:
             self.reverseString(arr, l , r - 1)
             l = r + 1
             r += 1
+    
+    # Repeated Substring Pattern
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        if len(s) == 0:
+            return False
         
+        length = len(s)
+        next = [0] * length
+        self.getNext(next, s)
+        
+        if next[- 1] != -1 and length % (length - (next[length - 1] + 1)) == 0:
+            return True
+        
+        return False
+    
+    def getNext(self, next: List[int], s: str):
+        j = -1
+        next[0] = j
+        for i in range(1, len(s)):
+            while j >= 0 and s[i] != s[j + 1]:
+                j = next[j]
+            if s[i] == s[j + 1]:
+                j += 1
+            next[i] = j
 
 # Deisgn Linked List
 class ListNode:
