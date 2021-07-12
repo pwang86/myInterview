@@ -491,6 +491,37 @@ class solution {
         }
         return res
     }
+
+    // Repeated Substring Pattern
+    func repeatedSubstringPattern(_ s: String) -> Bool {
+        if s.count == 0 {
+            return false
+        }
+        
+        let len = s.count
+        var next:[Int] = getNext(s)
+        
+        if next[len - 1] != -1, len % (len - (next[len - 1] + 1)) == 0 {
+            return true
+        }
+        return false
+    }
+    func getNext(_ s: String) -> [Int]{
+        var next = Array(repeating: 0, count: s.count)
+        let tmp = Array(s)
+        var j = -1
+        next[0] = j
+        for i in 1..<tmp.count {
+            while j >= 0 && tmp[i] != tmp[j + 1] {
+                j = next[j]
+            }
+            if tmp[i] == tmp[j + 1] {
+                j += 1
+            }
+            next[i] = j
+        }
+        return next;
+    }
     
 }
 
