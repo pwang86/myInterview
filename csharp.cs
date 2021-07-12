@@ -485,6 +485,32 @@ public class Solution {
             end = start + 1;
         }
     }
+
+    // Repeated Substring Pattern
+    public bool RepeatedSubstringPattern(string s) {
+        if (s.Length == 0) return false;
+        
+        int[] next = new int[s.Length];
+        GetNext(next, s);
+        
+        int len = s.Length;
+        if (next[len - 1] != -1 && len % (len - (next[len - 1] + 1)) == 0)
+            return true;
+        return false;
+    }
+    public void GetNext(int[] next, string s) {
+        int j = -1;
+        next[0] = j;
+        for (int i = 1; i < s.Length; i++) {
+            while (j >= 0 && s[i] != s[j + 1]) {
+                j = next[j];
+            }
+            if (s[i] == s[j + 1]) {
+                j++;
+            }
+            next[i] = j;
+        }
+    }
 } 
 
 // Deisgn Linked List
