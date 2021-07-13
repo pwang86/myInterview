@@ -405,6 +405,44 @@ class Solution:
                 j += 1
             next[i] = j
 
+#implement queue using stacks
+class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.sIn = list()
+        self.sOut = list()
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        self.sIn.append(x)
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        if len(self.sOut) == 0:
+            while len(self.sIn) != 0:
+                self.sOut.append(self.sIn.pop())
+        return self.sOut.pop()
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        res = self.pop()
+        self.sOut.append(res)
+        return res
+
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        return len(self.sIn) == 0 and len(self.sOut) == 0
 # Deisgn Linked List
 class ListNode:
     def __init__(self, val):
