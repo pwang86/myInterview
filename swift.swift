@@ -525,6 +525,43 @@ class solution {
     
 }
 
+// implement queue using stacks
+class MyQueue {
+    var sIn: [Int] = []
+    var sOut: [Int] = []
+    /** Initialize your data structure here. */
+    init() {
+
+    }
+    
+    /** Push element x to the back of queue. */
+    func push(_ x: Int) {
+        sIn.append(x)
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    func pop() -> Int {
+        if sOut.isEmpty {
+            while !sIn.isEmpty {
+                sOut.append(sIn.removeLast())
+            }
+        }
+        return sOut.removeLast()
+    }
+    
+    /** Get the front element. */
+    func peek() -> Int {
+        let res = pop()
+        sOut.append(res)
+        return res
+    }
+    
+    /** Returns whether the queue is empty. */
+    func empty() -> Bool {
+        return sIn.isEmpty && sOut.isEmpty
+    }
+}
+
 // Deisgn Linked List
 class ListNode {
     var val: Int
