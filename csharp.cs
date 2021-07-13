@@ -513,6 +513,45 @@ public class Solution {
     }
 } 
 
+// implement queue using stacks
+public class MyQueue {
+    Stack<int> sIn;
+    Stack<int> sOut;
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        sIn = new Stack<int>();
+        sOut = new Stack<int>();
+    }
+    
+    /** Push element x to the back of queue. */
+    public void Push(int x) {
+          sIn.Push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int Pop() {
+        if (!sOut.Any()) {
+            while (sIn.Any()) {
+                sOut.Push(sIn.Pop());
+            }
+        }
+        return (int)sOut.Pop();
+    }
+    
+    
+    /** Get the front element. */
+    public int Peek() {
+        int res = this.Pop();
+        sOut.Push(res);
+        return res;
+    }
+    
+    /** Returns whether the queue is empty. */
+    public bool Empty() {
+        return sIn.Any() && sOut.Any();
+    }
+ }
+
 // Deisgn Linked List
 public class ListNode {
     public int val;
