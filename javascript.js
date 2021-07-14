@@ -606,6 +606,55 @@ MyQueue.prototype.empty = function() {
     return this.sIn.length == 0 && this.sOut.length == 0;
 };
 
+// implement stack using queues
+/**
+ * Initialize your data structure here.
+ */
+ var MyStack = function() {
+    this.queue = [];
+};
+
+/**
+ * Push element x onto stack. 
+ * @param {number} x
+ * @return {void}
+ */
+MyStack.prototype.push = function(x) {
+    this.queue.push(x);
+};
+
+/**
+ * Removes the element on top of the stack and returns that element.
+ * @return {number}
+ */
+MyStack.prototype.pop = function() {
+    let count = this.queue.length;
+    count--;
+    while (count > 0) {
+        this.queue.push(this.queue.shift());
+        count--;
+    }
+    return this.queue.shift();
+};
+
+/**
+ * Get the top element.
+ * @return {number}
+ */
+MyStack.prototype.top = function() {
+    let res = this.pop();
+    this.queue.push(res);
+    return res;
+};
+
+/**
+ * Returns whether the stack is empty.
+ * @return {boolean}
+ */
+MyStack.prototype.empty = function() {
+    return this.queue.length == 0;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
