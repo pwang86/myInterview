@@ -562,6 +562,42 @@ class MyQueue {
     }
 }
 
+// implement stack using queues
+class MyStack {
+    var queue:[Int] = []
+    /** Initialize your data structure here. */
+    init() {
+    }
+    
+    /** Push element x onto stack. */
+    func push(_ x: Int) {
+        queue.append(x)
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    func pop() -> Int {
+        var size = queue.count
+        size -= 1
+        while size > 0 {
+            queue.append(queue.removeLast())
+            size -= 1
+        }
+        return queue.removeLast()
+    }
+    
+    /** Get the top element. */
+    func top() -> Int {
+        let res = pop()
+        queue.append(res)
+        return res
+    }
+    
+    /** Returns whether the stack is empty. */
+    func empty() -> Bool {
+        return queue.count == 0
+    }
+}
+
 // Deisgn Linked List
 class ListNode {
     var val: Int
