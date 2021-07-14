@@ -552,6 +552,44 @@ public class MyQueue {
     }
  }
 
+ // implement stack using queues
+ public class MyStack {
+    private Queue<int> queue;
+
+    /** Initialize your data structure here. */
+    public MyStack() {
+        queue = new Queue<int>();
+    }
+    
+    /** Push element x onto stack. */
+    public void Push(int x) {
+       queue.Enqueue(x);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int Pop() {
+        int count = queue.Count;
+        count--;
+        while (count > 0) {
+            queue.Enqueue(queue.Dequeue());
+            count--;
+        }
+        return queue.Dequeue();
+    }
+    
+    /** Get the top element. */
+    public int Top() {       
+        int res = this.Pop();
+        queue.Enqueue(res);
+        return res;
+    }
+    
+    /** Returns whether the stack is empty. */
+    public bool Empty() {
+        return queue.Count == 0;
+    }
+}
+
 // Deisgn Linked List
 public class ListNode {
     public int val;
