@@ -443,6 +443,48 @@ class MyQueue:
         Returns whether the queue is empty.
         """
         return len(self.sIn) == 0 and len(self.sOut) == 0
+
+# implement stack using queues
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.queue = list()
+
+    def push(self, x: int) -> None:
+        """
+        Push element x onto stack.
+        """
+        self.queue.append(x)
+
+    def pop(self) -> int:
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        count = len(self.queue)
+        count -= 1
+        while count > 0:
+            self.queue.append(self.queue.pop())
+            count -= 1
+        return self.queue.pop()
+
+    def top(self) -> int:
+        """
+        Get the top element.
+        """
+        res = self.pop()
+        self.queue.append(res)
+        return res
+
+    def empty(self) -> bool:
+        """
+        Returns whether the stack is empty.
+        """
+        return len(self.queue) == 0
+
+
 # Deisgn Linked List
 class ListNode:
     def __init__(self, val):
