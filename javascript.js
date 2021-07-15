@@ -655,6 +655,29 @@ MyStack.prototype.empty = function() {
     return this.queue.length == 0;
 };
 
+// valid parentheses
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var isValid = function(s) {
+    let stack = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == '(') {
+            stack.push(')');
+        } else if (s[i] == '{') {
+            stack.push('}');
+        } else if (s[i] == '[') {
+            stack.push(']');
+        } else if (stack.length == 0 || stack[stack.length - 1] != s[i]) {
+            return false;
+        } else {
+            stack.pop();
+        }
+    }
+    return stack.length == 0
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
