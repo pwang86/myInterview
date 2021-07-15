@@ -523,6 +523,25 @@ class solution {
         return next;
     }
     
+    // valid parentheses
+    func isValid(_ s: String) -> Bool {
+        var stack: [Character] = []
+        let arr = Array(s)
+        for i in 0..<arr.count {
+            if arr[i] == "(" {
+                stack.append(")")
+            } else if arr[i] == "{" {
+                stack.append("}")
+            } else if arr[i] == "[" {
+                stack.append("]")
+            } else if stack.count == 0 || stack[stack.count - 1] != arr[i] {
+                return false
+            } else {
+                stack.removeLast()
+            }
+        }
+        return stack.count == 0
+    }
 }
 
 // implement queue using stacks
