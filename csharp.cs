@@ -511,6 +511,27 @@ public class Solution {
             next[i] = j;
         }
     }
+
+    // valid parentheses
+    public bool IsValid(string s) {
+        Stack<char> stack = new Stack<char>();
+        for (int i = 0; i < s.Length; i++) {
+            char tmp = s[i];
+            if (tmp == '(') {
+                stack.Push(')');
+            } else if (tmp == '{') {
+                stack.Push('}');
+            } else if (tmp == '[') {
+                stack.Push(']');
+            } else if (stack.Count == 0 || stack.Peek() != tmp) {
+                return false;
+            } else {
+                stack.Pop();
+            }
+        }
+        
+        return stack.Count == 0;
+    }
 } 
 
 // implement queue using stacks
