@@ -404,6 +404,22 @@ class Solution:
             if s[i] == s[j + 1]:
                 j += 1
             next[i] = j
+    
+    # valid parentheses
+    def isValid(self, s: str) -> bool:
+        stack = list()
+        for i in range(len(s)):
+            if s[i] == '(':
+                stack.append(')')
+            elif s[i] == '{':
+                stack.append('}')
+            elif s[i] == '[':
+                stack.append(']')
+            elif len(stack) == 0 or stack[-1] != s[i]:
+                return False
+            else:
+                stack.pop()
+        return len(stack) == 0
 
 #implement queue using stacks
 class MyQueue:
@@ -483,6 +499,7 @@ class MyStack:
         Returns whether the stack is empty.
         """
         return len(self.queue) == 0
+
 
 
 # Deisgn Linked List
