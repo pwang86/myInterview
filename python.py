@@ -420,6 +420,16 @@ class Solution:
             else:
                 stack.pop()
         return len(stack) == 0
+    
+    # Remove All Adjacent Duplicates In String
+    def removeDuplicates(self, s: str) -> str:
+        res = list()
+        for i in range(len(s)):
+            if len(res) == 0 or res[-1] != s[i]:
+                res.append(s[i])
+            else:
+                res.pop()
+        return "".join(res)
 
 #implement queue using stacks
 class MyQueue:
