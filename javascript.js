@@ -678,6 +678,23 @@ MyStack.prototype.empty = function() {
     return stack.length == 0
 };
 
+// Remove All Adjacent Duplicates In String
+/**
+ * @param {string} s
+ * @return {string}
+ */
+ var removeDuplicates = function(s) {
+    let res = [];
+    for (let i = 0; i < s.length; i++) {
+        if (res.length == 0 || res[res.length - 1] != s[i]) {
+            res.push(s[i]);
+        } else {
+            res.pop();
+        }
+    }
+    return res.join("");
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
