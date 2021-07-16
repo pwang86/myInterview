@@ -532,6 +532,23 @@ public class Solution {
         
         return stack.Count == 0;
     }
+
+    // Remove All Adjacent Duplicates In String
+     public string RemoveDuplicates(string s) {
+        Stack<char> stack = new Stack<char>();
+        for (int i = 0; i < s.Length; i++) {
+            if (stack.Count == 0 || stack.Peek() != s[i]) {
+                stack.Push(s[i]);
+            } else {
+                stack.Pop();
+            }
+        }
+        string res = "";
+        while (stack.Count != 0) {
+            res = stack.Pop() + res;
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
