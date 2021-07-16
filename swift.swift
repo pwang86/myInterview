@@ -542,6 +542,20 @@ class solution {
         }
         return stack.count == 0
     }
+
+    // Remove All Adjacent Duplicates In String
+     func removeDuplicates(_ s: String) -> String {
+        var res: [Character] = []
+        let tmp = Array(s)
+        for i in 0..<s.count {
+            if res.count == 0 || res[res.count - 1] != tmp[i] {
+                res.append(tmp[i])
+            } else {
+                res.removeLast()
+            }
+        }
+        return String(res)
+    }
 }
 
 // implement queue using stacks
