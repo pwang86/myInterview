@@ -556,6 +556,27 @@ class solution {
         }
         return String(res)
     }
+
+    // Evaluate Reverse Polish Notation
+    func evalRPN(_ tokens: [String]) -> Int {
+        var stack:[Int] = []
+        for i in 0..<tokens.count {
+            if tokens[i] == "+" {
+                stack.append(stack.removeLast() + stack.removeLast())
+            } else if tokens[i] == "-" {
+                stack.append(-stack.removeLast() + stack.removeLast())
+            } else if tokens[i] == "*" {
+                stack.append(stack.removeLast() * stack.removeLast())
+            } else if tokens[i] == "/" {
+                let t1 = stack.removeLast()
+                let t2 = stack.removeLast()
+                stack.append(t2 / t1)
+            } else {
+                stack.append(Int(tokens[i])!)
+            }
+        }
+        return stack.removeLast()
+    }
 }
 
 // implement queue using stacks
