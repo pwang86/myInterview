@@ -695,6 +695,31 @@ MyStack.prototype.empty = function() {
     return res.join("");
 };
 
+// Evaluate Reverse Polish Notation
+/**
+ * @param {string[]} tokens
+ * @return {number}
+ */
+ var evalRPN = function(tokens) {
+    let stack = [];
+    for (let i = 0; i < tokens.length; i++) {
+        if (tokens[i] == "+") {
+            stack.push(stack.pop() + stack.pop());
+        } else if (tokens[i] == "-") {
+            stack.push(-stack.pop() + stack.pop());
+        } else if (tokens[i] == "*") {
+            stack.push(stack.pop() * stack.pop());
+        } else if (tokens[i] == "/") {
+            let t1 = stack.pop();
+            let t2 = stack.pop();
+            stack.push(t2 / t1 | 0);
+        } else {
+            stack.push(parseInt(tokens[i]));
+        }
+    }
+    return stack.pop();
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
