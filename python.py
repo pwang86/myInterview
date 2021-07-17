@@ -430,6 +430,19 @@ class Solution:
             else:
                 res.pop()
         return "".join(res)
+    
+    # Evaluate Reverse Polish Notation
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = list()
+        for i in range(len(tokens)):
+            if tokens[i] not in ["+", "-", "*", "/"]:
+                stack.append(tokens[i])
+            else:
+                t1 = stack.pop()
+                t2 = stack.pop()
+                res = eval(t2+tokens[i]+t1)
+                stack.append(str(int(res)))
+        return stack[-1]
 
 #implement queue using stacks
 class MyQueue:
