@@ -549,6 +549,27 @@ public class Solution {
         }
         return res;
     }
+
+    // Evaluate Reverse Polish Notation
+    public int EvalRPN(string[] tokens) {
+        Stack<int> stack = new Stack<int>();
+        for (int i = 0; i < tokens.Length; i++) {
+            if (tokens[i] == "+") {
+                stack.Push(stack.Pop() + stack.Pop());
+            } else if (tokens[i] == "-") {
+                stack.Push(-stack.Pop() + stack.Pop());
+            } else if (tokens[i] == "*") {
+                stack.Push(stack.Pop() * stack.Pop());
+            } else if (tokens[i] == "/") {
+                int t1 = stack.Pop();
+                int t2 = stack.Pop();
+                stack.Push(t2 / t1);
+            } else {
+                stack.Push(int.Parse(tokens[i]));
+            }
+        }
+        return stack.Pop();
+    }
 } 
 
 // implement queue using stacks
