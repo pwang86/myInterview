@@ -443,6 +443,36 @@ class Solution:
                 res = eval(t2+tokens[i]+t1)
                 stack.append(str(int(res)))
         return stack[-1]
+    
+    
+# Sliding Window Maximum
+class MyQueue:
+    def __init__(self):
+        self.myList = list()
+    def push(self, val: int) -> None:
+        while self.myList and val > self.myList[-1]:
+            self.myList.pop()
+        self.myList.append(val)
+    def pop(self, val: int) -> None:
+        if self.myList and val == self.myList[0]:
+            self.myList.pop(0)
+    def peek(self) -> int:
+        return self.myList[0]
+        
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        if len(nums) == 1:
+            return nums
+        mq = MyQueue()
+        res = list()
+        for i in range(k):
+            mq.push(nums[i])
+        res.append(mq.peek())
+        for i in range(k, len(nums)):
+            mq.pop(nums[i - k])
+            mq.push(nums[i])
+            res.append(mq.peek())
+        return res
 
 #implement queue using stacks
 class MyQueue:
