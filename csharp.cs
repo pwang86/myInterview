@@ -570,6 +570,43 @@ public class Solution {
         }
         return stack.Pop();
     }
+
+    // Sliding Window Maximum
+    public class MyQueue {
+        List<int> list = new List<int>();
+        public void Add(int val) {
+            while (list.Count != 0 && val > list[list.Count - 1]) {
+                list.RemoveAt(list.Count - 1);
+            }
+            list.Add(val);
+        }
+        public void Pop(int val) {
+            if (list.Count != 0 && val == list[0]) {
+                list.RemoveAt(0);
+            }
+        }
+        public int Peek() {
+            return list[0];
+        }
+    }
+    public int[] MaxSlidingWindow(int[] nums, int k) {
+        if (nums.Length == 1) {
+            return nums;
+        }
+        int[] res = new int[nums.Length - k + 1];
+        int count = 0;
+        MyQueue mq = new MyQueue();
+        for (int i = 0; i < k; i++) {
+            mq.Add(nums[i]);
+        }
+        res[count++] = mq.Peek();
+        for (int i = k; i < nums.Length; i++) {
+            mq.Pop(nums[i - k]);
+            mq.Add(nums[i]);
+            res[count++] = mq.Peek();
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
