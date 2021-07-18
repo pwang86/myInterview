@@ -577,6 +577,28 @@ class solution {
         }
         return stack.removeLast()
     }
+
+    // Sliding Window Maximum
+    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
+        if nums.count == 1 {
+            return nums
+        }
+        var res:[Int] = []
+        var indexArr:[Int] = []
+        for i in 0..<nums.count {
+            while indexArr.count != 0 && nums[i] >= nums[indexArr[indexArr.count - 1]] {
+                indexArr.removeLast()
+            }
+            indexArr.append(i)
+            while indexArr[0] <= i - k {
+                indexArr.removeFirst()
+            }
+            if i >= k - 1 {
+                res.append(nums[indexArr[0]])
+            }
+        }
+        return res
+    }
 }
 
 // implement queue using stacks
