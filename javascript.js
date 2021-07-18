@@ -720,6 +720,28 @@ MyStack.prototype.empty = function() {
     return stack.pop();
 };
 
+// Sliding Window Maximum
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+ var maxSlidingWindow = function(nums, k) {
+    let indexArr = [];
+    let res = [];
+    for (let i = 0; i < nums.length; i++) {
+        while (indexArr.length && nums[i] >= nums[indexArr[indexArr.length - 1]]) {
+            indexArr.pop();
+        }
+        indexArr.push(i);
+        while (indexArr[0] <= i - k) {
+            indexArr.shift();
+        }
+        if (i >= k - 1) res.push(nums[indexArr[0]]); 
+    }
+    return res;
+};
+
 // Design Linked List
 class ListNode {
     constructor(val, next) {
