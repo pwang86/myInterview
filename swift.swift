@@ -578,6 +578,74 @@ class solution {
         return stack.removeLast()
     }
 
+    // top k frequent elements
+    var dict: [Int: Int] = [:]
+    var unique: [Int] = []
+
+    private func swap(_ a: Int, _ b: Int) {
+        let temp = unique[a]
+        unique[a] = unique[b]
+        unique[b] = temp
+    }
+    
+    private func quickSelect(_ left: Int, _ right: Int, _ kSmallest: Int) {
+        // Base case contains only one element
+        if left == right {return}
+        // Selecting randomPivot index
+        let pivotIndex =
+            // left + Int(arc4random_uniform(UInt32(right - left)))
+        Int.random(in: left...right)
+        
+        // find pivot index in sortedList
+        let actualIndex =
+            partition(left: left, right: right, pivotIndex: pivotIndex)
+        
+        // If the pivot is in its final sorted position
+        if kSmallest == actualIndex {
+            return
+        } else if kSmallest < actualIndex {
+            // go left
+            quickSelect(left, actualIndex - 1, kSmallest)
+        } else {
+            // go right
+            quickSelect(actualIndex + 1, right, kSmallest)
+        }
+    }
+    
+    private func partition(left: Int, right: Int, pivotIndex: Int) -> Int {
+        let pivotFrequency = dict[unique[pivotIndex]]!
+        // 1. move pivot to end
+        swap(pivotIndex, right)
+        
+        var storeIndex = left
+        // 2. move all less frequent elements to the left
+        for i in left...right {
+            if dict[unique[i]]! < pivotFrequency {
+                swap(storeIndex, i)
+                storeIndex += 1
+            }
+        }
+        // 3. move pivot to its final place
+        swap(storeIndex, right)
+        return storeIndex
+    }
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+     // var dict: [Int: Int] = [:]
+     // for num in nums {
+     //     dict[num] = (dict[num] ?? 0) + 1
+     // }
+     // let sortedDict = dict.sorted(by: { $0.value > $1.value})
+     // return Array(sortedDict.map {$0.key}.prefix(k))
+        for num in nums {
+            dict[num] = (dict[num] ?? 0) + 1
+        }
+        unique = dict.keys.map {$0}
+        quickSelect(0, dict.count-1, dict.count-k)
+        
+        let result =  Array(unique.suffix(k))
+        return result
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
