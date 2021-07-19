@@ -571,6 +571,47 @@ public class Solution {
         return stack.Pop();
     }
 
+    // top k frequent elements
+    public int[] TopKFrequent(int[] nums, int k) {
+        if (k == nums.Length) {
+            return nums;
+        }
+        
+        int[] res = new int[k];
+        Dictionary<int, int> dic = new Dictionary<int, int>();
+        foreach (int num in nums) {
+            if (dic.ContainsKey(num)) {
+                dic[num]++;
+            } else {
+                dic.Add(num, 1);   
+            }
+        }
+        
+        var sd = new SortedList<int, List<int>>();
+        foreach (var tmp in dic) {
+            if (sd.ContainsKey(tmp.Value)) {
+                sd[tmp.Value].Add(tmp.Key);
+            } else {
+                sd.Add(tmp.Value, new List<int>(){tmp.Key});
+            }
+            if (sd.Count > k) {
+                sd.RemoveAt(0);
+            }
+        }
+        int i = 0;
+        foreach (int key in sd.Keys.Reverse()) {
+            if (i < k) {
+                 foreach(int num in sd[key]) {
+                     res[i] = num;
+                     i++;
+                 } 
+            }
+             
+        }
+        
+        return res;
+    }
+    
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
