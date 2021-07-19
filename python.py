@@ -1,4 +1,5 @@
 from typing import List
+import heapq
 
 class Solution:
     # spiral matrix II 
@@ -444,6 +445,25 @@ class Solution:
                 stack.append(str(int(res)))
         return stack[-1]
     
+    # top k frequent elements
+     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        if len(nums) == k:
+            return nums
+        
+        map = {}
+        for i in range(len(nums)):
+            map[nums[i]] = map.get(nums[i], 0) + 1
+        
+        que = []
+        for key, val in map.items():
+            heapq.heappush(que, (val, key))
+            if len(que) > k:
+                heapq.heappop(que)
+        
+        res = [0] * k
+        for i in range(k - 1, -1, -1):
+            res[i] = heapq.heappop(que)[1]
+        return res
     
 # Sliding Window Maximum
 class MyQueue:
