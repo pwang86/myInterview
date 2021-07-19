@@ -720,6 +720,37 @@ MyStack.prototype.empty = function() {
     return stack.pop();
 };
 
+// top k frequent elements
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+ var topKFrequent = function(nums, k) {
+    if (nums.length == k) return nums;
+    
+    let res = [];
+    let map = new Map();
+    for (let num of nums) {
+        if (map.has(num)) {
+            map.set(num, map.get(num) + 1);
+        } else {
+            map.set(num, 1);
+        }
+    }
+    
+    let sortArr = [];
+    for (let[key, value] of map) {
+        sortArr.push([key, value]);
+    }
+    sortArr.sort((a, b) => b[1] - a[1]);
+    
+    for (let i = 0; i < k; i++) {
+        res.push(sortArr[i][0]);
+    }
+    return res;
+};
+
 // Sliding Window Maximum
 /**
  * @param {number[]} nums
