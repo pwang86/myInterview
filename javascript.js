@@ -728,27 +728,37 @@ MyStack.prototype.empty = function() {
  */
  var topKFrequent = function(nums, k) {
     if (nums.length == k) return nums;
+    const map = new Map();
+    for(let n of nums) map.set(n, (map.get(n) || 0) + 1);
+    const keys = [...map.keys()], finalIdx = keys.length - k;
+    let start = 0, end = keys.length-1;
     
-    let res = [];
-    let map = new Map();
-    for (let num of nums) {
-        if (map.has(num)) {
-            map.set(num, map.get(num) + 1);
-        } else {
-            map.set(num, 1);
+    while(start <= end) {
+        const pivot = Math.floor(Math.random() * (end - start + 1)) + start;
+        const pivotIdx = pivotHelper(pivot, start, end);
+        
+        if(pivotIdx === finalIdx) return keys.slice(finalIdx);
+        if(pivotIdx < finalIdx) start = pivotIdx + 1;
+        else end = pivotIdx - 1;
+    }
+    
+    function pivotHelper(pivot, start, end) {
+        // move pivot away to the end
+        swap(pivot, end);
+        let swapIdx = start;
+        
+        for(let i = start; i < end; i++) {
+            if(map.get(keys[i]) < map.get(keys[end])) {
+                swap(swapIdx, i); swapIdx++;
+            }
         }
+        swap(swapIdx, end);
+        return swapIdx;
     }
     
-    let sortArr = [];
-    for (let[key, value] of map) {
-        sortArr.push([key, value]);
+    function swap(i, j) {
+        [keys[i], keys[j]] = [keys[j], keys[i]];
     }
-    sortArr.sort((a, b) => b[1] - a[1]);
-    
-    for (let i = 0; i < k; i++) {
-        res.push(sortArr[i][0]);
-    }
-    return res;
 };
 
 // Sliding Window Maximum
