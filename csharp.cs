@@ -576,7 +576,7 @@ public class Solution {
         if (k == nums.Length) {
             return nums;
         }
-        
+        /*
         int[] res = new int[k];
         Dictionary<int, int> dic = new Dictionary<int, int>();
         foreach (int num in nums) {
@@ -610,6 +610,26 @@ public class Solution {
         }
         
         return res;
+        */
+        if (nums.Length == k) return nums;
+        Dictionary<int, int> map = new Dictionary<int, int>();
+        foreach (var num in nums) {
+            if(!map.ContainsKey(num))
+                map.Add(num, 0);
+            map[num]++;
+        }
+        var set = new SortedSet<(int frequency, int num)>();
+        foreach (var item in map) {
+            set.Add((item.Value, item.Key));
+            if(set.Count > k)
+                set.Remove(set.Min);
+        }
+        
+        var output = new List<int>();
+        foreach (var item in set)
+            output.Add(item.num);
+        return output.ToArray();
+    }
     }
     
     // Sliding Window Maximum
