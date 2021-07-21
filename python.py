@@ -471,13 +471,22 @@ class Solution:
         if root == None:
             return res
         self.preOrder(root, res)
+        # self.helper(root, res)
         return res
     def preOrder(self, root: TreeNode, res: List[int]) -> None:
         if root == None:
-            return;
+            return
         res.append(root.val)
         self.preOrder(root.left, res)
         self.preOrder(root.right, res) 
+    # PostOrder Traversal
+    def helper(self, root: TreeNode, res: List[int]) -> None:
+        if root == None:
+            return
+        else:
+            self.helper(root.left, res)
+            self.helper(root.right, res)
+            res.append(root.val)
     
 # Sliding Window Maximum
 class MyQueue:
