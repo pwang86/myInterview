@@ -446,7 +446,7 @@ class Solution:
         return stack[-1]
     
     # top k frequent elements
-     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         if len(nums) == k:
             return nums
         
@@ -464,6 +464,20 @@ class Solution:
         for i in range(k - 1, -1, -1):
             res[i] = heapq.heappop(que)[1]
         return res
+
+    # Binary Tree Preorder Traversal
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        res = list()
+        if root == None:
+            return res
+        self.preOrder(root, res)
+        return res
+    def preOrder(self, root: TreeNode, res: List[int]) -> None:
+        if root == None:
+            return;
+        res.append(root.val)
+        self.preOrder(root.left, res)
+        self.preOrder(root.right, res) 
     
 # Sliding Window Maximum
 class MyQueue:
