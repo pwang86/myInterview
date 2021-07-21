@@ -646,6 +646,24 @@ class solution {
         return result
     }
 
+    // Binary Tree Preorder Traversal
+    func preorderTraversal(_ root: TreeNode?) -> [Int] {
+        var res:[Int] = []
+        if root == nil {
+            return res
+        }
+        preOrder(root, &res)
+        return res
+    }
+    func preOrder(_ root: TreeNode?, _ res: inout [Int]) {
+        if root == nil {
+            return
+        }
+        res.append(root!.val)
+        preOrder(root?.left, &res)
+        preOrder(root?.right, &res)
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
