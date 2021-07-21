@@ -557,6 +557,25 @@ function getNext(next, s) {
     }
 }
 
+// Binary Tree Preorder Traversal
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+ var preorderTraversal = function(root) {
+    let res = [];
+    if (root == null) return res;
+    
+    preOrder(root, res);
+    return res;
+};
+var preOrder = (root, res) => {
+    if (root == null) return;
+    res.push(root.val);
+    preOrder(root.left, res);
+    preOrder(root.right, res);
+}
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
