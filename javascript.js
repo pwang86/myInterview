@@ -567,6 +567,7 @@ function getNext(next, s) {
     if (root == null) return res;
     
     preOrder(root, res);
+    // helper(root, res);
     return res;
 };
 var preOrder = (root, res) => {
@@ -574,7 +575,17 @@ var preOrder = (root, res) => {
     res.push(root.val);
     preOrder(root.left, res);
     preOrder(root.right, res);
-}
+};
+// postorder traversal
+var helper = (root, res) => {
+    if (root == null) {
+        return;
+    } else {
+        helper(root.left, res);
+        helper(root.right, res);
+        res.push(root.val);
+    }
+};
 
 // implement queue using stacks
 /**
