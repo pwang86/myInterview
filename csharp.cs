@@ -637,6 +637,7 @@ public class Solution {
         if (root == null) return res;
         
         PreOrder(root, res);
+        // Helper(root, res);
         return res;
     }
     public void PreOrder(TreeNode root, IList<int> res) {
@@ -644,6 +645,16 @@ public class Solution {
         res.Add(root.val);
         PreOrder(root.left, res);
         PreOrder(root.right, res);
+    }
+    // Postorder Traversal
+    public void Helper(TreeNode root, IList<int> res) {
+        if (root == null) {
+            return;
+        } else {
+            Helper(root.left, res);
+            Helper(root.right, res);
+            res.Add(root.val);
+        }
     }
     
     // Sliding Window Maximum
