@@ -630,6 +630,20 @@ public class Solution {
             output.Add(item.num);
         return output.ToArray();
     }
+
+    // Binary Tree Preorder Traversal
+    public IList<int> PreorderTraversal(TreeNode root) {
+        IList<int> res = new List<int>();
+        if (root == null) return res;
+        
+        PreOrder(root, res);
+        return res;
+    }
+    public void PreOrder(TreeNode root, IList<int> res) {
+        if (root == null) return;
+        res.Add(root.val);
+        PreOrder(root.left, res);
+        PreOrder(root.right, res);
     }
     
     // Sliding Window Maximum
@@ -668,6 +682,7 @@ public class Solution {
         }
         return res;
     }
+
 } 
 
 // implement queue using stacks
