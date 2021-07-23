@@ -654,6 +654,7 @@ class solution {
         }
         preOrder(root, &res)
         // helper(root, &res)
+        // inOrder(root, &res)
         return res
     }
     func preOrder(_ root: TreeNode?, _ res: inout [Int]) {
@@ -673,6 +674,15 @@ class solution {
             helper(root?.right, &res)
             res.append(root!.val)
         }
+    }
+    // Inorder Traversal
+    func inOrder(_ root: TreeNode?, _ res: inout [Int]) {
+        if root == nil {
+            return 
+        }
+        inOrder(root?.left, &res)
+        res.append(root!.val)
+        inOrder(root?.right, &res)
     }
 
     // Sliding Window Maximum
