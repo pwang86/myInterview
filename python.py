@@ -472,6 +472,7 @@ class Solution:
             return res
         self.preOrder(root, res)
         # self.helper(root, res)
+        # self.inOrder(root, res)
         return res
     def preOrder(self, root: TreeNode, res: List[int]) -> None:
         if root == None:
@@ -487,6 +488,13 @@ class Solution:
             self.helper(root.left, res)
             self.helper(root.right, res)
             res.append(root.val)
+    # InOrder Traversal
+    def inOrder(self, root: TreeNode, res: List[int]) -> None:
+        if root == None:
+            return
+        self.inOrder(root.left, res)
+        res.append(root.val)
+        self.inOrder(root.right, res)
     
 # Sliding Window Maximum
 class MyQueue:
