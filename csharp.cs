@@ -638,6 +638,7 @@ public class Solution {
         
         PreOrder(root, res);
         // Helper(root, res);
+        // InOrder(root, res);
         return res;
     }
     public void PreOrder(TreeNode root, IList<int> res) {
@@ -655,6 +656,14 @@ public class Solution {
             Helper(root.right, res);
             res.Add(root.val);
         }
+    }
+
+    // Inorder Traversal
+    public void InOrder(TreeNode root, IList<int> res) {
+        if (root == null) return;
+        InOrder(root.left, res);
+        res.Add(root.val);
+        InOrder(root.right, res);
     }
     
     // Sliding Window Maximum
