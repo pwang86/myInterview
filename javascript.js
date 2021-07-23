@@ -568,6 +568,7 @@ function getNext(next, s) {
     
     preOrder(root, res);
     // helper(root, res);
+    // inOrder(root, res);
     return res;
 };
 var preOrder = (root, res) => {
@@ -585,6 +586,13 @@ var helper = (root, res) => {
         helper(root.right, res);
         res.push(root.val);
     }
+};
+// Inorder Traversal
+var inOrder = (root, res) => {
+    if (root == null) return;
+    inOrder(root.left, res);
+    res.push(root.val);
+    inOrder(root.right, res);
 };
 
 // implement queue using stacks
