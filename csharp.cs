@@ -635,9 +635,7 @@ public class Solution {
     public IList<int> PreorderTraversal(TreeNode root) {
         IList<int> res = new List<int>();
         if (root == null) return res;
-        
         // PreOrder(root, res);
-        // Helper(root, res);
         // InOrder(root, res);
 
         // iterative way
@@ -657,7 +655,28 @@ public class Solution {
         PreOrder(root.left, res);
         PreOrder(root.right, res);
     }
+
     // Postorder Traversal
+    public IList<int> PostorderTraversal(TreeNode root) {
+        IList<int> res = new List<int>();
+        if (root == null) return res;
+        // Helper(root, res);
+        
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.Push(root);
+        
+        while (stack.Count != 0) {
+            TreeNode tmp = stack.Pop();
+            res.Add(tmp.val);
+            if (tmp.left != null) {
+                stack.Push(tmp.left);
+            }
+            if (tmp.right != null) {
+                stack.Push(tmp.right);
+            }
+        }
+        return res.Reverse().ToList();
+    }
     public void Helper(TreeNode root, IList<int> res) {
         if (root == null) {
             return;
