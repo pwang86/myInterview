@@ -653,7 +653,6 @@ class solution {
             return res
         }
         // preOrder(root, &res)
-        // helper(root, &res)
         // inOrder(root, &res)
         
         // iterative way
@@ -679,7 +678,29 @@ class solution {
         preOrder(root?.left, &res)
         preOrder(root?.right, &res)
     }
+
     // Postorder Traversal
+    func postorderTraversal(_ root: TreeNode?) -> [Int] {
+        var res: [Int] = []
+        if root == nil {
+            return res
+        }
+        // helper(root, &res)
+        var stack:[TreeNode] = []
+        stack.append(root!)
+        while stack.count != 0 {
+            let tmp = stack.removeLast()
+            res.append(tmp.val)
+            if tmp.left != nil {
+                stack.append(tmp.left!)
+            }
+            if tmp.right != nil {
+                stack.append(tmp.right!)
+            }
+        }
+        res.reverse()
+        return res
+    }
     func helper(_ root: TreeNode?, _ res: inout [Int]) {
         if root == nil {
             return
@@ -689,6 +710,7 @@ class solution {
             res.append(root!.val)
         }
     }
+
     // Inorder Traversal
     func inOrder(_ root: TreeNode?, _ res: inout [Int]) {
         if root == nil {
