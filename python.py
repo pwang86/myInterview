@@ -470,9 +470,21 @@ class Solution:
         res = list()
         if root == None:
             return res
-        self.preOrder(root, res)
+        # self.preOrder(root, res)
         # self.helper(root, res)
         # self.inOrder(root, res)
+
+        # iterative way
+        stack = list()
+        stack.append(root)
+        while len(stack) != 0:
+            tmp = stack.pop()
+            res.append(tmp.val)
+            if tmp.right != None:
+                stack.append(tmp.right)
+            if tmp.left != None:
+                stack.append(tmp.left)
+                
         return res
     def preOrder(self, root: TreeNode, res: List[int]) -> None:
         if root == None:
