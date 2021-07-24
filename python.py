@@ -471,7 +471,6 @@ class Solution:
         if root == None:
             return res
         # self.preOrder(root, res)
-        # self.helper(root, res)
         # self.inOrder(root, res)
 
         # iterative way
@@ -492,7 +491,23 @@ class Solution:
         res.append(root.val)
         self.preOrder(root.left, res)
         self.preOrder(root.right, res) 
+
     # PostOrder Traversal
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        res = list()
+        if root == None:
+            return res
+        # self.helper(root, res)
+        stack = list()
+        stack.append(root)
+        while stack:
+            tmp = stack.pop()
+            res.append(tmp.val)
+            if tmp.left:
+                stack.append(tmp.left)
+            if tmp.right:
+                stack.append(tmp.right)
+        return res[::-1]
     def helper(self, root: TreeNode, res: List[int]) -> None:
         if root == None:
             return
@@ -500,6 +515,7 @@ class Solution:
             self.helper(root.left, res)
             self.helper(root.right, res)
             res.append(root.val)
+
     # InOrder Traversal
     def inOrder(self, root: TreeNode, res: List[int]) -> None:
         if root == None:
