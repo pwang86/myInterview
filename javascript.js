@@ -567,7 +567,6 @@ function getNext(next, s) {
     if (root == null) return res;
     
     // preOrder(root, res);
-    // helper(root, res);
     // inOrder(root, res);
 
     // iterative way
@@ -587,7 +586,32 @@ var preOrder = (root, res) => {
     preOrder(root.left, res);
     preOrder(root.right, res);
 };
+
+
 // postorder traversal
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+ var postorderTraversal = function(root) {
+    let res = [];
+    if (root == null) return res;
+    // helper(root, res);
+    let stack = [];
+    stack.push(root);
+    while (stack.length != 0) {
+        let tmp = stack.pop();
+        res.push(tmp.val);
+        if (tmp.left != null) {
+            stack.push(tmp.left);
+        }
+        if (tmp.right != null) {
+            stack.push(tmp.right);
+        }
+    }
+    
+    return res.reverse();
+};
 var helper = (root, res) => {
     if (root == null) {
         return;
@@ -597,6 +621,7 @@ var helper = (root, res) => {
         res.push(root.val);
     }
 };
+
 // Inorder Traversal
 var inOrder = (root, res) => {
     if (root == null) return;
