@@ -566,9 +566,19 @@ function getNext(next, s) {
     let res = [];
     if (root == null) return res;
     
-    preOrder(root, res);
+    // preOrder(root, res);
     // helper(root, res);
     // inOrder(root, res);
+
+    // iterative way
+    let stack = [];
+    stack.push(root);
+    while (stack.length != 0) {
+        let tmp = stack.pop();
+        res.push(tmp.val);
+        if (tmp.right != null) stack.push(tmp.right);
+        if (tmp.left != null) stack.push(tmp.left);
+    }
     return res;
 };
 var preOrder = (root, res) => {
