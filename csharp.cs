@@ -636,9 +636,19 @@ public class Solution {
         IList<int> res = new List<int>();
         if (root == null) return res;
         
-        PreOrder(root, res);
+        // PreOrder(root, res);
         // Helper(root, res);
         // InOrder(root, res);
+
+        // iterative way
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.Push(root);
+        while (stack.Any()) {
+            TreeNode tmp = stack.Pop();
+            res.Add(tmp.val);
+            if (tmp.right != null) stack.Push(tmp.right);
+            if (tmp.left != null) stack.Push(tmp.left);
+        }
         return res;
     }
     public void PreOrder(TreeNode root, IList<int> res) {
