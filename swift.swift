@@ -652,9 +652,23 @@ class solution {
         if root == nil {
             return res
         }
-        preOrder(root, &res)
+        // preOrder(root, &res)
         // helper(root, &res)
         // inOrder(root, &res)
+        
+        // iterative way
+        var stack: [TreeNode] = []
+        stack.append(root!)
+        while stack.count != 0 {
+            let tmp = stack.removeLast()
+            res.append(tmp.val)
+            if tmp.right != nil {
+                stack.append(tmp.right!)
+            }
+            if tmp.left != nil {
+                stack.append(tmp.left!)
+            }
+        }
         return res
     }
     func preOrder(_ root: TreeNode?, _ res: inout [Int]) {
