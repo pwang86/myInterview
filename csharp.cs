@@ -636,7 +636,6 @@ public class Solution {
         IList<int> res = new List<int>();
         if (root == null) return res;
         // PreOrder(root, res);
-        // InOrder(root, res);
 
         // iterative way
         Stack<TreeNode> stack = new Stack<TreeNode>();
@@ -688,6 +687,27 @@ public class Solution {
     }
 
     // Inorder Traversal
+    public IList<int> InorderTraversal(TreeNode root) {
+        IList<int> res = new List<int>();
+        if (root == null) return res;
+        
+        // InOrder(root, res);
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode cur = root;
+        
+        while (cur != null || stack.Count != 0) {
+            if (cur != null) {
+                stack.Push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.Pop();
+                res.Add(cur.val);
+                cur = cur.right;
+            }
+        }
+        
+        return res;
+    }
     public void InOrder(TreeNode root, IList<int> res) {
         if (root == null) return;
         InOrder(root.left, res);
