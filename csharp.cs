@@ -715,6 +715,27 @@ public class Solution {
         InOrder(root.right, res);
     }
     
+    // Binary Tree Level Order Traversal
+    public IList<IList<int>> LevelOrder(TreeNode root) {
+        IList<IList<int>> res = new List<IList<int>>();
+        if (root == null) return res;
+        
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        while (queue.Count != 0) {
+            int size = queue.Count;
+            IList<int> tmp = new List<int>();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.Dequeue();
+                tmp.Add(cur.val);
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);
+            }
+            res.Add(tmp);
+        }
+        return res;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
