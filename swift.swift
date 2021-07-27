@@ -741,6 +741,32 @@ class solution {
         inOrder(root?.right, &res)
     }
 
+    // Binary Tree Level Order Traversal
+    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+        var res: [[Int]] = [];
+        if root == nil {
+            return res
+        }
+        var queue: [TreeNode] = []
+        queue.append(root!)
+        while queue.count > 0 {
+            let size = queue.count
+            var tmp:[Int] = []
+            for _ in 0..<size {
+                let cur = queue.removeFirst()
+                tmp.append(cur.val)
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }
+            }
+            res.append(tmp)
+        }    
+        return res
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
