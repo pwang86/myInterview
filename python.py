@@ -539,7 +539,29 @@ class Solution:
         self.inOrder(root.left, res)
         res.append(root.val)
         self.inOrder(root.right, res)
-    
+
+    # Binary Tree Level Order Traversal
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        if root == None:
+            return res
+        
+        queue = []
+        queue.append(root)
+        while (len(queue) != 0):
+            size = len(queue)
+            tmp = list()
+            for i in range(size):
+                cur = queue.pop(0)
+                tmp.append(cur.val)
+                if cur.left != None:
+                    queue.append(cur.left)
+                if cur.right != None:
+                    queue.append(cur.right)
+            res.append(tmp)
+        
+        return res
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
