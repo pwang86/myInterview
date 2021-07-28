@@ -677,6 +677,31 @@ var inOrder = (root, res) => {
     return res;
 };
 
+// Binary Tree Level Order Traversal II.
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+ var levelOrderBottom = function(root) {
+    let res = [];
+    if (root == null) return res;
+    
+    let dfs = (root, level) => {
+        if (level >= res.length) {
+            res[level] = [];
+        }
+        res[level].push(root.val);
+        if (root.left != null) {
+            dfs(root.left, level + 1);
+        }
+        if (root.right != null) {
+            dfs(root.right, level + 1);
+        }
+    };
+    dfs(root, 0);
+    return res.reverse();
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
