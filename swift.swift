@@ -767,6 +767,29 @@ class solution {
         return res
     }
 
+    // Binary Tree Level Order Traversal II.
+    func levelOrderBottom(_ root: TreeNode?) -> [[Int]] {
+        var res: [[Int]] = [];
+        if root == nil {
+            return res
+        }
+        dfs(root!, 0, &res)
+        res.reverse()
+        return res
+    }
+    func dfs(_ root: TreeNode, _ level: Int, _ res: inout [[Int]]) {
+        if level >= res.count {
+            res.append([])
+        }
+        res[level].append(root.val)
+        if let left = root.left {
+            dfs(root.left!, level + 1, &res)
+        }
+        if let right = root.right {
+            dfs(root.right!, level + 1, &res)
+        }
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
