@@ -562,6 +562,23 @@ class Solution:
         
         return res
 
+    # Binary Tree Level Order Traversal II.
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        if root == None:
+            return res
+        self.dfs(root, 0, res)
+        return res[::-1]
+    
+    def dfs(self, root: TreeNode, level: int, res: List[List[int]]) -> None:
+            if level >= len(res):
+                res.append([])
+            res[level].append(root.val)
+            if root.left != None:
+                self.dfs(root.left, level + 1, res)
+            if root.right != None:
+                self.dfs(root.right, level + 1, res)
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
