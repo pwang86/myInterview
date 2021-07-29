@@ -578,6 +578,26 @@ class Solution:
                 self.dfs(root.left, level + 1, res)
             if root.right != None:
                 self.dfs(root.right, level + 1, res)
+    
+    # Binary Tree Right Side View
+     def rightSideView(self, root: TreeNode) -> List[int]:
+        res = list()
+        if root == None:
+            return res
+        queue = list()
+        queue.append(root)
+        while len(queue) > 0:
+            size = len(queue)
+            for i in range(size):
+                cur = queue.pop(0)
+                if cur.left != None:
+                    queue.append(cur.left)
+                if cur.right != None:
+                    queue.append(cur.right)
+                if i == size - 1:
+                    res.append(cur.val)
+        
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
