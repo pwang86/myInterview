@@ -702,6 +702,29 @@ var inOrder = (root, res) => {
     return res.reverse();
 };
 
+// Binary Tree Right Side View
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+ var rightSideView = function(root) {
+    let res = [];
+    if (root == null) return res;
+    
+    let queue = [];
+    queue.push(root);
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            if (cur.left != null) queue.push(cur.left);
+            if (cur.right != null) queue.push(cur.right);
+            if (i == size - 1) res.push(cur.val);
+        }
+    }
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
