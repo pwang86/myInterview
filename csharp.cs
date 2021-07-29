@@ -753,6 +753,27 @@ public class Solution {
         if (root.right != null) Helper(root.right, level + 1);
     }
 
+    // Binary Tree Right Side View
+    public IList<int> RightSideView(TreeNode root) {
+        IList<int> res = new List<int>();
+        if (root == null) return res;
+        
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.Dequeue();
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);
+                if (i == size - 1) res.Add(cur.val);
+            }
+            
+        }
+        return res;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
