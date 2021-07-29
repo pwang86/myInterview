@@ -790,6 +790,33 @@ class solution {
         }
     }
 
+    // Binary Tree Right Side View
+    func rightSideView(_ root: TreeNode?) -> [Int] {
+        var res: [Int] = []
+        if root == nil {
+            return res
+        }
+        
+        var queue:[TreeNode] = []
+        queue.append(root!)
+        while queue.count > 0 {
+            let size = queue.count
+            for i in 0..<size {
+                let cur = queue.removeFirst()
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }
+                if i == size - 1 {
+                    res.append(cur.val)
+                }
+            }
+        }
+        return res
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
