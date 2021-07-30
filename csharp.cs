@@ -774,6 +774,29 @@ public class Solution {
         return res;
     }
 
+    // Average of Levels in Binary Tree
+    public IList<double> AverageOfLevels(TreeNode root) {
+        IList<double> res = new List<double>();
+        if (root == null) return res;
+        
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            double sum = 0;
+            for (int i = 0; i < size;i++) {
+                TreeNode cur = queue.Dequeue();
+                sum += cur.val;
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);
+            }
+            res.Add(sum / size);
+        }
+        
+        return res;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
