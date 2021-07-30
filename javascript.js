@@ -725,6 +725,33 @@ var inOrder = (root, res) => {
     return res;
 };
 
+// Average of Levels in Binary Tree
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+ var averageOfLevels = function(root) {
+    let res = [];
+    if (root == null) return res;
+    
+    let queue = [];
+    queue.push(root);
+    while (queue.length > 0) {
+        let size = queue.length;
+        let sum = 0;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            sum += cur.val;
+            if (cur.left != null) queue.push(cur.left);
+            if (cur.right != null) queue.push(cur.right);
+        }
+        res.push(sum / size);
+    }
+    
+    return res;
+};
+
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
