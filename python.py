@@ -580,7 +580,7 @@ class Solution:
                 self.dfs(root.right, level + 1, res)
     
     # Binary Tree Right Side View
-     def rightSideView(self, root: TreeNode) -> List[int]:
+    def rightSideView(self, root: TreeNode) -> List[int]:
         res = list()
         if root == None:
             return res
@@ -597,6 +597,27 @@ class Solution:
                 if i == size - 1:
                     res.append(cur.val)
         
+        return res
+    
+    # Average of Levels in Binary Tree
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        res = list()
+        if root == None:
+            return res
+        
+        queue = list()
+        queue.append(root)
+        while len(queue) > 0:
+            size = len(queue)
+            sum = 0
+            for i in range(size):
+                cur = queue.pop(0)
+                sum += cur.val
+                if cur.left != None:
+                    queue.append(cur.left)
+                if cur.right != None:
+                    queue.append(cur.right)
+            res.append(sum / size)
         return res
 
 # Sliding Window Maximum
