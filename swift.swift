@@ -817,6 +817,35 @@ class solution {
         return res
     }
 
+    // Average of Levels in Binary Tree
+    func averageOfLevels(_ root: TreeNode?) -> [Double] {
+        var res: [Double] = []
+        if root == nil {
+            return res
+        }
+        
+        var queue: [TreeNode] = []
+        queue.append(root!)
+        
+        while queue.count > 0 {
+            let size = queue.count
+            var sum: Int = 0
+            for i in 0..<size {
+                let cur = queue.removeFirst()
+                sum += cur.val
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }   
+            }
+            res.append(Double(sum) / Double(size))
+        }
+        
+        return res
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
