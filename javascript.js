@@ -751,6 +751,39 @@ var inOrder = (root, res) => {
     return res;
 };
 
+// Populating Next Right Pointers in Each Node
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+ var connect = function(root) {
+    if (root == null) {
+        return root;
+    }
+    
+    let queue = [];
+    queue.push(root);
+    let pre = null;
+    let cur = null;
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            if (i == 0) {
+                pre = queue.shift();
+                cur = pre;
+            } else {
+                cur = queue.shift();
+                pre.next = cur;
+                pre = pre.next;
+            }
+            if (cur.left != null) queue.push(cur.left);
+            if (cur.right != null) queue.push(cur.right);
+        }
+        pre.next = null;
+    }
+    return root;
+};
+
 
 // implement queue using stacks
 /**
