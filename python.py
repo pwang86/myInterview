@@ -620,6 +620,33 @@ class Solution:
             res.append(sum / size)
         return res
 
+    # Populating Next Right Pointers in Each Node
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
+        
+        queue = list()
+        queue.append(root)
+        cur = None
+        pre = None
+        
+        while len(queue) > 0:
+            size = len(queue)
+            for i in range(size):
+                if i == 0:
+                    pre = queue.pop(0)
+                    cur = pre
+                else:
+                    cur = queue.pop(0)
+                    pre.next = cur
+                    pre = pre.next
+                if cur.left:
+                    queue.append(cur.left)
+                if cur.right:
+                    queue.append(cur.right)
+            pre.next = None
+        return root
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
