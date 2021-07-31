@@ -797,6 +797,37 @@ public class Solution {
         return res;
     }
 
+    // Populating Next Right Pointers in Each Node
+    public Node Connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+    
+        Queue<Node> queue = new Queue<Node>();
+        queue.Enqueue(root);
+        Node pre = null;
+        Node cur = null;
+        
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            for (int i = 0; i < size; i++) {
+                if (i == 0) {
+                    pre = queue.Dequeue();
+                    cur = pre;
+                } else {
+                    cur = queue.Dequeue();
+                    pre.next = cur;
+                    pre = pre.next;
+                }
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);             
+            }
+            pre.next = null;
+        }
+        return root;
+    }
+
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
