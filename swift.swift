@@ -846,6 +846,40 @@ class solution {
         return res
     }
 
+    // Populating Next Right Pointers in Each Node
+    func connect(_ root: Node?) -> Node? {
+        if root == nil {
+            return root
+        }
+        
+        var queue: [Node] = []
+        queue.append(root!)
+        var cur: Node? = nil
+        var pre: Node? = nil
+        
+        while queue.count > 0 {
+            let size = queue.count
+            for i in 0..<size {
+                if i == 0 {
+                    pre = queue.removeFirst()
+                    cur = pre
+                } else {
+                    cur = queue.removeFirst()
+                    pre?.next = cur
+                    pre = pre?.next
+                }
+                if let left = cur!.left {
+                    queue.append(left)
+                }
+                if let right = cur!.right {
+                    queue.append(right)
+                }
+            }
+            pre?.next = nil
+        }
+        return root
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
