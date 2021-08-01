@@ -880,6 +880,30 @@ class solution {
         return root
     }
 
+    // Invert Binary Tree
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        if root == nil {
+            return root
+        }
+        
+        var queue: [TreeNode] = []
+        queue.append(root!)
+        while queue.count > 0 {
+            let size = queue.count
+            for _ in 0..<size {
+                var cur = queue.removeFirst()
+                (cur.left, cur.right) = (cur.right, cur.left)
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }
+            }   
+        }
+        return root 
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
