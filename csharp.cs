@@ -827,6 +827,30 @@ public class Solution {
         return root;
     }
 
+    // Invert Binary Tree
+    public TreeNode InvertTree(TreeNode root) {
+        if (root == null)
+            return root;
+        
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.Dequeue();
+                Swap(ref cur.left, ref cur.right);
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);
+            }
+        }
+        return root;
+    }
+    public void Swap(ref TreeNode left, ref TreeNode right) {
+        TreeNode tmp = left;
+        left = right;
+        right = tmp;
+    }
+
 
     // Sliding Window Maximum
     public class MyQueue {
