@@ -784,6 +784,25 @@ var inOrder = (root, res) => {
     return root;
 };
 
+// Invert Binary Tree
+var invertTree = function(root) {
+    if (root == null)
+        return root;
+    
+    let queue = [];
+    queue.push(root);
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            [cur.left, cur.right] = [cur.right, cur.left];
+            if (cur.left) queue.push(cur.left);
+            if (cur.right) queue.push(cur.right);
+        }
+    }
+    return root;
+};
+
 
 // implement queue using stacks
 /**
