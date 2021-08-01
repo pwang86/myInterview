@@ -646,6 +646,25 @@ class Solution:
                     queue.append(cur.right)
             pre.next = None
         return root
+    
+    # Invert Binary Tree
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root == None:
+            return root
+        
+        queue = list()
+        queue.append(root)
+        while len(queue) > 0:
+            size = len(queue)
+            for i in range(size):
+                cur = queue.pop(0)
+                cur.left, cur.right = cur.right,cur.left
+                if cur.left:
+                    queue.append(cur.left)
+                if cur.right:
+                    queue.append(cur.right)
+        
+        return root
 
 # Sliding Window Maximum
 class MyQueue:
