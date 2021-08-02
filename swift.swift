@@ -903,6 +903,19 @@ class solution {
         }
         return root 
     }
+    // recursive way
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        if root == nil {
+            return root
+        }
+        
+        let tmp: TreeNode? = root?.left
+        root?.left = root?.right
+        root?.right = tmp
+        invertTree(root?.left)
+        invertTree(root?.right)
+        return root 
+    }
 
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
