@@ -665,6 +665,16 @@ class Solution:
                     queue.append(cur.right)
         
         return root
+    # recursive way
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root == None:
+            return root
+        
+        (root.left, root.right) = (root.right, root.left)
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
+        return root
 
 # Sliding Window Maximum
 class MyQueue:
