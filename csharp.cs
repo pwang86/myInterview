@@ -850,7 +850,16 @@ public class Solution {
         left = right;
         right = tmp;
     }
-
+    // recursive way
+    public TreeNode InvertTree(TreeNode root) {
+        if (root == null)
+            return root;
+        
+        Swap(ref root.left, ref root.right);
+        InvertTree(root.left);
+        InvertTree(root.right);
+        return root;
+    }
 
     // Sliding Window Maximum
     public class MyQueue {
