@@ -814,6 +814,27 @@ var invertTree = function(root) {
     return root;
 };
 
+// Symmetric Tree
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isSymmetric = function(root) {
+    if (root == null) return true;
+    return helper(root.left, root.right);
+};
+function helper(l, r) {
+    if (l == null && r == null) return true;
+    else if (l != null && r == null) return false;
+    else if (l == null && r != null) return false;
+    else if (l.val != r.val) return false;
+    else {
+        let inner = helper(l.right, r.left);
+        let outer = helper(l.left, r.right);
+        return inner && outer;
+    }
+}
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
