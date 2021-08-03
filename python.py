@@ -675,6 +675,27 @@ class Solution:
         self.invertTree(root.right)
         
         return root
+    
+    # Symmetric Tree
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        return self.helper(root.left, root.right)
+    
+    def helper(self, l: TreeNode, r: TreeNode) -> bool:
+        if not l and not r:
+            return True
+        elif l == None and r != None:
+            return False
+        elif l != None and r == None:
+            return False
+        elif l.val != r.val:
+            return False
+        else:
+            inner = self.helper(l.right, r.left)
+            outer = self.helper(l.left, r.right)
+            return inner and outer
 
 # Sliding Window Maximum
 class MyQueue:
