@@ -861,6 +861,26 @@ public class Solution {
         return root;
     }
 
+    // Symmetric Tree
+    public bool IsSymmetric(TreeNode root) {
+        if (root == null)
+            return false;
+        
+        return Helper(root.left, root.right);
+    }
+    
+    public bool Helper(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
+        else if (left == null && right != null) return false;
+        else if (left != null && right == null) return false;
+        else if (left.val != right.val) return false;
+        else {
+            bool outer = Helper(left.left, right.right);
+            bool inner = Helper(left.right, right.left);
+            return outer && inner;
+        }
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
