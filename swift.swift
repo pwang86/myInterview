@@ -917,6 +917,31 @@ class solution {
         return root 
     }
 
+    // Symmetric Tree
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        if root == nil {
+            return true
+        }
+        
+        return helper(root?.left, root?.right)
+    }
+    
+    func helper(_ l: TreeNode?, _ r: TreeNode?) -> Bool {
+        if l == nil && r == nil {
+            return true
+        } else if l != nil && r == nil {
+            return false
+        } else if l == nil && r != nil {
+            return false
+        } else if l?.val != r?.val {
+            return false
+        } else {
+            var inner = helper(l?.right, r?.left)
+            var outer = helper(l?.left, r?.right)
+            return inner && outer
+        }
+    }
+
     // Sliding Window Maximum
     func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
         if nums.count == 1 {
