@@ -963,6 +963,33 @@ class solution {
         }
         return res
     }
+
+    // using queue in Symmetric Tree
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        if root == nil {
+            return true
+        }
+        
+        var queue: [TreeNode?] = []
+        queue.append(root?.left)
+        queue.append(root?.right)
+        while queue.count > 0 {
+            let l = queue.removeFirst()
+            let r = queue.removeFirst()
+            
+            if l == nil && r == nil {
+                continue
+            }
+            if l == nil || r == nil || (l?.val != r?.val) {
+                return false
+            }
+            queue.append(l?.left)
+            queue.append(r?.right)
+            queue.append(l?.right)
+            queue.append(r?.left)
+        }
+        return true
+    }
 }
 
 // implement queue using stacks
