@@ -881,6 +881,29 @@ public class Solution {
         }
     }
 
+    // using queue in Symmetric Tree
+    public bool IsSymmetric(TreeNode root) {
+        if (root == null)
+            return true;
+        
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root.left);
+        queue.Enqueue(root.right);
+        
+        while (queue.Count > 0) {
+            TreeNode l = queue.Dequeue();
+            TreeNode r = queue.Dequeue();
+            if (l == null && r == null) continue;
+            if (l == null || r == null || (l.val != r.val)) 
+                return false;
+            queue.Enqueue(l.left);
+            queue.Enqueue(r.right);
+            queue.Enqueue(l.right);
+            queue.Enqueue(r.left);
+        }
+        return true;  
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
