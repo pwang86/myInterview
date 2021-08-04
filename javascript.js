@@ -834,6 +834,32 @@ function helper(l, r) {
         return inner && outer;
     }
 }
+// using queue in Symmetric Tree
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isSymmetric = function(root) {
+    if (root == null) return true;
+    
+    let queue = [];
+    queue.push(root.left);
+    queue.push(root.right);
+    while (queue.length > 0) {
+        let l = queue.shift();
+        let r = queue.shift();
+        
+        if (!l && !r) continue;
+        if (!l || !r || (l.val != r.val)) {
+            return false;
+        }
+        queue.push(l.left);
+        queue.push(r.right);
+        queue.push(l.right);
+        queue.push(r.left);
+    }
+    return true;
+};
 
 // implement queue using stacks
 /**
