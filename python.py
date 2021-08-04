@@ -696,6 +696,29 @@ class Solution:
             inner = self.helper(l.right, r.left)
             outer = self.helper(l.left, r.right)
             return inner and outer
+    
+    # using queue in Symmetric Tree
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        queue = list()
+        queue.append(root.left)
+        queue.append(root.right)
+        
+        while len(queue) > 0:
+            l = queue.pop(0)
+            r = queue.pop(0)
+            if not l and not r:
+                continue
+            if not l or not r or l.val != r.val:
+                return False
+            queue.append(l.left)
+            queue.append(r.right)
+            queue.append(l.right)
+            queue.append(r.left)
+            
+        return True
 
 # Sliding Window Maximum
 class MyQueue:
