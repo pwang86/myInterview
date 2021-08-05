@@ -719,6 +719,26 @@ class Solution:
             queue.append(r.left)
             
         return True
+    
+    # Maximum Depth of Binary Tree
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        res = 0
+        queue = list()
+        queue.append(root)
+        while len(queue) > 0:
+            size = len(queue)
+            for i in range(size):
+                cur = queue.pop(0)
+                if cur.left != None:
+                    queue.append(cur.left)
+                if cur.right != None:
+                    queue.append(cur.right)
+            res += 1
+        
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
