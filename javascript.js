@@ -861,6 +861,30 @@ function helper(l, r) {
     return true;
 };
 
+
+// Maximum Depth of Binary Tree
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var maxDepth = function(root) {
+    if (root == null) return 0;
+    let res = 0;
+    
+    let queue = [];
+    queue.push(root);
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            if (cur.left != null) queue.push(cur.left);
+            if (cur.right != null) queue.push(cur.right);
+        }
+        res++;
+    }
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
