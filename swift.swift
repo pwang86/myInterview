@@ -990,6 +990,32 @@ class solution {
         }
         return true
     }
+
+    // Maximum Depth of Binary Tree
+    func maxDepth(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        
+        var res = 0
+        var queue: [TreeNode] = []
+        queue.append(root!)
+        while queue.count > 0 {
+            let size = queue.count
+            for _ in 0..<size {
+                let cur = queue.removeFirst()
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }
+            }
+            res += 1
+        }
+        
+        return res
+    }
 }
 
 // implement queue using stacks
