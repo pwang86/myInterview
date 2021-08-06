@@ -885,6 +885,28 @@ function helper(l, r) {
     return res;
 };
 
+// Maximum Depth of N-ary Tree
+/**
+ * @param {Node|null} root
+ * @return {number}
+ */
+ var maxDepth = function(root) {
+    if (root == null)
+        return 0;
+    return helper(root);
+};
+
+function helper(root) {
+    if (root == null) return 0;
+    
+    let res = 0;
+    for (let node of root.children) {
+        res = Math.max(res, helper(node));
+    }
+    
+    return res + 1;
+}
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
