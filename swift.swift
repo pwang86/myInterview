@@ -1016,6 +1016,24 @@ class solution {
         
         return res
     }
+
+    // Maximum Depth of N-ary Tree
+    func maxDepth(_ root: Node?) -> Int {
+        if root == nil {
+            return 0
+        }
+        return helper(root)
+    }
+    func helper(_ root: Node?) -> Int {
+        if root == nil {
+            return 0
+        }
+        var res = 0
+        root?.children.forEach { cur in
+            res = max(res, helper(cur))
+        }
+        return res + 1
+    }
 }
 
 // implement queue using stacks
