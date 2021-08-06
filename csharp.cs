@@ -923,6 +923,22 @@ public class Solution {
         return res;
     }
 
+    // Maximum Depth of N-ary Tree
+    public int MaxDepth(Node root) {
+        if (root == null)
+            return 0;
+        
+        return Helper(root);
+    }
+    public int Helper(Node root) {
+        if (root == null) return 0;
+        int res = 0;
+        for (int i = 0; i < root.children.Count; i++) {
+            res = Math.Max(res, Helper(root.children[i]));
+        }
+        return 1 + res;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
