@@ -740,6 +740,23 @@ class Solution:
         
         return res
 
+    # Maximum Depth of N-ary Tree
+     def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        
+        return self.helper(root)
+    
+    def helper(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        
+        res = 0
+        for cur in root.children:
+            res = max(res, self.helper(cur))
+        
+        return res + 1
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
