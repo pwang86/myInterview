@@ -757,6 +757,27 @@ class Solution:
         
         return res + 1
 
+    # Minimum Depth of Binary Tree
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        res = 0
+        queue = list()
+        queue.append(root)
+        while len(queue) > 0:
+            size = len(queue)
+            res += 1
+            for i in range(size):
+                cur = queue.pop(0)
+                if not cur.left and not cur.right:
+                    return res
+                if cur.left != None:
+                    queue.append(cur.left)
+                if cur.right != None:
+                    queue.append(cur.right)
+        return res
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
