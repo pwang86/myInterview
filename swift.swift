@@ -1034,6 +1034,34 @@ class solution {
         }
         return res + 1
     }
+
+    // Minimum Depth of Binary Tree
+    func minDepth(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        var res = 0 
+        var queue: [TreeNode] = []
+        queue.append(root!)
+        
+        while queue.count > 0 {
+            let size = queue.count
+            res += 1
+            for _ in 0..<size {
+                let cur = queue.removeFirst()
+                if cur.left == nil && cur.right == nil {
+                    return res
+                }
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }
+            }
+        }
+        return res
+    }
 }
 
 // implement queue using stacks
