@@ -907,6 +907,36 @@ function helper(root) {
     return res + 1;
 }
 
+// Minimum Depth of Binary Tree
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var minDepth = function(root) {
+    if (root == null) return 0;
+    let res = 0;
+    let queue = [];
+    queue.push(root);
+    while (queue.length > 0) {
+        let size = queue.length;
+        res++;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            if (cur.left == null && cur.right == null) {
+                return res;
+            }
+            if (cur.left != null) {
+                queue.push(cur.left);
+            }
+            if (cur.right != null) {
+                queue.push(cur.right);
+            }
+        }
+    }
+    return res;
+};
+
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
