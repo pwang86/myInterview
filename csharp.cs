@@ -939,6 +939,30 @@ public class Solution {
         return 1 + res;
     }
 
+    // Minimum Depth of Binary Tree
+    public int MinDepth(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        int res = 0;
+        
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            res++;
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.Dequeue();
+                if (cur.left == null && cur.right == null) {
+                    return res;
+                }
+                if (cur.left != null)
+                    queue.Enqueue(cur.left);
+                if (cur.right != null) 
+                    queue.Enqueue(cur.right);
+            }
+        }
+        return res;   
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
