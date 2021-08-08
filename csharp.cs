@@ -960,7 +960,24 @@ public class Solution {
                     queue.Enqueue(cur.right);
             }
         }
-        return res;   
+        return res;
+        // postorder way:
+        // if (root == null) return 0;
+        // return Helper(root);
+    }
+    public int Helper(TreeNode root) {
+        if (root == null) return 0;
+        
+        TreeNode leftNode = root.left;
+        TreeNode rightNode = root.right;
+        if (leftNode != null && rightNode == null) {
+            return 1 + Helper(leftNode);
+        }
+        if (leftNode == null && rightNode != null) {
+            return 1 + Helper(rightNode);
+        }
+        int res = 1 + Math.Min(Helper(leftNode), Helper(rightNode));
+        return res;
     }
 
     // Sliding Window Maximum
