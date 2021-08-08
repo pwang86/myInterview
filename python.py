@@ -777,7 +777,23 @@ class Solution:
                 if cur.right != None:
                     queue.append(cur.right)
         return res
+        # postorder way
+        # if not root:
+        #    return 0
+        # return self.helper(root)
 
+    def helper(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        leftNode = root.left
+        rightNode = root.right
+        if not leftNode and rightNode:
+            return 1 + self.helper(rightNode)
+        if leftNode and not rightNode:
+            return 1 + self.helper(leftNode)
+        res = 1 + min(self.helper(leftNode), self.helper(rightNode))
+        return res
+        
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
