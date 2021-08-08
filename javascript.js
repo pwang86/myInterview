@@ -934,8 +934,24 @@ function helper(root) {
         }
     }
     return res;
+    // postorder way
+    // if (root == null) return 0;
+    // return helper(root);
 };
-
+function helper(root) {
+    if (root == null) return 0;
+    
+    let leftNode = root.left;
+    let rightNode = root.right;
+    if (leftNode == null && rightNode != null) {
+        return 1 + helper(rightNode);
+    }
+    if (leftNode != null && rightNode == null) {
+        return 1 + helper(leftNode);
+    }
+    let res = 1 + Math.min(helper(leftNode), helper(rightNode));
+    return res;
+}
 
 // implement queue using stacks
 /**
