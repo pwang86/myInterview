@@ -1061,6 +1061,27 @@ class solution {
             }
         }
         return res
+        // postorder way
+        // if root == nil {
+            //return 0
+        // }
+        // return helper(root)
+    }
+    func helper(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        
+        let leftNode = root?.left
+        let rightNode = root?.right
+        if leftNode != nil && rightNode == nil {
+            return 1 + helper(leftNode)
+        }
+        if leftNode == nil && rightNode != nil {
+            return 1 + helper(rightNode)
+        }
+        var res = 1 + min(helper(leftNode), helper(rightNode))
+        return res
     }
 }
 
