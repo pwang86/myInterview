@@ -953,6 +953,30 @@ function helper(root) {
     return res;
 }
 
+// Count Complete Tree Nodes
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var countNodes = function(root) {
+    if (root == null) {
+        return 0;
+    }
+    let queue = [];
+    queue.push(root);
+    let res = 0;
+    
+    while (queue.length > 0) {
+        let size = queue.length;
+        for (let i = 0; i < size; i++) {
+            let cur = queue.shift();
+            if (cur.left != null) queue.push(cur.left);
+            if (cur.right != null) queue.push(cur.right);
+        }
+        res += size;
+    }
+    return res;
+};
 // implement queue using stacks
 /**
  * Initialize your data structure here.
