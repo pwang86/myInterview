@@ -980,6 +980,27 @@ public class Solution {
         return res;
     }
 
+    // Count Complete Tree Nodes
+    public int CountNodes(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+        int res = 0;
+        
+        while (queue.Count > 0) {
+            int size = queue.Count;
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.Dequeue();
+                if (cur.left != null) queue.Enqueue(cur.left);
+                if (cur.right != null) queue.Enqueue(cur.right);
+            }
+            res += size;
+        }
+        return res;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
