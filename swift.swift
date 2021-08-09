@@ -1083,6 +1083,30 @@ class solution {
         var res = 1 + min(helper(leftNode), helper(rightNode))
         return res
     }
+
+    // Count Complete Tree Nodes
+    func countNodes(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        var queue:[TreeNode] = []
+        queue.append(root!)
+        var res = 0
+        while queue.count > 0 {
+            let size = queue.count
+            for _ in 0..<size {
+                let cur = queue.removeFirst()
+                if let left = cur.left {
+                    queue.append(left)
+                }
+                if let right = cur.right {
+                    queue.append(right)
+                }  
+            }
+            res += size
+        }
+        return res
+    }
 }
 
 // implement queue using stacks
