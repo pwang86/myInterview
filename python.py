@@ -794,6 +794,25 @@ class Solution:
         res = 1 + min(self.helper(leftNode), self.helper(rightNode))
         return res
         
+    # Count Complete Tree Nodes
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        queue = list()
+        queue.append(root)
+        res = 0
+        
+        while len(queue) > 0:
+            size = len(queue)
+            for i in range(size):
+                cur = queue.pop(0)
+                if cur.left:
+                    queue.append(cur.left)
+                if cur.right:
+                    queue.append(cur.right)
+            res += size
+        
+        return res
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
