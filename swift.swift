@@ -1106,6 +1106,28 @@ class solution {
             res += size
         }
         return res
+        /* O(logn * logn)
+        
+        if root == nil {
+            return 0
+        }
+        var leftNode: TreeNode? = root?.left
+        var rightNode: TreeNode? = root?.right
+        var leftHeight = 0
+        var rightHeight = 0
+        while leftNode != nil {
+            leftNode = leftNode?.left
+            leftHeight += 1
+        }
+        while rightNode != nil {
+            rightNode = rightNode?.right
+            rightHeight += 1
+        }
+        if leftHeight == rightHeight {
+            return (2 << leftHeight) - 1
+        }
+        return countNodes(root?.left) + countNodes(root?.right) + 1
+        */
     }
 }
 
