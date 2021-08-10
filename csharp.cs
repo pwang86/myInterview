@@ -999,6 +999,28 @@ public class Solution {
             res += size;
         }
         return res;
+        /*
+         * O(logn * logn)
+         
+         if (root == null) {
+            return 0;
+        }
+        TreeNode leftNode = root.left;
+        TreeNode rightNode = root.right;
+        int leftHeight = 0, rightHeight = 0;
+        while (leftNode != null) {
+            leftNode = leftNode.left;
+            leftHeight++;
+        }
+        while (rightNode != null) {
+            rightNode = rightNode.right;
+            rightHeight++;
+        }
+        if (leftHeight == rightHeight) {
+            return (2 << leftHeight) - 1;
+        }
+        return CountNodes(root.left) + CountNodes(root.right) + 1;
+        */
     }
 
     // Sliding Window Maximum
