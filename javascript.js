@@ -976,6 +976,29 @@ function helper(root) {
         res += size;
     }
     return res;
+    /**
+     * O(logn * logn)
+      
+    if (root == null) {
+        return 0;
+    }
+    let leftNode = root.left;
+    let rightNode = root.right;
+    let leftHeight = 0, rightHeight = 0;
+    while (leftNode != null) {
+        leftNode = leftNode.left;
+        leftHeight++;
+    }
+    while (rightNode != null) {
+        rightNode = rightNode.right;
+        rightHeight++;
+    }
+    if (leftHeight == rightHeight) {
+        return Math.pow(2, leftHeight + 1) - 1
+    }
+    return countNodes(root.left) + countNodes(root.right) + 1;
+    */ 
+
 };
 // implement queue using stacks
 /**
