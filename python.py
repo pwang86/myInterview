@@ -811,8 +811,24 @@ class Solution:
                 if cur.right:
                     queue.append(cur.right)
             res += size
-        
         return res
+        # O(logn * logn)
+        #
+        # if not root:
+            # return 0
+        # leftNode = root.left
+        # rightNode = root.right
+        # leftHeight = rightHeight = 0
+        # while leftNode:
+            # leftNode = leftNode.left
+            # leftHeight += 1
+        # while rightNode:
+            # rightNode = rightNode.right
+            # rightHeight += 1
+        # if leftHeight == rightHeight:
+            # return (2 << leftHeight) - 1
+        # return self.countNodes(root.left) + self.countNodes(root.right) + 1
+        #
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
