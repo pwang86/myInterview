@@ -1023,6 +1023,23 @@ public class Solution {
         */
     }
 
+    // Balanced Binary Tree
+    public bool IsBalanced(TreeNode root) {
+        int res = GetHeight(root);
+        return res != -1;
+    }
+    public int GetHeight(TreeNode root) {
+        if (root == null)
+            return 0;
+        int leftHeight = GetHeight(root.left);
+        if (leftHeight == -1)
+            return -1;
+        int rightHeight = GetHeight(root.right);
+        if (rightHeight == -1)
+            return -1;
+        return Math.Abs(leftHeight - rightHeight) > 1 ? -1 : 1 + Math.Max(leftHeight, rightHeight);
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
