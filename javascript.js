@@ -1009,6 +1009,27 @@ function helper(root) {
     this.sOut = [];
 };
 
+// Balanced Binary Tree
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isBalanced = function(root) {
+    let res = getHeight(root);
+    return res != -1
+};
+function getHeight(root) {
+    if (root == null)
+        return 0;
+    let leftHeight = getHeight(root.left);
+    if (leftHeight == -1)
+        return -1;
+    let rightHeight = getHeight(root.right);
+    if (rightHeight == -1) 
+        return -1;
+    return Math.abs(leftHeight - rightHeight) > 1 ? -1 : 1 + Math.max(leftHeight, rightHeight);
+}
+
 /**
  * Push element x to the back of queue. 
  * @param {number} x
