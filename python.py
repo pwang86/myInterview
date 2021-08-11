@@ -829,6 +829,22 @@ class Solution:
             # return (2 << leftHeight) - 1
         # return self.countNodes(root.left) + self.countNodes(root.right) + 1
         #
+
+    # Balanced Binary Tree
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        res = self.getHeight(root)
+        return res != -1
+    def getHeight(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        leftHeight = self.getHeight(root.left)
+        if leftHeight == -1:
+            return -1
+        rightHeight = self.getHeight(root.right)
+        if rightHeight == -1:
+            return -1
+        return -1 if abs(leftHeight - rightHeight) > 1 else 1 + max(leftHeight, rightHeight)
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
