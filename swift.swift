@@ -1129,6 +1129,26 @@ class solution {
         return countNodes(root?.left) + countNodes(root?.right) + 1
         */
     }
+
+    // Balanced Binary Tree
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        let res = getHeight(root)
+        return res != -1
+    }
+    func getHeight(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        var leftHeight = getHeight(root?.left)
+        if leftHeight == -1 {
+            return -1
+        }
+        var rightHeight = getHeight(root?.right)
+        if rightHeight == -1 {
+            return -1
+        }
+        return abs(leftHeight - rightHeight) > 1 ? -1 : 1 + max(leftHeight, rightHeight)
+    }
 }
 
 // implement queue using stacks
