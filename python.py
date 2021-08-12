@@ -741,7 +741,7 @@ class Solution:
         return res
 
     # Maximum Depth of N-ary Tree
-     def maxDepth(self, root: 'Node') -> int:
+    def maxDepth(self, root: 'Node') -> int:
         if not root:
             return 0
         
@@ -844,6 +844,31 @@ class Solution:
         if rightHeight == -1:
             return -1
         return -1 if abs(leftHeight - rightHeight) > 1 else 1 + max(leftHeight, rightHeight)
+    
+    # Binary Tree Paths
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        res = []
+        if not root:
+            return res
+        path = []
+        self.traversal(root, path, res)
+        return res
+    def traversal(self, root:Optional[TreeNode], path: List[int], res: List[str]) -> None:
+        path.append(root.val)
+        if not root.left and not root.right:
+            tmp = ""
+            for i in range(len(path) - 1):
+                tmp += str(path[i])
+                tmp += "->"
+            tmp += str(path[-1])
+            res.append(tmp)
+            return
+        if root.left != None:
+            self.traversal(root.left, path, res)
+            path.pop()
+        if root.right != None:
+            self.traversal(root.right, path, res)
+            path.pop()
 
 # Sliding Window Maximum
 class MyQueue:
