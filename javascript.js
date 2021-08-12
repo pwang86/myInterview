@@ -1000,6 +1000,43 @@ function helper(root) {
     */ 
 
 };
+
+// Binary Tree Paths
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+ var binaryTreePaths = function(root) {
+    let res = [];
+    if (root == null) {
+        return res;
+    }
+    let path = [];
+    traversal(root, path, res);
+    return res;
+};
+
+function traversal(root, path, res) {
+    path.push(root.val);
+    if (root.left == null && root.right == null) {
+        let tmp = "";
+        for (let i = 0; i < path.length - 1; i++) {
+            tmp += path[i];
+            tmp += "->";
+        }
+        tmp += path[path.length - 1];
+        res.push(tmp);
+        return;
+    }
+    if (root.left != null) {
+        traversal(root.left, path, res);
+        path.pop();
+    }
+    if (root.right != null) {
+        traversal(root.right, path, res);
+        path.pop();
+    }
+}
 // implement queue using stacks
 /**
  * Initialize your data structure here.
