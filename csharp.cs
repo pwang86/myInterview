@@ -1040,6 +1040,39 @@ public class Solution {
         return Math.Abs(leftHeight - rightHeight) > 1 ? -1 : 1 + Math.Max(leftHeight, rightHeight);
     }
 
+    // Binary Tree Paths
+    public IList<string> BinaryTreePaths(TreeNode root) {
+        IList<string> res = new List<string>();
+        if (root == null) {
+            return res;
+        }
+        List<int> path = new List<int>();
+        Traversal(root, path, res);
+        return res;
+    }
+    
+    public void Traversal(TreeNode root, List<int> path, IList<string> res) {
+        path.Add(root.val);
+        if (root.left == null && root.right == null) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < path.Count - 1; i++) {
+                sb.Append(path[i]);
+                sb.Append("->");
+            }
+            sb.Append(path[path.Count - 1]);
+            res.Add(sb.ToString());
+            return;
+        }
+        if (root.left != null) {
+            Traversal(root.left, path, res);
+            path.RemoveAt(path.Count - 1);
+        }
+        if (root.right != null) {
+            Traversal(root.right, path, res);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
