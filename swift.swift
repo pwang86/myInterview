@@ -1149,6 +1149,38 @@ class solution {
         }
         return abs(leftHeight - rightHeight) > 1 ? -1 : 1 + max(leftHeight, rightHeight)
     }
+
+    // Binary Tree Paths
+    func binaryTreePaths(_ root: TreeNode?) -> [String] {
+        var res: [String] = []
+        if root == nil {
+            return res
+        }
+        var path: [Int] = []
+        traversal(root, &path, &res)
+        return res
+    }
+    func traversal(_ root: TreeNode?, _ path:inout [Int], _ res:inout [String]) {
+        path.append(root!.val)
+        var tmp: String = ""
+        if root?.left == nil && root?.right == nil {
+            for i in 0..<(path.count - 1) {
+                tmp += String(path[i])
+                tmp += "->"
+            }
+            tmp += String(path[path.count - 1])
+            res.append(tmp)
+            return
+        }
+        if root?.left != nil {
+            traversal(root?.left, &path, &res)
+            path.removeLast()
+        }
+        if root?.right != nil {
+            traversal(root?.right, &path, &res)
+            path.removeLast()
+        }   
+    }
 }
 
 // implement queue using stacks
