@@ -1181,6 +1181,21 @@ class solution {
             path.removeLast()
         }   
     }
+
+    // Sum of Left Leaves
+    func sumOfLeftLeaves(_ root: TreeNode?) -> Int {
+        if root == nil {
+            return 0
+        }
+        var leftValue = sumOfLeftLeaves(root?.left)
+        var rightValue = sumOfLeftLeaves(root?.right)
+        var curValue = 0
+        if (root?.left != nil) && (root?.left?.left == nil) && (root?.left?.right == nil) {
+            curValue = root!.left!.val
+        } 
+        let sum = curValue + leftValue + rightValue
+        return sum
+    }
 }
 
 // implement queue using stacks
