@@ -870,6 +870,18 @@ class Solution:
             self.traversal(root.right, path, res)
             path.pop()
 
+# Sum of Left Leaves
+def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        leftValue = self.sumOfLeftLeaves(root.left)
+        rightValue = self.sumOfLeftLeaves(root.right)
+        curValue = 0
+        if root.left and (not root.left.left) and (not root.left.right):
+            curValue = root.left.val
+        sum = curValue + leftValue + rightValue
+        return sum
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
