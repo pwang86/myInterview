@@ -1073,6 +1073,23 @@ public class Solution {
         }
     }
 
+    // Sum of Left Leaves
+    public int SumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+           return 0;
+        }
+        int leftValue = SumOfLeftLeaves(root.left);
+        int rightValue = SumOfLeftLeaves(root.right);
+        
+        int curValue = 0;
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            curValue = root.left.val;
+        }
+        
+        int sum = curValue + leftValue + rightValue;
+        return sum;
+    }
+
     // Sliding Window Maximum
     public class MyQueue {
         List<int> list = new List<int>();
