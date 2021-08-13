@@ -1037,6 +1037,27 @@ function traversal(root, path, res) {
         path.pop();
     }
 }
+
+// Sum of Left Leaves
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var sumOfLeftLeaves = function(root) {
+    if (root == null) {
+        return 0;
+    }
+    
+    let leftValue = sumOfLeftLeaves(root.left);
+    let rightValue = sumOfLeftLeaves(root.right);
+    let curValue = 0;
+    if (root.left != null && root.left.left == null && root.left.right == null) {
+        curValue = root.left.val;
+    }
+    let sum = curValue + leftValue + rightValue;
+    return sum;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
