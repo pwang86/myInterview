@@ -1058,6 +1058,34 @@ function traversal(root, path, res) {
     return sum;
 };
 
+// Path Sum
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+ var hasPathSum = function(root, targetSum) {
+    if (root == null) return false;
+    return traversal(root, targetSum - root.val);
+};
+function traversal(root, sum) {
+    if (root.left == null && root.right == null && sum == 0) return true;
+    if (root.left == null && root.right == null) return false;
+    
+    if (root.left != null) {
+        if (traversal(root.left, sum - root.left.val)) {
+            return true;
+        }
+    }
+    if (root.right != null) {
+        if (traversal(root.right, sum - root.right.val)) {
+            return true;
+        } 
+    }
+    return false;
+}
+
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
