@@ -1196,6 +1196,34 @@ class solution {
         let sum = curValue + leftValue + rightValue
         return sum
     }
+
+    // Path Sum
+    func hasPathSum(_ root: TreeNode?, _ targetSum: Int) -> Bool {
+        if root == nil {
+          return false 
+        }
+        
+        return traversal(root, targetSum - root!.val)
+    }
+    func traversal(_ root: TreeNode?, _ sum: Int) -> Bool {
+        if root?.left == nil && root?.right == nil && sum == 0 {
+            return true
+        }
+        if root?.left == nil && root?.right == nil {
+            return false
+        }
+        if root?.left != nil {
+            if traversal(root?.left, sum - root!.left!.val) {
+                return true
+            }
+        }
+        if root?.right != nil {
+            if traversal(root?.right, sum - root!.right!.val) {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 // implement queue using stacks
