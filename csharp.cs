@@ -1127,6 +1127,25 @@ public class Solution {
         return res;
     }
 
+    // Path Sum
+    public bool HasPathSum(TreeNode root, int targetSum) {
+        if (root == null)
+            return false;
+        return Traversal(root, targetSum - root.val);
+    }
+    public bool Traversal(TreeNode root, int sum) {
+        if (root.left == null && root.right == null && sum == 0) return true;
+        if (root.left == null && root.right == null) return false;
+        
+        if (root.left != null) {
+             if (Traversal(root.left, sum - root.left.val)) return true;
+        }
+        if (root.right != null) {
+            if (Traversal(root.right, sum - root.right.val)) return true;
+        }
+        
+        return false;
+    }
 } 
 
 // implement queue using stacks
