@@ -1146,6 +1146,36 @@ public class Solution {
         
         return false;
     }
+
+    // path sum II
+    public IList<IList<int>> PathSum(TreeNode root, int targetSum) {
+        IList<IList<int>> res = new List<IList<int>>();
+        if (root == null) {
+            return res;
+        }
+        IList<int> path = new List<int>();
+        Preorder(root, targetSum, path, res);
+        return res;
+    }
+    
+    public void Preorder(TreeNode cur, int sum, IList<int> path, IList<IList<int>> res) {
+        path.Add(cur.val);
+        if (cur.left == null && cur.right == null) {
+            if (sum - cur.val == 0) {
+                res.Add(new List<int>(path));
+            }
+            return;
+        }
+        
+        if (cur.left != null) {
+            Preorder(cur.left, sum - cur.val, path, res);
+            path.RemoveAt(path.Count - 1);
+        }
+        if (cur.right != null) {
+            Preorder(cur.right, sum - cur.val, path, res);
+            path.RemoveAt(path.Count - 1);
+        }  
+    }
 } 
 
 // implement queue using stacks
