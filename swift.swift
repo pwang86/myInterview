@@ -1224,6 +1224,34 @@ class solution {
         }
         return false
     }
+
+    // path sum II
+    func pathSum(_ root: TreeNode?, _ targetSum: Int) -> [[Int]] {
+        var res = [[Int]]()
+        if root == nil {
+            return res
+        }
+        var path:[Int] = []
+        preorder(root, targetSum, &path, &res)
+        return res
+    }
+    func preorder(_ cur: TreeNode?, _ targetSum: Int, _ path: inout [Int], _ res: inout [[Int]]) {
+        path.append(cur!.val)
+        if cur?.left == nil && cur?.right == nil {
+            if targetSum - cur!.val == 0 {
+                res.append(path)
+            }
+            return
+        }
+        if cur?.left != nil {
+            preorder(cur?.left, targetSum - cur!.val, &path, &res)
+            path.removeLast()
+        }
+        if cur?.right != nil {
+            preorder(cur?.right, targetSum - cur!.val, &path, &res)
+            path.removeLast()
+        }
+    }
 }
 
 // implement queue using stacks
