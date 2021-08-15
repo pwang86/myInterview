@@ -899,6 +899,27 @@ class Solution:
             if self.traversal(root.right, sum - root.right.val):
                 return True
         return False
+    
+    # path sum II
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        res = []
+        if not root:
+            return res
+        path = []
+        self.preorder(root, targetSum, path, res)
+        return res
+    def preorder(self, root: Optional[TreeNode], targetSum: int, path: List[int], res: List[List[int]]) -> None:
+        path.append(root.val)
+        if not root.left and (not root.right):
+            if targetSum - root.val == 0:
+                res.append(path[:])
+            return
+        if root.left:
+            self.preorder(root.left, targetSum - root.val, path, res)
+            path.pop()
+        if root.right:
+            self.preorder(root.right, targetSum - root.val, path, res)
+            path.pop()
 
 
 # Sliding Window Maximum
