@@ -1085,6 +1085,36 @@ function traversal(root, sum) {
     return false;
 }
 
+// path sum II
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {number[][]}
+ */
+ var pathSum = function(root, targetSum) {
+    let res = [];
+    if (root == null) return res;
+    let path = [];
+    let preorder = (cur, sum) => {
+        path.push(cur.val);
+        if (!cur.left && !cur.right) {
+            if (sum - cur.val == 0) {
+                res.push([...path]);
+            }
+            return;
+        }
+        if (cur.left) {
+            preorder(cur.left, sum - cur.val);
+            path.pop();
+        }
+        if (cur.right) {
+            preorder(cur.right, sum - cur.val);
+            path.pop();
+        }
+    };
+    preorder(root, targetSum);
+    return res;
+};
 
 // implement queue using stacks
 /**
