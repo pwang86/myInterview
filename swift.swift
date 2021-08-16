@@ -1252,6 +1252,30 @@ class solution {
             path.removeLast()
         }
     }
+
+    // Construct Binary Tree from Inorder and Postorder Traversal
+    func buildTree(_ inorder: [Int], _ postorder: [Int]) -> TreeNode? {
+        if postorder == nil {
+            return nil
+        }
+        let rootVal = postorder[postorder.count - 1]
+        let root = TreeNode(rootVal)
+        
+        var leftInorder = [Int]()
+        var rightInorder = [Int]()
+        if let index = inorder.index(of: rootVal) {
+            leftInorder = inorder[0..<index]
+            rightInorder = inorder[index + 1..<inorder.count]
+        }
+        
+        var leftPostorder = postorder[0..<leftInorder.count]
+        var rightPostorder = postorder[leftInorder.count..<postorder.count - 1]
+        
+        root.left = buildTree(leftInorder, leftPostorder)
+        root.right = buildTree(rightInorder, rightPostorder)
+        
+        return root
+    }
 }
 
 // implement queue using stacks
