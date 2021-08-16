@@ -1176,6 +1176,27 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }  
     }
+
+    // Construct Binary Tree from Inorder and Postorder Traversal
+    public TreeNode BuildTree(int[] inorder, int[] postorder) {
+        if (postorder.Length == 0) return null;
+        
+        int rootVal = postorder[postorder.Length - 1];
+        int index = Array.IndexOf(inorder, rootVal);
+        TreeNode root = new TreeNode();
+        root.val = rootVal;
+        
+        int[] leftInorder = inorder.Take(index).ToArray();
+        int[] rightInorder = inorder.Skip(index + 1).ToArray();
+        
+        int[] leftPostorder = postorder.Take(leftInorder.Length).ToArray();
+        int[] rightPostorder = postorder.Skip(leftInorder.Length).Take(postorder.Length - leftInorder.Length - 1).ToArray();
+        
+        root.left = BuildTree(leftInorder, leftPostorder);
+        root.right = BuildTree(rightInorder, rightPostorder);
+        
+        return root;
+    }
 } 
 
 // implement queue using stacks
