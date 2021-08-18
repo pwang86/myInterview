@@ -1274,6 +1274,28 @@ class solution {
         
         return root
     }
+
+    // Construct Binary Tree from Preorder and Inorder Traversal
+    func buildTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        if preorder.isEmpty {
+            return nil
+        }
+        
+        let rootVal = preorder[0]
+        var rootIndex = inorder.index(of: rootVal)
+        
+        var leftInorder = Array(inorder[0..<rootIndex!])
+        var rightInorder = Array(inorder[rootIndex!+1..<inorder.count])
+
+        var leftPreorder = Array(preorder[1..<leftInorder.count + 1])
+        var rightPreorder = Array(preorder[leftInorder.count + 1..<preorder.count])
+        
+        let root = TreeNode(rootVal)
+        root.left = buildTree(leftPreorder, leftInorder)
+        root.right = buildTree(rightPreorder, rightInorder)
+        
+        return root
+    }
 }
 
 // implement queue using stacks
