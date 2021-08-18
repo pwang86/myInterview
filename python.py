@@ -939,6 +939,25 @@ class Solution:
         root.right = self.buildTree(rightInorder, rightPostorder)
         
         return root
+    
+    # Construct Binary Tree from Preorder and Inorder Traversal
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder:
+            return None
+        rootVal = preorder[0]
+        rootIndex = inorder.index(rootVal)
+        root = TreeNode(rootVal)
+        
+        leftInorder = inorder[0:rootIndex]
+        rightInorder = inorder[rootIndex + 1:]
+        
+        leftPreorder = preorder[1: len(leftInorder) + 1]
+        rightPreorder = preorder[len(leftInorder) + 1:]
+        
+        root.left = self.buildTree(leftPreorder, leftInorder)
+        root.right = self.buildTree(rightPreorder, rightInorder)
+        
+        return root
 
 # Sliding Window Maximum
 class MyQueue:
