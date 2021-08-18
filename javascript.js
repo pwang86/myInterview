@@ -1141,6 +1141,31 @@ function traversal(root, sum) {
     return root;
 };
 
+ // Construct Binary Tree from Preorder and Inorder Traversal
+ /**
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+    if (preorder.length == 0) return null;
+    
+    let rootVal = preorder[0];
+    let rootIndex = inorder.indexOf(rootVal);
+    
+    let root = new TreeNode(rootVal);
+    
+    let leftInorder = inorder.slice(0, rootIndex);
+    let rightInorder = inorder.slice(rootIndex + 1, inorder.length);
+    
+    let leftPreorder = preorder.slice(1, rootIndex + 1);
+    let rightPreorder = preorder.slice(rootIndex + 1, preorder.length);
+    
+    root.left = buildTree(leftPreorder, leftInorder);
+    root.right = buildTree(rightPreorder, rightInorder);
+    return root;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
