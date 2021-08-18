@@ -1197,6 +1197,26 @@ public class Solution {
         
         return root;
     }
+
+    // Construct Binary Tree from Preorder and Inorder Traversal
+    public TreeNode BuildTree(int[] preorder, int[] inorder) {
+        if (preorder.Length == 0) return null;
+        
+        int rootVal = preorder[0];
+        int rootIndex = Array.IndexOf(inorder, rootVal);
+        
+        TreeNode root = new TreeNode(rootVal);
+        int[] leftInorder = inorder.Take(rootIndex).ToArray();
+        int[] rightInorder = inorder.Skip(rootIndex + 1).ToArray();
+        
+        int[] leftPreorder = preorder.Skip(1).Take(rootIndex).ToArray();
+        int[] rightPreorder = preorder.Skip(1 + rootIndex).ToArray();
+        
+        root.left = BuildTree(leftPreorder, leftInorder);
+        root.right = BuildTree(rightPreorder, rightInorder);
+        
+        return root;
+    }
 } 
 
 // implement queue using stacks
