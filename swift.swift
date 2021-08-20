@@ -1296,6 +1296,25 @@ class solution {
         
         return root
     }
+
+    // Maximum Binary Tree
+    func constructMaximumBinaryTree(_ nums: [Int]) -> TreeNode? {
+        guard nums.count > 0 else { return nil }
+        
+        var maxValue = 0
+        var maxIndex = 0
+        for (idx, num) in nums.enumerated() {
+            if num > maxValue {
+                maxValue = num
+                maxIndex = idx
+            }
+        }
+        
+        var root = TreeNode(maxValue)
+        root.left = constructMaximumBinaryTree(Array(nums[0..<maxIndex]))
+        root.right = constructMaximumBinaryTree(Array(nums[(maxIndex + 1)..<nums.count]))
+        return root
+    }
 }
 
 // implement queue using stacks
