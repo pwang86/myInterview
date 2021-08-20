@@ -1217,6 +1217,30 @@ public class Solution {
         
         return root;
     }
+
+    // maximum binary tree
+     public TreeNode ConstructMaximumBinaryTree(int[] nums) {
+        if (nums.Length == 1)
+            return new TreeNode(nums[0]);
+        return Helper(nums, 0, nums.Length - 1);
+    }
+    public TreeNode Helper(int[] nums, int leftIndex, int rightIndex) {
+        if (leftIndex > rightIndex)
+            return null;
+        
+        int max = 0, maxIndex = 0;
+        for (int i = 0; i < nums.Length; i++) {
+            if (max < nums[i]) {
+                max = nums[i];
+                maxIndex = i;
+            }
+        }
+        
+        TreeNode root = new TreeNode(max);
+        root.left = Helper(nums.Take(maxIndex).ToArray(), 0, maxIndex - 1);
+        root.right = Helper(nums.Skip(maxIndex + 1).ToArray(), maxIndex + 1, nums.Length - 1);
+        return root;
+    }
 } 
 
 // implement queue using stacks
