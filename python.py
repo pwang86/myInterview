@@ -958,6 +958,24 @@ class Solution:
         root.right = self.buildTree(rightPreorder, rightInorder)
         
         return root
+    
+    # Maximum Binary Tree
+    def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
+        if len(nums) == 1:
+            return TreeNode(nums[0])
+        
+        return self.helper(nums)
+    def helper(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        
+        root = TreeNode(max(nums))
+        maxIndex = nums.index(root.val)
+        
+        root.left = self.helper(nums[:maxIndex])
+        root.right = self.helper(nums[maxIndex + 1:])
+        
+        return root
 
 # Sliding Window Maximum
 class MyQueue:
