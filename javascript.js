@@ -1166,6 +1166,39 @@ var buildTree = function(preorder, inorder) {
     return root;
 };
 
+// maximum binary tree
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+ var constructMaximumBinaryTree = function(nums) {
+    if (nums.length == 1) {
+        return new TreeNode(nums[0]);
+    }
+    
+    const helper = (arr, leftIndex, rightIndex) => {
+        if (leftIndex > rightIndex) {
+            return null;
+        }
+
+        let maxValue = -1;
+        let maxIndex = -1;
+        for (let i = leftIndex; i <= rightIndex; i++) {
+            if (arr[i] > maxValue) {
+                maxValue = arr[i];
+                maxIndex = i;
+            }
+        }
+        let root = new TreeNode(maxValue);
+        root.left = helper(arr, leftIndex, maxIndex - 1);
+        root.right = helper(arr, maxIndex + 1, rightIndex);
+        return root;
+    }
+    
+    let root = helper(nums, 0, nums.length - 1);
+    return root;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
