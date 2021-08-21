@@ -1315,6 +1315,20 @@ class solution {
         root.right = constructMaximumBinaryTree(Array(nums[(maxIndex + 1)..<nums.count]))
         return root
     }
+
+    // Merge Two Binary Trees
+    func mergeTrees(_ root1: TreeNode?, _ root2: TreeNode?) -> TreeNode? {
+        if root1 == nil {
+            return root2
+        }
+        if root2 == nil {
+            return root1
+        }
+        var root = TreeNode(root1!.val + root2!.val)
+        root.left = mergeTrees(root1?.left, root2?.left)
+        root.right = mergeTrees(root1?.right, root2?.right)
+        return root
+    }
 }
 
 // implement queue using stacks
