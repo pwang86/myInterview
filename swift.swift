@@ -1329,6 +1329,20 @@ class solution {
         root.right = mergeTrees(root1?.right, root2?.right)
         return root
     }
+
+    // Search in a Binary Search Tree
+    func searchBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        if root == nil || root!.val == val {
+            return root
+        }
+        if root!.val > val {
+            return searchBST(root?.left, val)
+        }
+        if root!.val < val {
+            return searchBST(root?.right, val)
+        }
+        return nil
+    }
 }
 
 // implement queue using stacks
