@@ -988,6 +988,17 @@ class Solution:
         root.left = self.mergeTrees(root1.left, root2.left)
         root.right = self.mergeTrees(root1.right, root2.right)
         return root
+    
+    # Search in a Binary Search Tree
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root or root.val == val:
+            return root
+        if root.val > val:
+            return self.searchBST(root.left, val)
+        if root.val < val:
+            return self.searchBST(root.right, val)
+        
+        return None
 
 # Sliding Window Maximum
 class MyQueue:
