@@ -1230,6 +1230,29 @@ var buildTree = function(preorder, inorder) {
     return null;
 };
 
+// Validate Binary Search Tree
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isValidBST = function(root) {
+    let cur = null;
+    const inorder = (root) => {
+         if (root == null) return true;
+    
+        let left = inorder(root.left);
+        if (!left) return false;
+
+        if (cur != null && cur.val >= root.val) {
+            return false;
+        }
+        cur = root;
+        let right = inorder(root.right);
+        return right;
+    }
+    return inorder(root);
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
