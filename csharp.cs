@@ -1262,6 +1262,24 @@ public class Solution {
         
         return null;
     }
+
+    // Validate Binary Search Tree
+    public TreeNode cur;
+    public bool IsValidBST(TreeNode root) {
+        if (root == null) return true;
+        
+        bool left = IsValidBST(root.left);
+        if (!left) return false;
+        
+        if (cur != null && cur.val >= root.val) {
+            return false;
+        } 
+        cur = root;
+        
+        bool right = IsValidBST(root.right);
+        return right;
+    }
+
 } 
 
 // implement queue using stacks
