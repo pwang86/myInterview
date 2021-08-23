@@ -1000,6 +1000,23 @@ class Solution:
         
         return None
 
+    # Validate Binary Search Tree
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        cur = None
+        def inorder(root: Optional[TreeNode]) -> bool:
+            nonlocal cur
+            if not root:
+                return True
+            left = inorder(root.left)
+            if not left:
+                return False
+            if cur and (cur.val >= root.val):
+                return False
+            cur = root
+            right = inorder(root.right)
+            return right
+        return inorder(root)
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
