@@ -1343,6 +1343,24 @@ class solution {
         }
         return nil
     }
+
+    // Validate Binary Search Tree
+    var cur: TreeNode?
+    func isValidBST(_ root: TreeNode?) -> Bool {
+        if root == nil {
+            return true
+        }
+        let left = isValidBST(root?.left)
+        if !left {
+            return false
+        }
+        if cur != nil && cur!.val >= root!.val {
+            return false
+        }
+        cur = root
+        let right = isValidBST(root?.right)
+        return right
+    }
 }
 
 // implement queue using stacks
