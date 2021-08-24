@@ -1361,6 +1361,26 @@ class solution {
         let right = isValidBST(root?.right)
         return right
     }
+
+    // Minimum Absolute Difference in BST
+    var res = Int.max
+    var pre: TreeNode?
+    func getMinimumDifference(_ root: TreeNode?) -> Int {
+        traverse(root)
+        return res
+    }
+    func traverse(_ cur: TreeNode?) {
+        if cur == nil {
+            return
+        }
+        traverse(cur?.left)
+        if pre != nil {
+            res = min(res, cur!.val - pre!.val)
+        }
+        pre = cur
+        traverse(cur?.right)
+    }
+
 }
 
 // implement queue using stacks
