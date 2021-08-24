@@ -1016,6 +1016,23 @@ class Solution:
             right = inorder(root.right)
             return right
         return inorder(root)
+    
+    # Minimum Absolute Difference in BST
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        res = float('inf')
+        pre = None
+        def traverse(cur: Optional[TreeNode]) -> None:
+            nonlocal res, pre
+            if not cur:
+                return
+            traverse(cur.left)
+            if pre:
+                res = min(res, cur.val - pre.val)
+            pre = cur
+            traverse(cur.right)
+        traverse(root)
+        return res
+
 
 # Sliding Window Maximum
 class MyQueue:
