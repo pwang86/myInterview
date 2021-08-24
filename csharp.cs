@@ -1280,6 +1280,24 @@ public class Solution {
         return right;
     }
 
+    // Minimum Absolute Difference in BST
+    public int res = Int32.MaxValue;
+    public TreeNode pre = null;
+    public int GetMinimumDifference(TreeNode root) {
+        Traverse(root);
+        return res;
+    }
+    public void Traverse(TreeNode cur) {
+        if (cur == null) return;
+        
+        Traverse(cur.left);
+        if (pre != null) {
+            res = Math.Min(res, cur.val - pre.val);
+        }
+        pre = cur;
+        Traverse(cur.right);
+    }
+
 } 
 
 // implement queue using stacks
