@@ -1253,6 +1253,27 @@ var buildTree = function(preorder, inorder) {
     return inorder(root);
 };
 
+// Minimum Absolute Difference in BST
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var getMinimumDifference = function(root) {
+    let res = Number.MAX_VALUE;
+    let pre = null;
+    const traverse = cur => {
+        if (cur == null) return;
+        traverse(cur.left);
+        if (pre != null) {
+            res = Math.min(res, cur.val - pre.val);
+        }
+        pre = cur;
+        traverse(cur.right);
+    }
+    traverse(root);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
