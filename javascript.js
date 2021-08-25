@@ -1274,6 +1274,37 @@ var buildTree = function(preorder, inorder) {
     return res;
 };
 
+// Find Mode in Binary Search Tree
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+ var findMode = function(root) {
+    let count = 0, maxCount = 0;
+    let pre = null;
+    let res = [];
+    const helper = cur => {
+        if (cur == null) return;
+        helper(cur.left);
+        if (pre == null || pre.val != cur.val) {
+            count = 1;
+        } else {
+            count++;
+        }
+        if (count > maxCount) {
+            res = [];
+            res.push(cur.val);
+            maxCount = count;
+        } else if (count == maxCount) {
+            res.push(cur.val);
+        }
+        pre = cur;
+        helper(cur.right);
+    }
+    helper(root);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
