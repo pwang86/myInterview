@@ -1381,6 +1381,35 @@ class solution {
         traverse(cur?.right)
     }
 
+    // Find Mode in Binary Search Tree
+    var count: Int = 0
+    var maxCount: Int = 0
+    var res = [Int]()
+    var pre: TreeNode? = nil
+    func findMode(_ root: TreeNode?) -> [Int] {
+        helper(root)
+        return res
+    }
+    func helper(_ cur: TreeNode?) {
+        if cur == nil {
+            return
+        }
+        helper(cur?.left)
+        if pre == nil || pre!.val != cur!.val {
+            count = 1
+        } else {
+            count += 1
+        }
+        if count > maxCount {
+            res = []
+            res.append(cur!.val)
+            maxCount = count
+        } else if count == maxCount {
+            res.append(cur!.val)
+        }
+        pre = cur
+        helper(cur?.right)
+    }
 }
 
 // implement queue using stacks
