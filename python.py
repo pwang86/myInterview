@@ -1033,6 +1033,31 @@ class Solution:
         traverse(root)
         return res
 
+    # Find Mode in Binary Search Tree
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        res = list()
+        count = maxCount = 0
+        pre = None
+        def helper(cur: Optional[TreeNode]) -> None:
+            if not cur:
+                return
+            nonlocal res, count, maxCount, pre
+            helper(cur.left)
+            if not pre or pre.val != cur.val:
+                count = 1
+            else:
+                count += 1
+            
+            if count > maxCount:
+                res.clear()
+                res.append(cur.val)
+                maxCount = count
+            elif count == maxCount:
+                res.append(cur.val)
+            pre = cur
+            helper(cur.right)
+        helper(root)
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
