@@ -1298,6 +1298,35 @@ public class Solution {
         Traverse(cur.right);
     }
 
+    // Find Mode in Binary Search Tree
+    public int count = 0;
+    public int maxCount = 0;
+    public TreeNode pre = null;
+    public List<int> res = new List<int>();
+    
+    public int[] FindMode(TreeNode root) {
+        Helper(root);
+        return res.ToArray();
+    }
+    
+    public void Helper(TreeNode cur) {
+        if (cur == null) return;
+        Helper(cur.left);
+        if (pre == null || pre.val != cur.val) {
+            count = 1;
+        } else {
+            count++;
+        }
+        if (count > maxCount) {
+            res.Clear();
+            maxCount = count;
+            res.Add(cur.val);
+        } else if (count == maxCount) {
+            res.Add(cur.val);
+        }
+        pre = cur;
+        Helper(cur.right);
+    }
 } 
 
 // implement queue using stacks
