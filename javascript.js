@@ -1305,6 +1305,22 @@ var buildTree = function(preorder, inorder) {
     return res;
 };
 
+// Lowest Common Ancestor of a Binary Tree
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+ var lowestCommonAncestor = function(root, p, q) {
+    if (root == p || root == q || root == null) return root;
+    let left = lowestCommonAncestor(root.left, p, q);
+    let right = lowestCommonAncestor(root.right, p, q);
+    if (left != null && right != null) return root;
+    if (left == null) return right;
+    return left;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
