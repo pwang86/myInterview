@@ -1058,6 +1058,18 @@ class Solution:
             helper(cur.right)
         helper(root)
         return res
+    
+    # Lowest Common Ancestor of a Binary Tree
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root == p or root == q or (not root):
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left and right:
+            return root
+        if not left:
+            return right
+        return left
 
 # Sliding Window Maximum
 class MyQueue:
