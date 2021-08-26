@@ -1426,6 +1426,21 @@ class solution {
         }
         return left
     }
+
+    // Lowest Common Ancestor of a Binary Search Tree
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        var cur = root
+        while cur != nil {
+            if cur!.val > p!.val && cur!.val > q!.val {
+                cur = cur?.left
+            } else if cur!.val < p!.val && cur!.val < q!.val {
+                cur = cur?.right
+            } else {
+                return cur
+            }
+        }
+        return nil
+    }
 }
 
 // implement queue using stacks
