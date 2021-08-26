@@ -1327,6 +1327,16 @@ public class Solution {
         pre = cur;
         Helper(cur.right);
     }
+
+    // Lowest Common Ancestor of a Binary Tree
+    public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == p || root == q || root == null) return root;
+        TreeNode left = LowestCommonAncestor(root.left, p, q);
+        TreeNode right = LowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) return root;
+        if (left == null) return right;
+        return left;
+    }
 } 
 
 // implement queue using stacks
