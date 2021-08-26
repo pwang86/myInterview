@@ -1410,6 +1410,22 @@ class solution {
         pre = cur
         helper(cur?.right)
     }
+
+    // Lowest Common Ancestor of a Binary Tree
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        if root === p || root === q || root == nil {
+            return root
+        }
+        let left = lowestCommonAncestor(root?.left, p, q)
+        let right = lowestCommonAncestor(root?.right, p, q)
+        if left != nil && right != nil {
+            return root
+        }
+        if left == nil {
+            return right
+        }
+        return left
+    }
 }
 
 // implement queue using stacks
