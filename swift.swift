@@ -1441,6 +1441,20 @@ class solution {
         }
         return nil
     }
+
+    // Insert into a Binary Search Tree
+    func insertIntoBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        if root == nil {
+            let node = TreeNode(val)
+            return node
+        }
+        if root!.val > val {
+            root?.left = insertIntoBST(root?.left, val)
+        } else {
+            root?.right = insertIntoBST(root?.right, val)
+        }
+        return root
+    }
 }
 
 // implement queue using stacks
