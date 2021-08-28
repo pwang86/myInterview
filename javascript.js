@@ -1341,6 +1341,25 @@ var buildTree = function(preorder, inorder) {
     return null;
 };
 
+// Insert into a Binary Search Tree
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+ var insertIntoBST = function(root, val) {
+    if (root == null) {
+        let node = new TreeNode(val);
+        return node;
+    }
+    if (root.val > val) {
+        root.left = insertIntoBST(root.left, val);
+    } else {
+        root.right = insertIntoBST(root.right, val);
+    }
+    return root;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
