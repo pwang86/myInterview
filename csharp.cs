@@ -1351,6 +1351,20 @@ public class Solution {
         }
         return null;
     }
+
+    // Insert into a Binary Search Tree
+     public TreeNode InsertIntoBST(TreeNode root, int val) {
+        if (root == null) {
+            TreeNode node = new TreeNode(val);
+            return node;
+        }
+        if (root.val > val) {
+            root.left = InsertIntoBST(root.left, val);
+        } else {
+            root.right = InsertIntoBST(root.right, val);
+        }
+        return root;
+    }
 } 
 
 // implement queue using stacks
