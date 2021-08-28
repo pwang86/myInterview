@@ -1081,7 +1081,18 @@ class Solution:
             else:
                 return root
         return None
-
+    
+    # Insert into a Binary Search Tree
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            node = TreeNode(val)
+            return node
+        if root.val > val:
+            root.left = self.insertIntoBST(root.left, val)
+        else:
+            root.right = self.insertIntoBST(root.right, val)
+        return root
+        
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
