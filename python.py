@@ -1092,6 +1092,29 @@ class Solution:
         else:
             root.right = self.insertIntoBST(root.right, val)
         return root
+    
+    # Delete Node in a BST
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        if not root:
+            return root
+        if root.val > key:
+            root.left = self.deleteNode(root.left, key)
+        elif root.val < key:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            if not root.left:
+                return root.right
+            if not root.right:
+                return root.left
+            cur = root.right
+            while cur.left:
+                cur = cur.left
+            cur.left = root.left
+            tmp = root
+            root = root.right
+            del tmp
+            return root
+        return root
         
 # Sliding Window Maximum
 class MyQueue:
