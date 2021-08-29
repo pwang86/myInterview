@@ -1455,6 +1455,33 @@ class solution {
         }
         return root
     }
+
+    // Delete Node in a BST
+    func deleteNode(_ root: TreeNode?, _ key: Int) -> TreeNode? {
+        if root == nil {
+            return root
+        }
+        if root!.val > key {
+            root?.left = deleteNode(root?.left, key)
+        } else if root!.val < key {
+            root?.right = deleteNode(root?.right, key)
+        } else {
+            if root?.left == nil {
+                return root?.right
+            }
+            if root?.right == nil {
+                return root?.left
+            }
+            var cur = root?.right
+            while cur?.left != nil {
+                cur = cur?.left
+            }
+            cur?.left = root?.left
+            var tmp = root?.right
+            return tmp
+        }
+        return root
+    }
 }
 
 // implement queue using stacks
