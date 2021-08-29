@@ -1360,6 +1360,35 @@ var buildTree = function(preorder, inorder) {
     return root;
 };
 
+// Delete Node in a BST
+/**
+ * @param {TreeNode} root
+ * @param {number} key
+ * @return {TreeNode}
+ */
+ var deleteNode = function(root, key) {
+    if (root == null) return root;
+    
+    if (root.val > key) {
+        root.left = deleteNode(root.left, key);
+    } else if (root.val < key) {
+        root.right = deleteNode(root.right, key);
+    } else {
+        if (root.left == null) return root.right;
+        if (root.right == null) return root.left;
+        let cur = root.right;
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        cur.left = root.left;
+        let tmp = root;
+        root = root.right;
+        delete tmp;
+        return root;
+    }
+    return root;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
