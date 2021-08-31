@@ -1408,6 +1408,23 @@ var buildTree = function(preorder, inorder) {
     return root;
 };
 
+// Convert Sorted Array to BST
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+ var sortedArrayToBST = function(nums) {
+    const traverse = (nums, left, right) => {
+        if (left > right) return null;
+        let mid = Math.floor(left + (right - left) / 2);
+        let root = new TreeNode(nums[mid]);
+        root.left = traverse(nums, left, mid - 1);
+        root.right = traverse(nums, mid + 1, right);
+        return root;
+    };
+    let res = traverse(nums, 0, nums.length - 1);
+    return res;
+};
 // implement queue using stacks
 /**
  * Initialize your data structure here.
