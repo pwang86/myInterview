@@ -1404,6 +1404,20 @@ public class Solution {
         root.right = TrimBST(root.right, low, high);
         return root;
     }
+
+    // Convert Sorted Array to BST
+    public TreeNode SortedArrayToBST(int[] nums) {
+        TreeNode root = Traverse(nums, 0, nums.Length - 1);
+        return root;
+    }
+    public TreeNode Traverse(int[] nums, int left, int right) {
+        if (left > right) return null;
+        int mid = left + (right - left) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = Traverse(nums, left, mid - 1);
+        root.right = Traverse(nums, mid + 1, right);
+        return root;
+    }
 } 
 
 // implement queue using stacks
