@@ -1127,6 +1127,18 @@ class Solution:
         root.left = self.trimBST(root.left, low, high)
         root.right = self.trimBST(root.right, low, high)
         return root
+    
+    # Convert Sorted Array to BST
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        def traverse(nums: List[int], left: int, right: int) -> Optional[TreeNode]:
+            if left > right:
+                return None
+            mid = left + (right - left) // 2
+            root = TreeNode(nums[mid])
+            root.left = traverse(nums, left, mid - 1)
+            root.right = traverse(nums, mid + 1, right)
+            return root
+        return traverse(nums, 0, len(nums) - 1)
 
 # Sliding Window Maximum
 class MyQueue:
