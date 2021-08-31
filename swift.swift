@@ -1497,6 +1497,21 @@ class solution {
         root?.left = trimBST(root?.left, low, high)
         root?.right = trimBST(root?.right, low, high)
         return root
+    
+    // Convert Sorted Array to BST
+    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+        return traverse(nums, 0, nums.count - 1)
+    }
+    func traverse(_ nums: [Int], _ left: Int, _ right: Int) -> TreeNode? {
+        if left > right {
+            return nil
+        }
+        let mid = left + (right - left) / 2
+        let root = TreeNode(nums[mid])
+        root.left = traverse(nums, left, mid - 1)
+        root.right = traverse(nums, mid + 1, right)
+        return root
+    }
 }
 
 // implement queue using stacks
