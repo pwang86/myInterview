@@ -1425,6 +1425,25 @@ var buildTree = function(preorder, inorder) {
     let res = traverse(nums, 0, nums.length - 1);
     return res;
 };
+
+// Convert BST to Greater Tree
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var convertBST = function(root) {
+    let pre = 0;
+    const traverse = cur => {
+        if (cur == null) return;
+        traverse(cur.right);
+        cur.val += pre;
+        pre = cur.val;
+        traverse(cur.left);
+    };
+    traverse(root);
+    return root;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
