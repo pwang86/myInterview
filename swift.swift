@@ -1512,6 +1512,22 @@ class solution {
         root.right = traverse(nums, mid + 1, right)
         return root
     }
+
+    // Convert BST to Greater Tree
+    public var pre = 0
+    func convertBST(_ root: TreeNode?) -> TreeNode? {
+        traverse(root)
+        return root
+    }
+    func traverse(_ cur: TreeNode?) {
+        if cur == nil {
+            return
+        }
+        traverse(cur?.right)
+        cur!.val += pre
+        pre = cur!.val
+        traverse(cur?.left)
+    }
 }
 
 // implement queue using stacks
