@@ -1140,6 +1140,20 @@ class Solution:
             return root
         return traverse(nums, 0, len(nums) - 1)
 
+    # Convert BST to Greater Tree
+    def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        pre = 0
+        def traverse(cur: Optional[TreeNode]) -> None:
+            nonlocal pre
+            if not cur:
+                return
+            traverse(cur.right)
+            cur.val += pre
+            pre = cur.val
+            traverse(cur.left)
+        traverse(root)
+        return root
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
