@@ -1418,6 +1418,21 @@ public class Solution {
         root.right = Traverse(nums, mid + 1, right);
         return root;
     }
+
+    // Convert BST to Greater Tree
+    int pre = 0;
+    public TreeNode ConvertBST(TreeNode root) {
+        if (root == null) return root;
+        Traverse(root);
+        return root;
+    }
+    public void Traverse(TreeNode cur) {
+        if (cur == null) return;
+        Traverse(cur.right);
+        cur.val += pre;
+        pre = cur.val;
+        Traverse(cur.left);
+    }
 } 
 
 // implement queue using stacks
