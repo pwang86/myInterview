@@ -1162,7 +1162,7 @@ class Solution:
             if len(path) == k:
                 res.append(path[:])
                 return
-            for i in range(startIndex, n + 1):
+            for i in range(startIndex, n - k + len(path) + 2):
                 path.append(i)
                 backtracking(n, k, i + 1)
                 path.pop()
