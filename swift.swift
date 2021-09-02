@@ -1528,6 +1528,26 @@ class solution {
         pre = cur!.val
         traverse(cur?.left)
     }
+
+    // Combinations
+    public var res = [[Int]]()
+    public var path = [Int]()
+    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+        backtracking(n, k, 1)
+        return res
+    }
+    func backtracking(_ n: Int, _ k: Int, _ startIndex: Int) {
+        if path.count == k {
+            res.append(path)
+            return
+        }
+        // if startIndex > n {return}
+        for i in startIndex..<n+1 {
+            path.append(i)
+            backtracking(n, k, i + 1)
+            path.removeLast()
+        }
+    }
 }
 
 // implement queue using stacks
