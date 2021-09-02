@@ -1444,6 +1444,30 @@ var convertBST = function(root) {
     return root;
 };
 
+// Combinations
+/**
+ * @param {number} n
+ * @param {number} k
+ * @return {number[][]}
+ */
+ var combine = function(n, k) {
+    let res = [];
+    let path = [];
+    const backtracking = (n, k, startIndex) => {
+        if (path.length == k) {
+            res.push([...path]);
+            return;
+        }
+        for (let i = startIndex; i <= n; i++) {
+            path.push(i);
+            backtracking(n, k, i + 1);
+            path.pop();
+        }
+    };
+    backtracking(n, k, 1);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
