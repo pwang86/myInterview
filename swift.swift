@@ -1542,7 +1542,7 @@ class solution {
             return
         }
         // if startIndex > n {return}
-        for i in startIndex..<n+1 {
+        for i in startIndex..<(n - k + path.count + 2) {
             path.append(i)
             backtracking(n, k, i + 1)
             path.removeLast()
