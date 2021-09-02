@@ -1433,6 +1433,25 @@ public class Solution {
         pre = cur.val;
         Traverse(cur.left);
     }
+
+    // Combinations
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    public IList<IList<int>> Combine(int n, int k) {
+        Backtracking(n, k, 1);
+        return res;
+    }
+    public void Backtracking(int n, int k, int startIndex) {
+        if (path.Count == k) {
+            res.Add(new List<int>(path));
+            return;
+        }
+        for (int i = startIndex; i <= n; i++) {
+            path.Add(i);
+            Backtracking(n, k, i + 1);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
 } 
 
 // implement queue using stacks
