@@ -1458,7 +1458,7 @@ var convertBST = function(root) {
             res.push([...path]);
             return;
         }
-        for (let i = startIndex; i <= n; i++) {
+        for (let i = startIndex; i <= n - k + path.length + 1; i++) {
             path.push(i);
             backtracking(n, k, i + 1);
             path.pop();
