@@ -1446,7 +1446,7 @@ public class Solution {
             res.Add(new List<int>(path));
             return;
         }
-        for (int i = startIndex; i <= n; i++) {
+        for (int i = startIndex; i <= n - k + path.Count + 1; i++) {
             path.Add(i);
             Backtracking(n, k, i + 1);
             path.RemoveAt(path.Count - 1);
