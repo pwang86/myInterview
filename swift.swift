@@ -1548,6 +1548,30 @@ class solution {
             path.removeLast()
         }
     }
+
+    // Combination Sum III
+    var res = [[Int]]()
+    var path = [Int]()
+    func combinationSum3(_ k: Int, _ n: Int) -> [[Int]] {
+        var sum = 0;
+        traverse(k, n, &sum, 1)
+        return res
+    }
+    func traverse(_ k: Int, _ n: Int, _ mySum: inout Int, _ startIndex: Int) {
+        if path.count == k {
+            if mySum == n {
+                res.append(path)
+            }
+            return
+        }
+        for i in startIndex..<9 - k + path.count + 2 {
+            mySum += i
+            path.append(i)
+            traverse(k, n, &mySum, i + 1)
+            mySum -= i
+            path.removeLast()
+        }
+    }
 }
 
 // implement queue using stacks
