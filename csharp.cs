@@ -1452,6 +1452,29 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }
     }
+
+    // Combination Sum III
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    
+    public IList<IList<int>> CombinationSum3(int k, int n) {
+        Traverse(k, n, 0, 1);
+        return res;
+    }
+    
+    public void Traverse(int k, int n, int sum, int startIndex) {
+        if (path.Count == k) {
+            if (sum == n) res.Add(new List<int>(path));
+            return;
+        }
+        for (int i = startIndex; i <= 9 - k + path.Count + 1; i++) {
+            sum += i;
+            path.Add(i);
+            Traverse(k, n, sum, i + 1);
+            sum -= i;
+            path.RemoveAt(path.Count - 1);
+        }
+    }
 } 
 
 // implement queue using stacks
