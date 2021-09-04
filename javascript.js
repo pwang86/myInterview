@@ -1468,6 +1468,32 @@ var convertBST = function(root) {
     return res;
 };
 
+// Combination Sum III
+/**
+ * @param {number} k
+ * @param {number} n
+ * @return {number[][]}
+ */
+ var combinationSum3 = function(k, n) {
+    let path = [];
+    let res = [];
+    const traverse = (k, n, sum, startIndex) => {
+        if (path.length == k) {
+            if (sum == n) res.push([...path]);
+            return;
+        }
+        for (let i = startIndex; i <= 9 - k + path.length + 1; i++) {
+            sum += i;
+            path.push(i);
+            traverse(k, n, sum, i + 1);
+            sum -= i;
+            path.pop();
+        }
+    };
+    traverse(k, n, 0, 1);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
