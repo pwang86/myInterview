@@ -1168,6 +1168,24 @@ class Solution:
                 path.pop()
         backtracking(n, k, 1)
         return res
+    
+    # Combination Sum III
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        path = []
+        res = []
+        def traverse(k: int, n: int, mySum: int, startIndex: int):
+            if len(path) == k:
+                if mySum == n:
+                    res.append(path[:])
+                return
+            for i in range(startIndex, 9 - k + len(path) + 2):
+                mySum += i
+                path.append(i)
+                traverse(k, n, mySum, i + 1)
+                mySum -= i
+                path.pop()
+        traverse(k, n, 0, 1)
+        return res
         
 # Sliding Window Maximum
 class MyQueue:
