@@ -1186,6 +1186,28 @@ class Solution:
                 path.pop()
         traverse(k, n, 0, 1)
         return res
+    
+    # Letter Combinations of a Phone Number
+    def letterCombinations(self, digits: str) -> List[str]:
+        res = []
+        if not digits or len(digits) == 0:
+            return res
+        
+        path = ""
+        myArr = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        def backtrack(digits: str, startIndex: int):
+            nonlocal path
+            if len(digits) == startIndex:
+                res.append(path)
+                return
+            tmp = myArr[int(digits[startIndex])]
+            for i in range(0, len(tmp)):
+                path += tmp[i]
+                backtrack(digits, startIndex + 1)
+                path = path[:-1]
+        
+        backtrack(digits, 0)
+        return res
         
 # Sliding Window Maximum
 class MyQueue:
