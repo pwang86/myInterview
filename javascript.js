@@ -1494,6 +1494,34 @@ var convertBST = function(root) {
     return res;
 };
 
+// Letter Combinations of a Phone Numbers
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+ var letterCombinations = function(digits) {
+    let res = [];
+    if (digits == null || digits.length == 0) return res;
+    
+    let path = "";
+    const myArr = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
+    
+    const backtrack = (digits, startIndex) => {
+        if (startIndex == digits.length) {
+            res.push(path);
+            return;
+        }
+        const tmp = myArr[digits[startIndex] - '0'];
+        for (let i = 0; i < tmp.length; i++) {
+            path += tmp[i];
+            backtrack(digits, startIndex + 1);
+            path = path.slice(0, -1);
+        }
+    };
+    backtrack(digits, 0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
