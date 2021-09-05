@@ -1572,6 +1572,31 @@ class solution {
             path.removeLast()
         }
     }
+
+    // Letter Combinations of a Phone Number
+    public var res = [String]()
+    public var path: String = ""
+    public let myMap:[Character:String] = ["1":"", "2": "abc", "3":"def", "4":"ghi", "5":"jkl", "6":"mno", "7":"pqrs", "8":"tuv", "9":"wxyz"]
+    func letterCombinations(_ digits: String) -> [String] {
+        if digits == nil || digits.count == 0 {
+            return res
+        }
+        backtrack(digits, 0)
+        return res
+    }
+    func backtrack(_ digits: String, _ startIndex: Int) {
+        if startIndex == digits.count {
+            res.append(path)
+            return
+        }
+        if let tmp = myMap[Array(digits)[startIndex]] {
+            for i in tmp {
+                path.append(i)
+                backtrack(digits, startIndex + 1)
+                path.removeLast()
+            }
+        }
+    }
 }
 
 // implement queue using stacks
