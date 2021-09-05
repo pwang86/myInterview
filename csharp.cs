@@ -1475,6 +1475,28 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }
     }
+
+    // Letter Combinations of a Phone Number
+    public IList<string> res = new List<string>();
+    public StringBuilder path = new StringBuilder();
+    String[] myArr = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    public IList<string> LetterCombinations(string digits) {
+        if (digits == null || digits.Length == 0) return res;
+        Backtrack(digits, 0);
+        return res;
+    }
+    public void Backtrack(string digits, int startIndex) {
+        if (startIndex == digits.Length) {
+            res.Add(path.ToString());
+            return;
+        }
+        String tmp = myArr[digits[startIndex] - '0'];
+        for (int i = 0; i < tmp.Length; i++) {
+            path.Append(tmp[i]);
+            Backtrack(digits, startIndex + 1);
+            path.Remove(path.Length - 1, 1);
+        }
+    }
 } 
 
 // implement queue using stacks
