@@ -1549,6 +1549,32 @@ class solution {
         }
     }
 
+    // Combination Sum II
+    public var res = [[Int]]()
+    public var path = [Int]()
+    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        let sortedArr = candidates.sorted()
+        backtrack(sortedArr, target, 0, 0)
+        return res
+    }
+    func backtrack(_ candidates: [Int], _ target: Int, _ sum: Int, _ startIndex: Int) {
+        if sum == target {
+            res.append(path)
+            return
+        }
+        for i in startIndex..<candidates.count {
+            if sum + candidates[i] > target {
+                return
+            }
+            if i > startIndex && candidates[i] == candidates[i - 1] {
+                continue
+            }
+            path.append(candidates[i])
+            backtrack(candidates, target, sum + candidates[i], i + 1)
+            path.removeLast()
+        }
+    }
+
     // Combination Sum III
     var res = [[Int]]()
     var path = [Int]()
