@@ -1468,6 +1468,35 @@ var convertBST = function(root) {
     return res;
 };
 
+// Combination Sum II
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+ var combinationSum2 = function(candidates, target) {
+    let res = [];
+    let path = [];
+    const backtrack = (sum, startIndex) => {
+        if (sum == target) {
+            res.push([...path]);
+            return;
+        }
+        for (let i = startIndex; i < candidates.length && sum + candidates[i] <= target; i++) {
+            if (i > startIndex && candidates[i] == candidates[i- 1]) continue;
+            sum += candidates[i];
+            path.push(candidates[i]);
+            backtrack(sum, i + 1);
+            path.pop();
+            sum -= candidates[i];
+            
+        }
+    };
+    candidates.sort((a, b) => a - b);
+    backtrack(0, 0);
+    return res;
+};
+
 // Combination Sum III
 /**
  * @param {number} k
