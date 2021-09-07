@@ -1169,6 +1169,30 @@ class Solution:
         backtracking(n, k, 1)
         return res
     
+    # Combination Sum II
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        path = []
+        def backtrack(mySum: int, startIndex: int):
+            nonlocal candidates, target
+            if mySum == target:
+                res.append(path[:])
+                return
+            for i in range(startIndex, len(candidates)):
+                if mySum + candidates[i] > target:
+                    return
+                if i > startIndex and candidates[i] == candidates[i - 1]:
+                    continue
+                mySum += candidates[i]
+                path.append(candidates[i])
+                backtrack(mySum, i + 1)
+                path.pop()
+                mySum -= candidates[i]
+        
+        candidates.sort()
+        backtrack(0, 0)
+        return res
+    
     # Combination Sum III
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         path = []
