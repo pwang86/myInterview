@@ -1453,6 +1453,31 @@ public class Solution {
         }
     }
 
+    // Combination Sum II
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    
+    public IList<IList<int>> CombinationSum2(int[] candidates, int target) {
+        Array.Sort(candidates);
+        Backtrack(candidates, target, 0, 0);
+        return res;
+    }
+    
+    public void Backtrack(int[] candidates, int target, int sum, int startIndex) {
+        if (target == sum) {
+            res.Add(new List<int>(path));
+            return;
+        }
+        for (int i = startIndex; i < candidates.Length && sum + candidates[i] <= target; i++) {
+            if (i > startIndex && candidates[i] == candidates[i - 1]) continue;
+            sum += candidates[i];
+            path.Add(candidates[i]);
+            Backtrack(candidates, target, sum , i + 1);
+            path.RemoveAt(path.Count - 1);
+            sum -= candidates[i];
+        }
+    }
+
     // Combination Sum III
     public IList<IList<int>> res = new List<IList<int>>();
     public IList<int> path = new List<int>();
