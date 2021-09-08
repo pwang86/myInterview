@@ -1522,6 +1522,36 @@ public class Solution {
             path.Remove(path.Length - 1, 1);
         }
     }
+
+    // Palindrome Partitioning
+    public IList<IList<string>> res = new List<IList<string>>();
+    public IList<string> path = new List<string>();
+    
+    public IList<IList<string>> Partition(string s) {
+        Backtrack(s, 0);
+        return res;
+    }
+    public void Backtrack(string s, int startIndex) {
+        if (startIndex >= s.Length) {
+            res.Add(new List<string>(path));
+            return;
+        }
+        for (int i = startIndex; i < s.Length; i++) {
+            if (isPalindrome(s, startIndex, i)) {
+                path.Add(s.Substring(startIndex, i - startIndex + 1));
+            } else {
+                continue;
+            }
+            Backtrack(s, i + 1);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
+    public bool isPalindrome(string s, int start, int end) {
+        for (int i = start, j = end; i < j; i++, j--) {
+            if (s[i] != s[j]) return false;
+        }
+        return true;
+    }
 } 
 
 // implement queue using stacks
