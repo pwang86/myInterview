@@ -1232,6 +1232,34 @@ class Solution:
         
         backtrack(digits, 0)
         return res
+    
+    # Palindrome Partitioning
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        path = []
+        def isPalindrome(start: int, end: int) -> bool:
+            nonlocal s
+            i, j = start, end
+            while i < j:
+                if s[i] != s[j]:
+                    return False
+                i += 1
+                j -= 1
+            return True
+        def backtrack(startIndex: int):
+            nonlocal s
+            if startIndex >= len(s):
+                res.append(path[:])
+                return
+            for i in range(startIndex, len(s)):
+                if isPalindrome(startIndex, i):
+                    path.append(s[startIndex: i + 1])
+                else:
+                    continue
+                backtrack(i + 1)
+                path.pop()
+        backtrack(0)
+        return res
         
 # Sliding Window Maximum
 class MyQueue:
