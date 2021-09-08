@@ -1551,6 +1551,41 @@ var convertBST = function(root) {
     return res;
 };
 
+// Palindrome Partitioning
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+ const isPalindrome = (s, start, end) => {
+    for (let i = start, j = end; i < j; i++, j--) {
+        if (s[i] != s[j]) {
+            return false;
+        }
+    }
+    return true;
+};
+var partition = function(s) {
+    let res = [];
+    let path = [];
+    const backtrack = (s, startIndex) => {
+        if (startIndex >= s.length) {
+            res.push([...path]);
+            return;
+        }
+        for (let i = startIndex; i < s.length; i++) {
+            if (isPalindrome(s, startIndex, i)) {
+                path.push(s.substr(startIndex, i - startIndex + 1));
+            } else {
+                continue;
+            }
+            backtrack(s, i + 1);
+            path.pop();
+        }  
+    };
+    backtrack(s, 0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
