@@ -1623,6 +1623,41 @@ class solution {
             }
         }
     }
+
+    // Palindrome Partitioning
+    public var res = [[String]]()
+    public var path = [String]()
+    func partition(_ s: String) -> [[String]] {
+        backtrack(Array(s), 0)
+        return res
+    }
+    func backtrack(_ arr: [Character], _ startIndex: Int) {
+        if startIndex >= arr.count {
+            res.append(path)
+            return
+        }
+        for i in startIndex..<arr.count {
+            if isPalindrome(arr, startIndex, i) {
+                path.append(String(arr[startIndex...i]))
+            } else {
+                continue
+            }
+            backtrack(arr, i + 1)
+            path.removeLast()
+        }
+    }
+    func isPalindrome(_ arr: [Character], _ start: Int, _ end: Int) -> Bool {
+        var i = start
+        var j = end
+        while i < j {
+            if arr[i] != arr[j] {
+                return false
+            }
+            i += 1
+            j -= 1
+        }
+        return true
+    }
 }
 
 // implement queue using stacks
