@@ -1586,6 +1586,37 @@ var partition = function(s) {
     return res;
 };
 
+// Restore IP Addresses
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+ var restoreIpAddresses = function(s) {
+    let res = [];
+    let path = [];
+    if (s.length > 12) return res;
+    
+    const backtrack = (startIndex) => {
+        const len = path.length;
+        if (len > 4) return;
+        if (len == 4 && startIndex == s.length) {
+            res.push(path.join("."));
+            return;
+        }
+        for (let i = startIndex; i < s.length; i++) {
+            const str = s.substr(startIndex, i - startIndex + 1);
+            if (str.length > 3 || +str > 255) break;
+            if (str.length > 1 && str[0] == '0') break;
+            path.push(str);
+            backtrack(i + 1);
+            path.pop();
+        }
+    };
+    
+    backtrack(0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
