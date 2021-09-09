@@ -1660,6 +1660,48 @@ class solution {
     }
 }
 
+// Restore IP Addresses
+class Solution {
+    public var res = [String]()
+    public var path = [String]()
+    func restoreIpAddresses(_ s: String) -> [String] {
+        if s.count > 12 {
+            return res
+        }
+        backtrack(s, 0);
+        return res
+    }
+    
+    func backtrack(_ s: String, _ startIndex: Int) {
+        if path.count > 4 {
+            return
+        }
+        if path.count == 4 && startIndex == s.count {
+            res.append(path.joined(separator: "."))
+            return
+        }
+        for i in startIndex..<s.count {
+            let str = String(Array(s)[startIndex..<i+1])
+            let num = Int(str) ?? 0
+            if str.count > 3 || num > 255 {
+                break
+            }
+            if str.count > 1 && str[0] == "0" {
+                break
+            }
+            path.append(str)
+            backtrack(s, i + 1)
+            path.removeLast()
+        }
+    }
+}
+
+private extension String {
+    subscript(index: Int) -> Character {
+        return self[self.index(self.startIndex, offsetBy: index)]
+    }
+}
+
 // implement queue using stacks
 class MyQueue {
     var sIn: [Int] = []
