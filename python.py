@@ -1260,6 +1260,31 @@ class Solution:
                 path.pop()
         backtrack(0)
         return res
+
+    # Restore IP Addresses
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        res = []
+        if len(s) > 12:
+            return res
+        path = []
+        def backtrack(startIndex):
+            length = len(path)
+            if length > 4:
+                return
+            if length == 4 and startIndex == len(s):
+                res.append(".".join(path))
+                return
+            for i in range(startIndex, len(s)):
+                str = s[startIndex: i+1]
+                if len(str) > 3 or int(str) > 255:
+                    break
+                if len(str) > 1 and str[0] == '0':
+                    break
+                path.append(str)
+                backtrack(i+1)
+                path.pop()
+        backtrack(0)
+        return res
         
 # Sliding Window Maximum
 class MyQueue:
