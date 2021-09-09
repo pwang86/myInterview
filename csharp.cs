@@ -1552,6 +1552,49 @@ public class Solution {
         }
         return true;
     }
+
+    // Restore IP Addresses
+        public IList<string> res = new List<string>();
+    public bool IsValid(string s, int start, int end) {
+        if (start > end) return false;
+        if (s[start] == '0' && start != end) {
+            return false;
+        }
+        int num = 0;
+        for (int i = start; i <= end; i++) {
+            if (s[i] - '0' < 0 || s[i] - '9' > 0) {
+                return false;
+            } 
+            num = num * 10 + (s[i] - '0');
+            if (num > 255) return false;
+        }
+        return true;
+    }
+    public void Backtrack(string s, int startIndex, int point) {
+        if (point == 3) {
+            if (IsValid(s, startIndex, s.Length - 1)) {
+                res.Add(s);
+            }
+            return;
+        }
+        for (int i = startIndex; i < s.Length; i++) {
+            if (IsValid(s, startIndex, i)) {
+                // s = s.Substring(0, i - startIndex + 1) + "." + s.Substring(i - startIndex + 1);
+                string tmp = s.Insert(i + 1, ".");
+                point++;
+                Backtrack(tmp, i + 2, point);
+                point--;
+                // s = s.Substring(0, i - startIndex + 1) + s.Substring(i - startIndex + 2);
+            } else {
+                break;
+            }
+        }
+    }
+    public IList<string> RestoreIpAddresses(string s) {
+        if (s.Length > 12) return res;
+        Backtrack(s, 0, 0);
+        return res;
+    }
 } 
 
 // implement queue using stacks
