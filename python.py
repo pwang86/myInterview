@@ -1285,7 +1285,23 @@ class Solution:
                 path.pop()
         backtrack(0)
         return res
-        
+    
+    # Subsets
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        path = []
+        def backtrack(startIndex: int):
+            nonlocal nums
+            res.append(path[:])
+            if startIndex >= len(nums):
+                return
+            for i in range(startIndex, len(nums)):
+                path.append(nums[i])
+                backtrack(i + 1)
+                path.pop()
+        backtrack(0)
+        return res
+           
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
