@@ -1658,6 +1658,26 @@ class solution {
         }
         return true
     }
+
+    // Subsets
+    public var res = [[Int]]()
+    public var path = [Int]()
+    
+    func subsets(_ nums: [Int]) -> [[Int]] {
+        backtrack(nums, 0)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ startIndex: Int) {
+        res.append(path)
+        if startIndex >= nums.count {
+            return
+        }
+        for i in startIndex..<nums.count {
+            path.append(nums[i])
+            backtrack(nums, i + 1)
+            path.removeLast()
+        }
+    }
 }
 
 // Restore IP Addresses
