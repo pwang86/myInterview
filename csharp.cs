@@ -1595,6 +1595,24 @@ public class Solution {
         Backtrack(s, 0, 0);
         return res;
     }
+
+    // subsets
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    
+    public IList<IList<int>> Subsets(int[] nums) {
+        Backtrack(nums, 0);
+        return res;
+    }
+    public void Backtrack(int[] nums, int startIndex) {
+        res.Add(new List<int>(path));
+        if (startIndex >= nums.Length) return;
+        for (int i = startIndex; i < nums.Length; i++) {
+            path.Add(nums[i]);
+            Backtrack(nums, i + 1);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
 } 
 
 // implement queue using stacks
