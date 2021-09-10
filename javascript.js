@@ -1617,6 +1617,27 @@ var partition = function(s) {
     return res;
 };
 
+// Subsets
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var subsets = function(nums) {
+    let res = [];
+    let path = [];
+    const backtrack = (startIndex) => {
+        res.push([...path]);
+        if (startIndex >= nums.length) return;
+        for (let i = startIndex; i < nums.length; i++) {
+            path.push(nums[i]);
+            backtrack(i + 1);
+            path.pop();
+        }
+    };
+    backtrack(0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
