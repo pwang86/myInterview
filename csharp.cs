@@ -1633,6 +1633,27 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }
     }
+
+    // Increasing Subsequences
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    public IList<IList<int>> FindSubsequences(int[] nums) {
+        Backtrack(nums, 0);
+        return res;
+    }
+    public void Backtrack(int[] nums, int startIndex) {
+        if (path.Count > 1) {
+            res.Add(new List<int>(path));
+        }
+        int[] arr = new int[201];
+        for (int i = startIndex; i < nums.Length; i++) {
+            if ((path.Count != 0 && nums[i] < path[path.Count - 1]) || arr[nums[i] + 100] == 1) continue;
+            arr[nums[i] + 100] = 1;
+            path.Add(nums[i]);
+            Backtrack(nums, i + 1);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
 } 
 
 // implement queue using stacks
