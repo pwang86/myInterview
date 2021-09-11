@@ -1662,6 +1662,31 @@ var partition = function(s) {
     return res;
 };
 
+// Increasing Subsequences
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var findSubsequences = function(nums) {
+    let res = [];
+    let path = [];
+    const backtrack = startIndex => {
+        if (path.length > 1) {
+            res.push([...path]);
+        }
+        let arr = new Array(201);
+        for (let i = startIndex; i < nums.length; i++) {
+            if ((path.length > 0 && nums[i] < path[path.length - 1]) || arr[nums[i] + 100] == 1) continue;
+            arr[nums[i] + 100] = 1;
+            path.push(nums[i]);
+            backtrack(i + 1);
+            path.pop();
+        }
+    };
+    backtrack(0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
