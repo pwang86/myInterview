@@ -1638,6 +1638,30 @@ var partition = function(s) {
     return res;
 };
 
+// Subsets II
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var subsetsWithDup = function(nums) {
+    let res = [];
+    let path = [];
+    nums.sort((a, b) => a - b);
+    const backtrack = startIndex => {
+        res.push([...path]);
+        for (let i = startIndex; i < nums.length; i++) {
+            if (i > startIndex && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            path.push(nums[i]);
+            backtrack(i + 1);
+            path.pop();
+        }
+    };
+    backtrack(0);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
