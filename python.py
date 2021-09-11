@@ -1317,7 +1317,27 @@ class Solution:
                 path.pop()
         backtrack(0)
         return res
-           
+
+    # Increasing Subsequences
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        path = []
+        def backtrack(startIndex: int):
+            if len(path) > 1:
+                res.append(path[:])
+            arr = [0] * 201
+            for i in range(startIndex, len(nums)):
+                if arr[nums[i] + 100] == 1:
+                    continue
+                if len(path) and nums[i] < path[len(path) - 1]:
+                    continue
+                arr[nums[i] + 100] = 1
+                path.append(nums[i])
+                backtrack(i + 1)
+                path.pop()
+        backtrack(0)
+        return res
+       
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
