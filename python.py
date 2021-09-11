@@ -1301,6 +1301,22 @@ class Solution:
                 path.pop()
         backtrack(0)
         return res
+
+    # Subsets II
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        path = []
+        nums.sort()
+        def backtrack(startIndex: int):
+            res.append(path[:])
+            for i in range(startIndex, len(nums)):
+                if i > startIndex and nums[i - 1] == nums[i]:
+                    continue
+                path.append(nums[i])
+                backtrack(i + 1)
+                path.pop()
+        backtrack(0)
+        return res
            
 # Sliding Window Maximum
 class MyQueue:
