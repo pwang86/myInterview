@@ -1678,6 +1678,26 @@ class solution {
             path.removeLast()
         }
     }
+
+    // Subsets II
+    public var res = [[Int]]()
+    public var path = [Int]()
+    func subsetsWithDup(_ nums: [Int]) -> [[Int]] {
+        var arr = nums.sorted()
+        backtrack(arr, 0)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ startIndex: Int) {
+        res.append(path)
+        for i in startIndex..<nums.count {
+            if i > startIndex && nums[i - 1] == nums[i] {
+                continue
+            }
+            path.append(nums[i])
+            backtrack(nums, i + 1)
+            path.removeLast()
+        }
+    }
 }
 
 // Restore IP Addresses
