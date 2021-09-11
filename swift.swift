@@ -1698,6 +1698,29 @@ class solution {
             path.removeLast()
         }
     }
+
+    // Increasing Subsequences
+    public var res = [[Int]]()
+    public var path = [Int]()
+    func findSubsequences(_ nums: [Int]) -> [[Int]] {
+        backtrack(nums, 0)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ startIndex: Int) {
+        if path.count > 1 {
+            res.append(path)
+        }
+        var arr = Array(repeating: 0, count: 201)
+        for i in startIndex..<nums.count {
+            if (path.count != 0 && nums[i] < path[path.count - 1]) || arr[nums[i] + 100] == 1 {
+                continue
+            }
+            arr[nums[i] + 100] = 1
+            path.append(nums[i])
+            backtrack(nums, i + 1)
+            path.removeLast()
+        } 
+    }
 }
 
 // Restore IP Addresses
