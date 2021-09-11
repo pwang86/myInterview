@@ -1613,6 +1613,26 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }
     }
+
+    // Subsets II
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    public IList<IList<int>> SubsetsWithDup(int[] nums) {
+        Array.Sort(nums);
+        Backtrack(nums, 0);
+        return res;
+    }
+    public void Backtrack(int[] nums, int startIndex) {
+        res.Add(new List<int>(path));
+        for (int i = startIndex; i < nums.Length; i++) {
+            if (i > startIndex && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            path.Add(nums[i]);
+            Backtrack(nums, i + 1);
+            path.RemoveAt(path.Count - 1);
+        }
+    }
 } 
 
 // implement queue using stacks
