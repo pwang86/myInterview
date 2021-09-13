@@ -1721,6 +1721,32 @@ class solution {
             path.removeLast()
         } 
     }
+
+    // Permutations
+    public var res = [[Int]]()
+    public var path = [Int]()
+    public var used = [Bool]()
+    func permute(_ nums: [Int]) -> [[Int]] {
+        used = Array(repeating: false, count: nums.count)
+        backtrack(nums)
+        return res
+    }
+    func backtrack(_ nums: [Int]) {
+        if path.count == nums.count {
+            res.append(path)
+            return
+        }
+        for i in 0..<nums.count {
+            if used[i] {
+                continue
+            }
+            used[i] = true
+            path.append(nums[i])
+            backtrack(nums)
+            path.removeLast()
+            used[i] = false
+        }
+    }
 }
 
 // Restore IP Addresses
