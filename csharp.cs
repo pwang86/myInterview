@@ -1654,6 +1654,31 @@ public class Solution {
             path.RemoveAt(path.Count - 1);
         }
     }
+
+    // Permutations
+    public IList<IList<int>> res = new List<IList<int>>();
+    public IList<int> path = new List<int>();
+    public bool[] used;
+    public IList<IList<int>> Permute(int[] nums) {
+        if (nums.Length == 0) return res;
+        used = new bool[nums.Length];
+        Backtrack(nums);
+        return res;
+    }
+    public void Backtrack(int[] nums) {
+        if (path.Count == nums.Length) {
+            res.Add(new List<int>(path));
+            return;
+        }
+        for (int i = 0; i < nums.Length; i++) {
+            if (used[i]) continue;
+            used[i] = true;
+            path.Add(nums[i]);
+            Backtrack(nums);
+            path.RemoveAt(path.Count - 1);
+            used[i] = false;
+        }
+    }
 } 
 
 // implement queue using stacks
