@@ -1687,6 +1687,33 @@ var partition = function(s) {
     return res;
 };
 
+// Permutations
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var permute = function(nums) {
+    let res = [];
+    let path = [];
+    let used = new Array(nums.length);
+    const backtrack = () => {
+        if (path.length == nums.length) {
+            res.push([...path]);
+            return;
+        }
+        for (let i = 0; i < nums.length; i++) {
+            if (used[i]) continue;
+            used[i] = true;
+            path.push(nums[i]);
+            backtrack();
+            path.pop();
+            used[i] = false;
+        }
+    };
+    backtrack();
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
