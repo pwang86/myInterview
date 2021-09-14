@@ -1357,6 +1357,27 @@ class Solution:
                 used[i] = False
         backtrack()
         return res
+    
+    # Permutations II
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        path = []
+        nums.sort()
+        def backtrack(used: List[bool]):
+            if len(path) == len(nums):
+                res.append(path[:])
+                return
+            for i in range(0, len(nums)):
+                if i > 0 and nums[i - 1] == nums[i] and not used[i - 1]:
+                    continue
+                if not used[i]:
+                    used[i] = 1
+                    path.append(nums[i])
+                    backtrack(used)
+                    path.pop()
+                    used[i] = 0
+        backtrack([0] * len(nums))
+        return res
        
 # Sliding Window Maximum
 class MyQueue:
