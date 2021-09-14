@@ -1747,6 +1747,34 @@ class solution {
             used[i] = false
         }
     }
+
+    // Permutations II
+    public var res = [[Int]]()
+    public var path = [Int]()
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        var tmp = nums.sorted()
+        var used = Array(repeating: 0, count: nums.count)
+        backtrack(tmp, &used)
+        return res
+    }
+    func backtrack(_ nums: [Int], _ used: inout [Int]) {
+        if path.count == nums.count {
+            res.append(path)
+            return
+        }
+        for i in 0..<nums.count {
+            if i > 0 && nums[i - 1] == nums[i] && used[i - 1] == 0 {
+                continue
+            }
+            if used[i] == 0 {
+                used[i] = 1
+                path.append(nums[i])
+                backtrack(nums, &used)
+                path.removeLast()
+                used[i] = 0
+            }
+        }
+    }
 }
 
 // Restore IP Addresses
