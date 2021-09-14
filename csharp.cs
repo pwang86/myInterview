@@ -1679,6 +1679,34 @@ public class Solution {
             used[i] = false;
         }
     }
+
+    // Permutations II
+    IList<IList<int>> res = new List<IList<int>>();
+    IList<int> path = new List<int>();
+    public IList<IList<int>> PermuteUnique(int[] nums) {
+        Array.Sort(nums);
+        bool[] used = new bool[nums.Length];
+        Backtrack(nums, used);
+        return res;
+    }
+    public void Backtrack(int[] nums, bool[] used) {
+        if (path.Count == nums.Length) {
+            res.Add(new List<int>(path));
+            return;
+        }
+        for (int i = 0; i < nums.Length; i++) {
+            if (i > 0 && nums[i - 1] == nums[i] && used[i - 1] == false) {
+                continue;
+            }
+            if (used[i] == false) {
+                used[i] = true;
+                path.Add(nums[i]);
+                Backtrack(nums, used);
+                path.RemoveAt(path.Count - 1);
+                used[i] = false;
+            }
+        }
+    }
 } 
 
 // implement queue using stacks
