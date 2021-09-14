@@ -1714,6 +1714,35 @@ var partition = function(s) {
     return res;
 };
 
+// Permutations II
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var permuteUnique = function(nums) {
+    let res = [];
+    let path = [];
+    nums.sort((a, b) => a - b);
+    const backtrack = (used) => {
+        if (path.length == nums.length) {
+            res.push([...path]);
+            return;
+        }
+        for (let i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i - 1] == nums[i] && !used[i - 1]) continue;
+            if (!used[i]) {
+                used[i] = true;
+                path.push(nums[i]);
+                backtrack(used);
+                path.pop();
+                used[i] = false;
+            }
+        }
+    };
+    backtrack([]);
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
