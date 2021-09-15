@@ -1707,6 +1707,40 @@ public class Solution {
             }
         }
     }
+
+    // Reconstruct Itinerary
+    public IList<string> res = new List<string>();
+    public Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
+    public IList<string> FindItinerary(IList<IList<string>> tickets) {
+        foreach (List<string> t in tickets) {
+            if (!map.ContainsKey(t[0])) {
+                map[t[0]] = new List<string>();
+            }
+            map[t[0]].Add(t[1]);
+        }
+        foreach (var kvp in map) {
+            Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count);
+        }
+        res.Add("JFK");
+        Backtrack(tickets, "JFK");
+        return res;
+    }
+    
+    public bool Backtrack(IList<IList<string>> tickets, string start) {
+        if (res.Count == tickets.Count + 1) return true;
+        map[start].Sort();
+        for (int i = 0; i < map[start].Count; i++) {
+            string end = map[start][0];
+            // map[start].RemoveAt(0);
+            res.Add(end);
+            if (Backtrack(tickets, end)) {
+                return true;
+            }
+            res.RemoveAt(res.Count - 1);
+            // map[start].Add(end);
+        }
+        return false;
+    }
 } 
 
 // implement queue using stacks
