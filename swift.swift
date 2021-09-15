@@ -1775,6 +1775,79 @@ class solution {
             }
         }
     }
+
+    // Reconstruct Itinerary
+    var itDict = [String : [String]]()
+    var finalArr = [String]()
+    var visitedDict = [String: [Bool]]()
+    var numFlights = 0
+    
+    func findItinerary(_ tickets: [[String]]) -> [String] {
+        
+        numFlights = tickets.count
+        
+        //1. Make the graph
+        for pair in tickets {
+            var from = pair[0]
+            var to = pair[1]
+            if (itDict[from] == nil) {
+                itDict[from] = [String]()
+            }
+            
+            itDict[from]!.append(to)
+        }
+        
+        
+        
+        //2.Initialize the visitedDict & lexographically order the arrays for each key
+        
+        for (key,val) in itDict {
+            var newVal = val
+            newVal = newVal.sorted()
+            visitedDict[key] = Array(repeating:false, count: newVal.count)
+            itDict[key] = newVal
+        }
+        
+        
+        
+        //3. Finally dfs/backtrackthrough the dictionary
+        finalArr.append("JFK")
+        backtrack("JFK", &finalArr)
+        return finalArr
+        
+        
+    }
+    
+    func backtrack(_ code : String, _ results: inout [String]) -> Bool {
+        if ((results.count) == numFlights + 1 ) {
+            return true
+        }
+        
+        if (itDict[code] == nil) {
+            return false
+        }
+        
+        var boolArr = visitedDict[code]!
+        var dest = itDict[code]!
+        
+        for (i,val) in dest.enumerated() {
+            if (boolArr[i] == false) {
+                boolArr[i] = true
+                visitedDict[code] = boolArr
+                results.append(val)
+                let valid = backtrack(val, &results)
+                if (valid) {
+                    return true
+                } else {
+                    boolArr[i] = false
+                    visitedDict[code] = boolArr
+                    results.removeLast()
+                }
+            }
+        }
+        
+        return false
+    }
 }
 
 // Restore IP Addresses
