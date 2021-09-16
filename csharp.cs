@@ -1718,6 +1718,9 @@ public class Solution {
             }
             map[t[0]].Add(t[1]);
         }
+        foreach(var m in map.Values) {
+            m.Sort();
+        }
         foreach (var kvp in map) {
             Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value.Count);
         }
@@ -1728,16 +1731,17 @@ public class Solution {
     
     public bool Backtrack(IList<IList<string>> tickets, string start) {
         if (res.Count == tickets.Count + 1) return true;
-        map[start].Sort();
+        if (!map.ContainsKey(start) || map[start].Count == 0) return false;
+        
         for (int i = 0; i < map[start].Count; i++) {
-            string end = map[start][0];
-            // map[start].RemoveAt(0);
-            res.Add(end);
-            if (Backtrack(tickets, end)) {
+            string city = map[start][i];
+            map[start].RemoveAt(i);
+            res.Add(city);
+            if (Backtrack(tickets, city)) {
                 return true;
             }
             res.RemoveAt(res.Count - 1);
-            // map[start].Add(end);
+            map[start].Insert(i, city);
         }
         return false;
     }
