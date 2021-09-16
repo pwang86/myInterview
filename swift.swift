@@ -1777,77 +1777,38 @@ class solution {
     }
 
     // Reconstruct Itinerary
-    var itDict = [String : [String]]()
-    var finalArr = [String]()
-    var visitedDict = [String: [Bool]]()
-    var numFlights = 0
-    
+    public var res = [String]()
+    public var map: [String: [String]] = [:] 
     func findItinerary(_ tickets: [[String]]) -> [String] {
-        
-        numFlights = tickets.count
-        
-        //1. Make the graph
-        for pair in tickets {
-            var from = pair[0]
-            var to = pair[1]
-            if (itDict[from] == nil) {
-                itDict[from] = [String]()
-            }
-            
-            itDict[from]!.append(to)
+        for t in tickets {
+            map[t[0], default: [String]()].append(t[1])
         }
-        
-        
-        
-        //2.Initialize the visitedDict & lexographically order the arrays for each key
-        
-        for (key,val) in itDict {
-            var newVal = val
-            newVal = newVal.sorted()
-            visitedDict[key] = Array(repeating:false, count: newVal.count)
-            itDict[key] = newVal
+        for m in map.keys {
+            map[m] = map[m]!.sorted()
         }
-        
-        
-        
-        //3. Finally dfs/backtrackthrough the dictionary
-        finalArr.append("JFK")
-        backtrack("JFK", &finalArr)
-        return finalArr
-        
-        
+        res.append("JFK")
+        backtrack(tickets, "JFK")
+        return res
     }
-    
-    func backtrack(_ code : String, _ results: inout [String]) -> Bool {
-        if ((results.count) == numFlights + 1 ) {
+    func backtrack(_ tickets: [[String]], _ start: String) -> Bool {
+        if res.count == tickets.count + 1 {
             return true
         }
-        
-        if (itDict[code] == nil) {
+        if map[start] == nil || map[start]!.count == 0 {
             return false
         }
-        
-        var boolArr = visitedDict[code]!
-        var dest = itDict[code]!
-        
-        for (i,val) in dest.enumerated() {
-            if (boolArr[i] == false) {
-                boolArr[i] = true
-                visitedDict[code] = boolArr
-                results.append(val)
-                let valid = backtrack(val, &results)
-                if (valid) {
-                    return true
-                } else {
-                    boolArr[i] = false
-                    visitedDict[code] = boolArr
-                    results.removeLast()
-                }
+        for i in 0..<map[start]!.count {
+            let city = map[start]![i]
+            map[start]!.remove(at: i)
+            res.append(city)
+            if backtrack(tickets, city) {
+                return true
             }
+            res.removeLast()
+            map[start]!.insert(city, at: i)
         }
-        
         return false
-    }
+    }            
 }
 
 // Restore IP Addresses
