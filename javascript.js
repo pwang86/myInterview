@@ -1744,43 +1744,39 @@ var partition = function(s) {
 };
 
 // Reconstruct Itinerary
-var findItinerary = function(tickets) {
-    let result = ['JFK']
-    let map = {}
-
-    for (const tickt of tickets) {
-        const [from, to] = tickt
-        if (!map[from]) {
-            map[from] = []
+/**
+ * @param {string[][]} tickets
+ * @return {string[]}
+ */
+ var findItinerary = function(tickets) {
+    let res = [];
+    let map = new Map();
+    for (let t of tickets) {
+        if (!map.has(t[0])) {
+            map.set(t[0], []);
         }
-        map[from].push(to)
+        map.get(t[0]).push(t[1]);
     }
-
-    for (const city in map) {
-        // 对到达城市列表排序
-        map[city].sort()
+    for (let m of map.values()) {
+        m.sort();
     }
-    function backtracing() {
-        if (result.length === tickets.length + 1) {
-            return true
+    // console.log(map);
+    const backtrack = start => {
+        if (res.length == tickets.length + 1) return true;
+        if (!map.has(start) || map.get(start).length == 0) return false;
+        
+        for (let i = 0 ; i < map.get(start).length; i++) {
+            let city = map.get(start)[i];
+            map.get(start).splice(i, 1);
+            res.push(city);
+            if (backtrack(city)) return true;
+            res.pop();
+            map.get(start).splice(i, 0, city);
         }
-        if (!map[result[result.length - 1]] || !map[result[result.length - 1]].length) {
-            return false
-        }
-        for(let i = 0 ; i <  map[result[result.length - 1]].length; i++) {
-            let city = map[result[result.length - 1]][i]
-            // 删除已走过航线，防止死循环
-            map[result[result.length - 1]].splice(i, 1)
-            result.push(city)
-            if (backtracing()) {
-                return true
-            }
-            result.pop()
-            map[result[result.length - 1]].splice(i, 0, city)
-        }
-    }
-    backtracing()
-    return result
+    };
+    res.push("JFK");
+    backtrack("JFK");
+    return res;
 };
 
 // implement queue using stacks
