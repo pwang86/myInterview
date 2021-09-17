@@ -1808,7 +1808,62 @@ class solution {
             map[start]!.insert(city, at: i)
         }
         return false
-    }            
+    }
+
+    // N queens            
+    public var res = [[String]]()
+    func solveNQueens(_ n: Int) -> [[String]] {
+        var board:[[Character]] = Array(repeating: Array(repeating: ".", count: n), count: n)
+        backtrack(&board, 0, n)
+        return res
+    }
+    func backtrack(_ board: inout [[Character]], _ row: Int, _ n: Int) {
+        if row == n {
+            res.append(toList(board, n))
+            return
+        }
+        for col in 0..<n {
+            if isValid(row, col, n, board) {
+                board[row][col] = "Q"
+                backtrack(&board, row + 1, n)
+                board[row][col] = "."
+            }
+        }
+    }
+    func isValid(_ row: Int, _ col: Int, _ n: Int, _ board:[[Character]]) -> Bool {
+        for i in 0..<row {
+            if board[i][col] == "Q" {
+                return false
+            }
+        }
+        var i = row - 1
+        var j = col - 1
+        while i >= 0 && j >= 0 {
+            if board[i][j] == "Q" {
+                return false
+            }
+            i -= 1
+            j -= 1
+        }
+        i = row - 1
+        j = col + 1
+        while i >= 0 && j < n {
+            if board[i][j] == "Q" {
+                return false
+            }
+            i -= 1
+            j += 1
+        }
+        return true
+    }
+    
+    func toList(_ board: [[Character]], _ n: Int) -> [String] {
+        var list = [String]()
+        for i in 0..<n {
+            list.append(String(board[i]))
+        }
+        return list
+    }
 }
 
 // Restore IP Addresses
