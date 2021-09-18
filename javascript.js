@@ -1840,6 +1840,48 @@ var partition = function(s) {
     return res;
 };
 
+// Sudoku Solver
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+ var solveSudoku = function(board) {
+    const isValid = (row, col, k, board) => {
+        for (let i = 0; i < 9; i++) {
+            if (board[row][i] == String.fromCharCode(k + 48)) return false;
+        }
+        for (let i = 0; i < 9; i++) {
+            if (board[i][col] == String.fromCharCode(k + 48)) return false;
+        }
+        let sRow = Math.floor(row / 3) * 3;
+        let sCol = Math.floor(col / 3) * 3;
+        
+        for (let i = sRow; i < sRow + 3; i++) {
+            for (let j = sCol; j < sCol + 3; j++) {
+                if (board[i][j] == String.fromCharCode(k + 48)) return false; 
+            }
+        }
+        return true;   
+    };
+    const helper = board => {
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                if (board[i][j] != '.') continue;
+                for (let k = 1; k <= 9; k++) {
+                    if (isValid (i, j, k, board)) {
+                        board[i][j] = String.fromCharCode(k + 48);
+                        if (helper(board)) return true;
+                        board[i][j] = '.';
+                    }
+                }
+                return false;
+            }
+        }
+        return true;
+    };
+    helper(board);
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
