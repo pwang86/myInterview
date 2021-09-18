@@ -1799,6 +1799,46 @@ public class Solution {
         }
         return list;
     }
+
+    // Sudoku Solver
+    public void SolveSudoku(char[][] board) {
+        Helper(board);
+    }
+    public bool Helper(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') {
+                    continue;
+                }
+                for (int k = 1; k <= 9; k++) {
+                    if (IsValid(i, j, k, board)) {
+                        board[i][j] = (char)(k +'0');
+                        if (Helper(board)) return true;
+                        board[i][j] = '.';
+                    }
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public bool IsValid(int row, int col, int val, char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] == (char)(val + '0')) return false;
+        }
+        for (int i = 0; i < 9; i++) {
+            if (board[i][col] == (char)(val + '0')) return false;
+        }
+        int sRow = (row / 3) * 3;
+        int sCol = (col / 3) * 3;
+        for (int i = sRow; i < sRow + 3; i++) {
+            for (int j = sCol; j < sCol + 3; j++) {
+                if (board[i][j] == (char)(val + '0')) return false;
+            }
+        }
+        return true;
+    }
 } 
 
 // implement queue using stacks
