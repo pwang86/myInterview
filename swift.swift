@@ -1864,6 +1864,51 @@ class solution {
         }
         return list
     }
+
+    // Sudoku Solver
+    func solveSudoku(_ board: inout [[Character]]) {
+        helper(&board)
+    }
+    func helper(_ board: inout [[Character]]) -> Bool {
+        for i in 0..<9 {
+            for j in 0..<9 {
+                if board[i][j] != "." {
+                    continue
+                }
+                for k in 1...9 {
+                    if isValid(i, j, k, &board) {
+                        board[i][j] = Character(String(k))
+                        if helper(&board) {
+                            return true
+                        }
+                        board[i][j] = "." 
+                    }
+                }
+                return false
+            }
+        }
+        return true
+    }
+    func isValid(_ row: Int, _ col: Int, _ k: Int, _ board: inout [[Character]]) -> Bool {
+        for i in 0..<9 {
+            if board[row][i] == Character(String(k)) {
+                return false
+            }
+            if board[i][col] == Character(String(k)) {
+                return false
+            }
+        }
+        let sRow = (row / 3) * 3
+        let sCol = (col / 3) * 3
+        for i in sRow..<sRow + 3 {
+            for j in sCol..<sCol + 3 {
+                if board[i][j] == Character(String(k)) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
 }
 
 // Restore IP Addresses
