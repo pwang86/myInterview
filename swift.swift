@@ -1909,6 +1909,23 @@ class solution {
         }
         return true
     }
+
+    // Assign Cookies
+    func findContentChildren(_ g: [Int], _ s: [Int]) -> Int {
+        let gArr = g.sorted()
+        let sArr = s.sorted()
+        var res = 0
+        var sIndex = s.count - 1
+        var gIndex = g.count - 1
+        while gIndex >= 0 {
+            if sIndex >= 0 && sArr[sIndex] >= gArr[gIndex] {
+                res += 1
+                sIndex -= 1
+            }
+            gIndex -= 1
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
