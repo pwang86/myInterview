@@ -1481,6 +1481,18 @@ class Solution:
                     return False
             return True
         helper(board)
+    
+    # Assign Cookies
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        g.sort()
+        s.sort()
+        res = 0
+        index = len(s) - 1
+        for i in range(len(g) - 1, -1, -1):
+            if index >= 0 and s[index] >= g[i]:
+                res += 1
+                index -= 1
+        return res
        
 # Sliding Window Maximum
 class MyQueue:
