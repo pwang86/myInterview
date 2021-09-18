@@ -1839,6 +1839,21 @@ public class Solution {
         }
         return true;
     }
+
+    // Assign Cookies
+    public int FindContentChildren(int[] g, int[] s) {
+        Array.Sort(g);
+        Array.Sort(s);
+        int res = 0;
+        int index = s.Length - 1;
+        for (int i = g.Length - 1; i >= 0; i--) {
+            if (index >= 0 && s[index] >= g[i]) {
+                res++;
+                index--;
+            }
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
