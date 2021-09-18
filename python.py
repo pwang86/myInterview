@@ -1447,6 +1447,40 @@ class Solution:
                     board[row][col] = '.'
         backtrack(0)
         return res
+    
+    # Sudoku Solver
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def isValid(row: int, col: int, k: int, board: List[List[str]]) -> bool:
+            for i in range(9):
+                if board[row][i] == str(k):
+                    return False
+            for i in range(9):
+                if board[i][col] == str(k):
+                    return False
+            sRow = (row // 3) * 3
+            sCol = (col // 3) * 3
+            for i in range(sRow, sRow + 3):
+                for j in range(sCol, sCol + 3):
+                    if board[i][j] == str(k):
+                        return False
+            return True
+        def helper(board: List[List[str]]) -> bool:
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] != '.':
+                        continue
+                    for k in range(1, 10):
+                        if isValid(i, j, k, board):
+                            board[i][j] = str(k)
+                            if helper(board):
+                                return True
+                            board[i][j] = '.'
+                    return False
+            return True
+        helper(board)
        
 # Sliding Window Maximum
 class MyQueue:
