@@ -1902,6 +1902,25 @@ var partition = function(s) {
     return res;
 };
 
+// Wiggle Subsequence
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var wiggleMaxLength = function(nums) {
+    if (nums.length <= 1) return nums.length;
+    let res = 1;
+    let curDiff = 0, preDiff = 0;
+    for (let i = 0; i < nums.length - 1; i++) {
+        curDiff = nums[i + 1] - nums[i];
+        if ((preDiff <= 0 && curDiff > 0) || (preDiff >= 0 && curDiff < 0)) {
+            res++;
+            preDiff = curDiff;
+        }
+    }
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
