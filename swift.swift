@@ -1926,6 +1926,24 @@ class solution {
         }
         return res
     }
+
+    // Wiggle Subsequence
+    func wiggleMaxLength(_ nums: [Int]) -> Int {
+        if nums.count <= 1 {
+            return nums.count
+        }
+        var res = 1
+        var curDiff = 0
+        var preDiff = 0
+        for i in 0..<nums.count - 1 {
+            curDiff = nums[i + 1] - nums[i]
+            if (preDiff <= 0 && curDiff > 0) || (preDiff >= 0 && curDiff < 0) {
+                res += 1
+                preDiff = curDiff
+            }
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
