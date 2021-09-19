@@ -1854,6 +1854,22 @@ public class Solution {
         }
         return res;
     }
+
+    // Wiggle Subsequence
+    public int WiggleMaxLength(int[] nums) {
+        if (nums.Length <= 1) return nums.Length;
+        int res = 1;
+        int preDiff = 0;
+        int curDiff = 0;
+        for (int i = 0; i < nums.Length - 1; i++) {
+            curDiff = nums[i + 1] - nums[i];
+            if ((preDiff <= 0 && curDiff > 0) || (preDiff >= 0 && curDiff < 0)) {
+                res++;
+                preDiff = curDiff;
+            }
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
