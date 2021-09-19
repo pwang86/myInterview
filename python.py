@@ -1493,6 +1493,19 @@ class Solution:
                 res += 1
                 index -= 1
         return res
+    
+    # Wiggle Subsequence
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        if len(nums) <= 1:
+            return len(nums)
+        res = 1
+        preDiff = curDiff = 0
+        for i in range(len(nums) - 1):
+            curDiff = nums[i + 1] - nums[i]
+            if (preDiff >= 0 and curDiff < 0) or (preDiff <= 0 and curDiff > 0):
+                res += 1
+                preDiff = curDiff
+        return res
        
 # Sliding Window Maximum
 class MyQueue:
