@@ -1944,6 +1944,22 @@ class solution {
         }
         return res
     }
+
+    // Maximum Subarray
+    func maxSubArray(_ nums: [Int]) -> Int {
+        var res = Int.min
+        var count = 0
+        for i in 0..<nums.count {
+            count += nums[i]
+            if res < count {
+                res = count
+            }
+            if count <= 0 {
+                count = 0
+            }
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
