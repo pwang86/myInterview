@@ -1870,6 +1870,18 @@ public class Solution {
         }
         return res;
     }
+
+    // Maximum Subarray
+    public int MaxSubArray(int[] nums) {
+        int res = Int32.MinValue;
+        int count = 0;
+        for (int i = 0; i < nums.Length; i++) {
+            count += nums[i];
+            if (count > res) res = count;
+            if (count <= 0) count = 0;
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
