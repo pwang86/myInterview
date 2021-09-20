@@ -1506,6 +1506,18 @@ class Solution:
                 res += 1
                 preDiff = curDiff
         return res
+
+    # Maximum Subarray
+    def maxSubArray(self, nums: List[int]) -> int:
+        res = float('-inf')
+        count = 0
+        for i in range(len(nums)):
+            count += nums[i]
+            if res < count:
+                res = count
+            if count <= 0:
+                count = 0
+        return res
        
 # Sliding Window Maximum
 class MyQueue:
