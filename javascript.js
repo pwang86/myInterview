@@ -1921,6 +1921,22 @@ var partition = function(s) {
     return res;
 };
 
+// Maximum Subarray
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var maxSubArray = function(nums) {
+    let res = Number.MIN_SAFE_INTEGER;
+    let count = 0;
+    for (let i = 0; i < nums.length; i++) {
+        count += nums[i];
+        if (res < count) res = count;
+        if (count <= 0) count = 0;
+    }
+    return res;
+};
+
 // implement queue using stacks
 /**
  * Initialize your data structure here.
