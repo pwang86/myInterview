@@ -1960,6 +1960,15 @@ class solution {
         }
         return res
     }
+
+    // Best Time to Buy and Sell Stock II
+    func maxProfit(_ prices: [Int]) -> Int {
+        var res = 0
+        for i in 1..<prices.count {
+            res += max(prices[i] - prices[i - 1], 0)
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
