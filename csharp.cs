@@ -1882,6 +1882,15 @@ public class Solution {
         }
         return res;
     }
+
+    // Best Time to Buy and Sell Stock II
+    public int MaxProfit(int[] prices) {
+        int res = 0;
+        for (int i = 1; i < prices.Length; i++) {
+            res += Math.Max(prices[i] - prices[i - 1], 0);
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
