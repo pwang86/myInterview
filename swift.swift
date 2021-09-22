@@ -1969,6 +1969,23 @@ class solution {
         }
         return res
     }
+
+    // Jump Game
+    func canJump(_ nums: [Int]) -> Bool {
+        if nums.count == 1 {
+            return true
+        }
+        var cover = 0
+        var i = 0
+        while i <= cover {
+            cover = max(i + nums[i], cover)
+            if cover >= nums.count - 1 {
+                return true
+            }
+            i += 1
+        }
+        return false
+    }
 }
 
 // Restore IP Addresses
