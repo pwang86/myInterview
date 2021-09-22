@@ -1525,6 +1525,19 @@ class Solution:
         for i in range(1, len(prices)):
             res += max(prices[i] - prices[i - 1], 0)
         return res
+    
+    # Jump Game
+    def canJump(self, nums: List[int]) -> bool:
+        if len(nums) == 1:
+            return True
+        cover = 0
+        i = 0
+        while i <= cover:
+            cover = max(i + nums[i], cover)
+            if cover >= len(nums) - 1:
+                return True
+            i += 1
+        return False
 
 # Sliding Window Maximum
 class MyQueue:
