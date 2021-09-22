@@ -1891,6 +1891,17 @@ public class Solution {
         }
         return res;
     }
+
+    // Jump Game
+    public bool CanJump(int[] nums) {
+        int cover = 0;
+        if (nums.Length == 1) return true;
+        for (int i = 0; i <= cover; i++) {
+            cover = Math.Max(i + nums[i], cover);
+            if (cover >= nums.Length - 1) return true;
+        }
+        return false;
+    }
 } 
 
 // implement queue using stacks
