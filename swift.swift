@@ -1986,6 +1986,24 @@ class solution {
         }
         return false
     }
+
+    // Jump Game II
+    func jump(_ nums: [Int]) -> Int {
+        if nums.count == 1 {
+            return 0
+        }
+        var res = 0
+        var cur = 0
+        var next = 0
+        for i in 0..<nums.count - 1 {
+            next = max(nums[i] + i, next)
+            if i == cur {
+                res += 1
+                cur = next
+            }
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
