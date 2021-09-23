@@ -1949,6 +1949,23 @@ var partition = function(s) {
     return false;
 };
 
+// Jump Game II
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var jump = function(nums) {
+    if (nums.length == 1) return 0;
+    let cur = 0, next = 0, res = 0;
+    for (let i = 0; i < nums.length - 1; i++) {
+        next = Math.max(nums[i] + i, next);
+        if (i == cur) {
+            cur = next;
+            res++;
+        }
+    }
+    return res;
+};
 
 // Maximum Subarray
 /**
