@@ -1902,6 +1902,22 @@ public class Solution {
         }
         return false;
     }
+
+    // Jump Game II
+    public int Jump(int[] nums) {
+        if (nums.Length == 1) return 0;
+        int cur = 0;
+        int next = 0;
+        int res = 0;
+        for (int i = 0; i < nums.Length - 1; i++) {
+            next = Math.Max(nums[i] + i, next);
+            if (i == cur) {
+                cur = next;
+                res++;
+            }
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
