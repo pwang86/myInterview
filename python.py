@@ -1538,6 +1538,19 @@ class Solution:
                 return True
             i += 1
         return False
+    
+    # Jump Game II
+    def jump(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return 0
+        curDistance = nextDistance = 0
+        res = 0
+        for i in range(len(nums) - 1):
+            nextDistance = max(nums[i] + i, nextDistance)
+            if i == curDistance:
+                res += 1
+                curDistance = nextDistance
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
