@@ -1918,6 +1918,20 @@ public class Solution {
         }
         return res;
     }
+
+    // Maximize Sum Of Array After K Negations
+     public int LargestSumAfterKNegations(int[] nums, int k) {
+        int[] arr = nums.OrderBy(x => Math.Abs(x)).ToArray();
+        for (int i = arr.Length - 1; i >= 0; i--) {
+            if (arr[i] < 0 && k > 0) {
+                k--;
+                arr[i] = -arr[i];
+            }
+        }
+      
+        if (k % 2 == 1) arr[0] = -arr[0];
+        return arr.Sum();
+    }
 } 
 
 // implement queue using stacks
