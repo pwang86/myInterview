@@ -2005,6 +2005,23 @@ class solution {
         return res
     }
 
+    // Gas Station
+    func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
+        var start = 0
+        var curSum = 0
+        var totalSum = 0
+        for i in 0..<gas.count {
+            curSum += gas[i] - cost[i]
+            totalSum += gas[i] - cost[i]
+            if curSum < 0 {
+                curSum = 0
+                start = i + 1
+            }
+        }
+        if totalSum < 0 { return -1 }
+        return start
+    }
+
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
         var arr = nums.sorted()
