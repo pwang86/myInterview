@@ -2004,6 +2004,25 @@ class solution {
         }
         return res
     }
+
+    // Maximize Sum Of Array After K Negations
+    func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
+        var arr = nums.sorted()
+        var count = k
+        var small = (Int.max, 0)
+        for i in 0..<arr.count {
+            if arr[i] < 0 && count > 0 {
+                count -= 1
+                arr[i] = -arr[i]
+            }
+            if abs(arr[i]) < small.0 { small = (abs(arr[i]), i) }
+        }
+        if count % 2 == 1 {
+            arr[small.1] *= -1
+        }
+        
+        return arr.reduce(0, +)
+    }
 }
 
 // Restore IP Addresses
