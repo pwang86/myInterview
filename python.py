@@ -1551,6 +1551,17 @@ class Solution:
                 res += 1
                 curDistance = nextDistance
         return res
+    
+    # Maximize Sum Of Array After K Negations
+    def largestSumAfterKNegations(self, nums: List[int], k: int) -> int:
+        arr = sorted(nums, key = abs)
+        for i in range(len(arr) - 1, -1, -1):
+            if k > 0 and arr[i] < 0:
+                k -= 1
+                arr[i] *= -1
+        if k % 2 == 1:
+            arr[0] *= -1
+        return sum(arr)
 
 # Sliding Window Maximum
 class MyQueue:
