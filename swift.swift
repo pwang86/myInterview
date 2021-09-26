@@ -2022,6 +2022,24 @@ class solution {
         return start
     }
 
+    // Candy
+    func candy(_ ratings: [Int]) -> Int {
+        var candies = Array(repeating: 1, count: ratings.count)
+        for i in 1..<candies.count {
+            if ratings[i] > ratings[i - 1] {
+                candies[i] = candies[i - 1] + 1
+            }
+        }
+        var i = candies.count - 2
+        while i >= 0 {
+            if ratings[i] > ratings[i + 1] {
+                candies[i] = max(candies[i + 1] + 1, candies[i])
+            }
+            i -= 1
+        }
+        return candies.reduce(0, +)
+    }
+
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
         var arr = nums.sorted()
