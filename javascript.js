@@ -1989,6 +1989,27 @@ var partition = function(s) {
     return start;
 };
 
+// Candy
+/**
+ * @param {number[]} ratings
+ * @return {number}
+ */
+ var candy = function(ratings) {
+    let candies = new Array(ratings.length).fill(1);
+    for (let i = 1; i < candies.length; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            candies[i] = candies[i - 1] + 1;
+        }
+    }
+    for (let i = candies.length - 2; i >= 0; i--) {
+        if (ratings[i] > ratings[i + 1]) {
+            candies[i] = Math.max(candies[i + 1] + 1, candies[i]);
+        }
+    }
+    let res = candies.reduce((a, b) => a + b, 0);
+    return res;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
