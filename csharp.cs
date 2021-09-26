@@ -1953,9 +1953,7 @@ public class Solution {
     // Candy
     public int Candy(int[] ratings) {
         int[] candies = new int[ratings.Length];
-        for (int i = 0; i < candies.Length; i++) {
-            candies[i] = 1;
-        }
+        Array.Fill(candies, 1);
         for (int i = 1; i < candies.Length; i++) {
             if (ratings[i] > ratings[i - 1]) {
                 candies[i] = candies[i - 1] + 1;
