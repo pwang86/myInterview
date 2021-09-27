@@ -2040,6 +2040,33 @@ class solution {
         return candies.reduce(0, +)
     }
 
+    // Lemonade Change
+    func lemonadeChange(_ bills: [Int]) -> Bool {
+        var five = 0
+        var ten = 0
+        for i in 0..<bills.count {
+            if bills[i] == 5 {
+                five += 1
+            } else if bills[i] == 10 {
+                if five <= 0 {
+                    return false
+                }
+                five -= 1
+                ten += 1
+            } else {
+                if five > 0 && ten > 0 {
+                    five -= 1
+                    ten -= 1
+                } else if five >= 3 {
+                    five -= 3
+                } else {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
         var arr = nums.sorted()
