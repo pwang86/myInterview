@@ -2067,6 +2067,16 @@ class solution {
         return true
     }
 
+    // Queue Reconstruction by Height
+    func reconstructQueue(_ people: [[Int]]) -> [[Int]] {
+        var tmp = people.sorted(by: {$0[0] == $1[0] ? $0[1] < $1[1] : $0[0] > $1[0]})
+        var res = [[Int]]()
+        tmp.forEach { t in 
+            res.insert(t, at: t[1])
+        }
+        return res
+    }
+
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
         var arr = nums.sorted()
