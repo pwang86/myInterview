@@ -1617,6 +1617,17 @@ class Solution:
             res.insert(p[1], p)
         return res
 
+    # Minimum Number of Arrows to Burst Balloons
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        points.sort(key = lambda x: x[0])
+        count = 1
+        for i in range(1, len(points)):
+            if points[i][0] > points[i - 1][1]:
+                count += 1
+            else:
+                points[i][1] = min(points[i][1], points[i - 1][1])
+        return count
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
