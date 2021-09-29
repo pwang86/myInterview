@@ -2006,6 +2006,21 @@ public class Solution {
         
         return res.ToArray();
     }
+
+    // Minimum Number of Arrows to Burst Balloons
+    public int FindMinArrowShots(int[][] points) {
+        if (points.Length == 0) return 0;
+        Array.Sort(points, (a, b) => a[0].CompareTo(b[0]));
+        int count = 1;
+        for (int i = 1; i < points.Length; i++) {
+            if (points[i][0] > points[i - 1][1]) {
+                count++;
+            } else {
+                points[i][1] = Math.Min(points[i][1], points[i - 1][1]);
+            }
+        }
+        return count;
+    }
 } 
 
 // implement queue using stacks
