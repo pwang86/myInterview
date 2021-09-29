@@ -2077,6 +2077,20 @@ class solution {
         return res
     }
 
+    // Minimum Number of Arrows to Burst Balloons
+    func findMinArrowShots(_ points: [[Int]]) -> Int {
+        var tmp = points.sorted(by: {$0[0] < $1[0]})
+        var count = 1
+        for i in 1..<tmp.count {
+            if tmp[i][0] > tmp[i - 1][1] {
+                count += 1
+            } else {
+                tmp[i][1] = min(tmp[i][1], tmp[i - 1][1])
+            }
+        }
+        return count
+    }
+    
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
         var arr = nums.sorted()
