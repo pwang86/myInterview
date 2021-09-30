@@ -2090,6 +2090,23 @@ class solution {
         }
         return count
     }
+
+    // Non-overlapping Intervals
+     func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
+        if intervals.count == 0 {
+            return 0
+        }
+        let arr = intervals.sorted(by: {$0[1] < $1[1]})
+        var res = 1
+        var end = arr[0][1]
+        for i in 1..<arr.count {
+            if end <= arr[i][0] {
+                res += 1
+                end = arr[i][1]
+            }
+        }
+        return arr.count - res
+    }
     
     // Maximize Sum Of Array After K Negations
     func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
