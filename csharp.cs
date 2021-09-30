@@ -2021,6 +2021,21 @@ public class Solution {
         }
         return count;
     }
+
+    // Non-overlapping Intervals
+    public int EraseOverlapIntervals(int[][] intervals) {
+        if (intervals.Length == 0) return 0;
+        Array.Sort(intervals, (a, b) => a[1].CompareTo(b[1]));
+        int count = 1;
+        int end = intervals[0][1];
+        for (int i = 0; i < intervals.Length; i++) {
+            if (end <= intervals[i][0]) {
+                end = intervals[i][1];
+                count++;
+            }
+        }
+        return intervals.Length - count;
+    }
 } 
 
 // implement queue using stacks
