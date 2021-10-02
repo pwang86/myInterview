@@ -2096,6 +2096,29 @@ var partition = function(s) {
     return intervals.length - count;
 };
 
+// Partition Labels
+/**
+ * @param {string} s
+ * @return {number[]}
+ */
+ var partitionLabels = function(s) {
+    let res = [];
+    let arr = new Array(26);
+    for (let i = 0; i < s.length; i++) {
+        arr[s[i].charCodeAt() - 'a'.charCodeAt()] = i;
+    }
+    let index = 0; 
+    let last = -1;
+    for (let i = 0; i < s.length; i++) {
+        index = Math.max(index, arr[s[i].charCodeAt() - 'a'.charCodeAt()]);
+        if (i == index) {
+            res.push(i - last);
+            last = i;
+        }
+    }
+    return res;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
