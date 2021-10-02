@@ -1640,6 +1640,21 @@ class Solution:
                 end = intervals[i][1]
                 count += 1
         return len(intervals) - count
+    
+    # Partition Labels
+    def partitionLabels(self, s: str) -> List[int]:
+        res = []
+        arr = [0] * 26
+        for i in range(len(s)):
+            arr[ord(s[i]) - ord('a')] = i
+        index = 0
+        last = -1
+        for i in range(len(s)):
+            index = max(index, arr[ord(s[i]) - ord('a')])
+            if i == index:
+                res.append(i - last)
+                last = i
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
