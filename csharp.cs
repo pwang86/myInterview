@@ -2036,6 +2036,25 @@ public class Solution {
         }
         return intervals.Length - count;
     }
+
+    // Partition Labels
+    public IList<int> PartitionLabels(string s) {
+        IList<int> res = new List<int>();
+        int[] arr = new int[26];
+        for (int i = 0; i < s.Length; i++) {
+            arr[s[i] - 'a'] = i;
+        }
+        int index = 0;
+        int last = -1;
+        for (int i = 0; i < s.Length; i++) {
+            index = Math.Max(index, arr[s[i] - 'a']);
+            if (index == i) {
+                res.Add(i - last);
+                last = i;
+            }
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
