@@ -2126,6 +2126,29 @@ class solution {
         
         return arr.reduce(0, +)
     }
+
+    // Partition Labels
+    func partitionLabels(_ s: String) -> [Int] {
+        var res = [Int]()
+        var arr = Array(repeating: 0, count: 26)
+        let tmp = Array(s)
+        var value = 0
+        for i in 0..<tmp.count {
+            value = Int(tmp[i].asciiValue! - Character("a").asciiValue!)
+            arr[value] = i
+        }
+        var index = 0
+        var last = -1
+        for i in 0..<tmp.count {
+            value = Int(tmp[i].asciiValue! - Character("a").asciiValue!)
+            index = max(index, arr[value])
+            if index == i {
+                res.append(i - last)
+                last = i
+            }
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
