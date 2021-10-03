@@ -2055,6 +2055,23 @@ public class Solution {
         }
         return res;
     }
+
+    // Merge Intervals
+    public int[][] Merge(int[][] intervals) {
+        List<int[]> res = new List<int[]>();
+        Array.Sort(intervals, (a, b) => a[0].CompareTo(b[0]));
+        int start = intervals[0][0];
+        for (int i = 1; i < intervals.Length; i++) {
+            if (intervals[i][0] > intervals[i -1][1]) {
+                res.Add(new int[]{start, intervals[i - 1][1]});
+                start = intervals[i][0];
+            } else {
+                intervals[i][1] = Math.Max(intervals[i][1], intervals[i - 1][1]);
+            }
+        }
+        res.Add(new int[]{start, intervals[intervals.Length - 1][1]});
+        return res.ToArray();
+    }
 } 
 
 // implement queue using stacks
