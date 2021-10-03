@@ -2120,6 +2120,25 @@ var partition = function(s) {
 };
 
 // Merge Intervals
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+ var merge = function(intervals) {
+    intervals.sort((a, b) => a[0] - b[0]);
+    let res = [];
+    let start = intervals[0][0];
+    for (let i = 1; i < intervals.length; i++) {
+        if (intervals[i][0] > intervals[i - 1][1]) {
+            res.push([start, intervals[i - 1][1]]);
+            start = intervals[i][0];
+        } else {
+            intervals[i][1] = Math.max(intervals[i - 1][1], intervals[i][1]);
+        }
+    }
+    res.push([start, intervals[intervals.length - 1][1]]);
+    return res;
+};
 
 // Maximize Sum Of Array After K Negations
 /**
