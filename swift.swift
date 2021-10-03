@@ -2151,6 +2151,22 @@ class solution {
     }
 
     // Merge Intervals
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        var res = [[Int]]()
+        var arr = intervals.sorted(by: {$0[0] < $1[0]})
+        print(arr)
+        var start = arr[0][0]
+        for i in 1..<arr.count {
+            if arr[i][0] > arr[i - 1][1] {
+                res.append([start, arr[i - 1][1]])
+                start = arr[i][0]
+            } else {
+                arr[i][1] = max(arr[i - 1][1], arr[i][1])
+            }
+        }
+        res.append([start, arr[arr.count - 1][1]])
+        return res
+    }
 }
 
 // Restore IP Addresses
