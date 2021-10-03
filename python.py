@@ -1656,6 +1656,20 @@ class Solution:
                 last = i
         return res
 
+    # Merge Intervals
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        res = []
+        intervals.sort(key=lambda x: x[0])
+        start = intervals[0][0]
+        for i in range(1, len(intervals)):
+            if intervals[i][0] > intervals[i - 1][1]:
+                res.append([start, intervals[i - 1][1]])
+                start = intervals[i][0]
+            else:
+                intervals[i][1] = max(intervals[i - 1][1], intervals[i][1])
+        res.append([start, intervals[len(intervals) - 1][1]])
+        return res
+
 # Sliding Window Maximum
 class MyQueue:
     def __init__(self):
