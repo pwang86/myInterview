@@ -1669,6 +1669,18 @@ class Solution:
                 intervals[i][1] = max(intervals[i - 1][1], intervals[i][1])
         res.append([start, intervals[len(intervals) - 1][1]])
         return res
+    
+    # Monotone Increasing Digits
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        arr = list(str(n))
+        start = len(arr)
+        for i in range(len(arr) - 1, 0, -1):
+            if int(arr[i]) < int(arr[i - 1]):
+                start = i
+                arr[i - 1] = str(int(arr[i - 1]) - 1)
+        for i in range(start, len(arr)):
+            arr[i] = str(9)
+        return int("".join(arr))
 
 # Sliding Window Maximum
 class MyQueue:
