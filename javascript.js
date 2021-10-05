@@ -2140,6 +2140,28 @@ var partition = function(s) {
     return res;
 };
 
+// Monotone Increasing Digits
+/**
+ * @param {number} n
+ * @return {number}
+ */
+ var monotoneIncreasingDigits = function(n) {
+    let arr = n.toString().split('').map(item => {
+        return +item;
+    });
+    let start = arr.length;
+    for (let i = arr.length - 1; i > 0; i--) {
+        if (arr[i] < arr[i - 1]) {
+            arr[i - 1]--;
+            start = i;
+        }
+    }
+    for (let i = start; i < arr.length; i++) {
+        arr[i] = 9;
+    }
+    return +(arr.join(''));
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
