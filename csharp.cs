@@ -2072,6 +2072,22 @@ public class Solution {
         res.Add(new int[]{start, intervals[intervals.Length - 1][1]});
         return res.ToArray();
     }
+
+    // Monotone Increasing Digits
+    public int MonotoneIncreasingDigits(int n) {
+        char[] myArr = n.ToString().ToCharArray();
+        int start = myArr.Length;
+        for (int i = myArr.Length - 1; i > 0; i--) {
+            if (myArr[i] < myArr[i - 1]) {
+                myArr[i - 1]--;
+                start = i;
+            }
+        }
+        for (int i = start; i < myArr.Length; i++) {
+            myArr[i] = '9';
+        }
+        return Int32.Parse(String.Concat(myArr));
+    }
 } 
 
 // implement queue using stacks
