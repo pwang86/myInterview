@@ -2167,6 +2167,24 @@ class solution {
         res.append([start, arr[arr.count - 1][1]])
         return res
     }
+
+    // Monotone Increasing Digits
+    func monotoneIncreasingDigits(_ n: Int) -> Int {
+        var arr = Array(String(n))
+        var start = arr.count
+        var i = arr.count - 1
+        while i > 0 {
+            if arr[i] < arr[i - 1] {
+                start = i
+                arr[i - 1] = Character(String(Int(String(arr[i - 1]))! - 1))
+            }
+            i -= 1
+        }
+        for i in start..<arr.count {
+            arr[i] = "9"
+        }
+        return Int(String(arr))!
+    }
 }
 
 // Restore IP Addresses
