@@ -2185,6 +2185,23 @@ class solution {
         }
         return Int(String(arr))!
     }
+
+    // Best Time to Buy and Sell Stock with Transaction Fee
+    func maxProfit(_ prices: [Int], _ fee: Int) -> Int {
+        var res = 0
+        var buy = prices[0]
+        for i in 1..<prices.count {
+            if prices[i] < buy {
+                buy = prices[i]
+            } else if prices[i] >= buy && prices[i] <= buy + fee {
+                continue
+            } else {
+                res += prices[i] - buy - fee
+                buy = prices[i] - fee
+            }
+        }
+        return res
+    }
 }
 
 // Restore IP Addresses
