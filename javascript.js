@@ -2162,6 +2162,28 @@ var partition = function(s) {
     return +(arr.join(''));
 };
 
+// Best Time to Buy and Sell Stock with Transaction Fee
+/**
+ * @param {number[]} prices
+ * @param {number} fee
+ * @return {number}
+ */
+ var maxProfit = function(prices, fee) {
+    let res = 0; 
+    let buy = prices[0];
+    for (let i = 1; i < prices.length; i++) {
+        if (prices[i] < buy) {
+            buy = prices[i];
+        } else if (prices[i] >= buy && prices[i] <= buy + fee) {
+            continue;
+        } else {
+            res += prices[i] - buy - fee;
+            buy = prices[i] - fee;
+        }
+    }
+    return res;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
