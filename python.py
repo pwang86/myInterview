@@ -1681,6 +1681,20 @@ class Solution:
         for i in range(start, len(arr)):
             arr[i] = str(9)
         return int("".join(arr))
+    
+    # Best Time to Buy and Sell Stock with Transaction Fee
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        res = 0
+        buy = prices[0]
+        for i in range(1, len(prices)):
+            if prices[i] < buy:
+                buy = prices[i]
+            elif prices[i] >= buy and prices[i] <= buy + fee:
+                continue
+            else:
+                res += prices[i] - buy - fee
+                buy = prices[i] - fee
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
