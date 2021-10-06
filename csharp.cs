@@ -2088,6 +2088,23 @@ public class Solution {
         }
         return Int32.Parse(String.Concat(myArr));
     }
+
+    // Best Time to Buy and Sell Stock with Transaction Fee
+    public int MaxProfit(int[] prices, int fee) {
+        int res = 0;
+        int buy = prices[0];
+        for (int i = 1; i < prices.Length; i++) {
+            if (prices[i] < buy) {
+                buy = prices[i];
+            } else if (prices[i] >= buy && prices[i] <= buy + fee) {
+                continue;
+            } else {
+                res += prices[i] - buy - fee;
+                buy = prices[i] - fee;
+            }
+        }
+        return res;
+    }
 } 
 
 // implement queue using stacks
