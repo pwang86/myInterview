@@ -2184,6 +2184,41 @@ var partition = function(s) {
     return res;
 };
 
+// Binary Tree Cameras
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var minCameraCover = function(root) {
+    let res = 0;
+    const traverse = cur => {
+        if (cur == null) return 2;
+        let left = traverse(cur.left);
+        let right = traverse(cur.right);
+        if (left == 2 && right == 2) {
+            return 0;
+        } else if (left == 0 || right == 0) {
+            res++;
+            return 1;
+        } else {
+            return 2;
+        }
+        
+    };
+    if (traverse(root) == 0) {
+        res++;
+    }
+    return res;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
