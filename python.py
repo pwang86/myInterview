@@ -1715,6 +1715,17 @@ class Solution:
         if traverse(root) == 0:
             res += 1
         return res
+    
+    # Fibonacci Number
+    def fib(self, n: int) -> int:
+        if n <= 1:
+            return n
+        dp = [0, 1]
+        for i in range(2, n + 1):
+            mySum = dp[0] + dp[1]
+            dp[0] = dp[1]
+            dp[1] = mySum
+        return dp[1]
 
 # Sliding Window Maximum
 class MyQueue:
