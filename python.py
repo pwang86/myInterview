@@ -1695,6 +1695,26 @@ class Solution:
                 res += prices[i] - buy - fee
                 buy = prices[i] - fee
         return res
+    
+    # Binary Tree Cameras
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        res = 0
+        def traverse(cur: Optional[TreeNode]) -> int:
+            nonlocal res
+            if cur == None:
+                return 2
+            left = traverse(cur.left)
+            right = traverse(cur.right)
+            if left == 2 and right == 2:
+                return 0
+            elif left == 0 or right == 0:
+                res += 1
+                return 1
+            else:
+                return 2
+        if traverse(root) == 0:
+            res += 1
+        return res
 
 # Sliding Window Maximum
 class MyQueue:
