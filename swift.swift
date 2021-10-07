@@ -2226,6 +2226,20 @@ class solution {
             return 2
         }
     }
+
+    // Fibonacci Number
+    func fib(_ n: Int) -> Int {
+        if n <= 1 {
+            return n
+        }
+        var dp = [0, 1]
+        for i in 2..<n+1 {
+            var mySum = dp[0] + dp[1]
+            dp[0] = dp[1]
+            dp[1] = mySum
+        }
+        return dp[1]
+    }
 }
 
 // Restore IP Addresses
