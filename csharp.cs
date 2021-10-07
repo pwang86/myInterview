@@ -2105,6 +2105,28 @@ public class Solution {
         }
         return res;
     }
+
+    // Binary Tree Cameras
+    public int res = 0;
+    public int MinCameraCover(TreeNode root) {
+        if (Traverse(root) == 0) {
+            res++;
+        }
+        return res;
+    }
+    public int Traverse(TreeNode cur) {
+        if (cur == null) return 2;
+        int left = Traverse(cur.left);
+        int right = Traverse(cur.right);
+        if (left == 2 && right == 2) {
+            return 0;
+        } else if (left == 0 || right == 0) {
+            res++;
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 } 
 
 // implement queue using stacks
