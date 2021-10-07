@@ -2202,6 +2202,30 @@ class solution {
         }
         return res
     }
+
+    // Binary Tree Cameras
+    private var res: Int = 0
+    func minCameraCover(_ root: TreeNode?) -> Int {
+        if traverse(root) == 0 {
+            res += 1
+        }
+        return res
+    }
+    func traverse(_ cur: TreeNode?) -> Int {
+        if cur == nil {
+            return 2
+        }
+        let left = traverse(cur?.left)
+        let right = traverse(cur?.right)
+        if left == 2 && right == 2 {
+            return 0
+        } else if left == 0 || right == 0 {
+            res += 1
+            return 1
+        } else {
+            return 2
+        }
+    }
 }
 
 // Restore IP Addresses
