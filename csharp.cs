@@ -2141,6 +2141,18 @@ public class Solution {
         }
         return dp[1];
     }
+
+    // Climbing Stairs
+    public int ClimbStairs(int n) {
+        if (n <= 2) return n;
+        int a = 1, b = 2;
+        for (int i = 3; i <= n; i++) {
+            int sum = a + b;
+            a = b;
+            b = sum;
+        }
+        return b;
+    }
 } 
 
 // implement queue using stacks
