@@ -2237,6 +2237,22 @@ var partition = function(s) {
     return dp[1];
 };
 
+// Climbing Stairs
+/**
+ * @param {number} n
+ * @return {number}
+ */
+ var climbStairs = function(n) {
+    if (n <= 2) return n;
+    let a = 1, b = 2;
+    for (let i = 3; i <= n; i++) {
+        let sum = a + b;
+        a = b;
+        b = sum;
+    }
+    return b;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
