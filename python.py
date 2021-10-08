@@ -1726,6 +1726,18 @@ class Solution:
             dp[0] = dp[1]
             dp[1] = mySum
         return dp[1]
+    
+    # Climbing Stairs
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+        a = 1
+        b = 2
+        for i in range(3, n + 1):
+            mySum = a + b
+            a = b
+            b = mySum
+        return b
 
 # Sliding Window Maximum
 class MyQueue:
