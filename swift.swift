@@ -2255,6 +2255,18 @@ class solution {
         }
         return b
     }
+
+    // Min Cost Climbing Stairs
+     func minCostClimbingStairs(_ cost: [Int]) -> Int {
+        var a = cost[0]
+        var b = cost[1]
+        for i in 2..<cost.count {
+            var mySum = min(a, b) + cost[i]
+            a = b
+            b = mySum
+        }
+        return min(a, b)
+    }
 }
 
 // Restore IP Addresses
