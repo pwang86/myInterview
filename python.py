@@ -1738,6 +1738,16 @@ class Solution:
             a = b
             b = mySum
         return b
+    
+    # Min Cost Climbing Stairs
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        a = cost[0]
+        b = cost[1]
+        for i in range(2, len(cost)):
+            mySum = min(a, b) + cost[i]
+            a = b
+            b = mySum
+        return min(a, b)
 
 # Sliding Window Maximum
 class MyQueue:
