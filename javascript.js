@@ -2253,6 +2253,22 @@ var partition = function(s) {
     return b;
 };
 
+// Min Cost Climbing Stairs
+/**
+ * @param {number[]} cost
+ * @return {number}
+ */
+ var minCostClimbingStairs = function(cost) {
+    let a = cost[0];
+    let b = cost[1];
+    for (let i = 2; i < cost.length; i++) {
+        let sum = Math.min(a, b) + cost[i];
+        a = b; 
+        b = sum;
+    }
+    return Math.min(a, b);
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
