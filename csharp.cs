@@ -2153,6 +2153,18 @@ public class Solution {
         }
         return b;
     }
+
+    // Min Cost Climbing Stairs
+    public int MinCostClimbingStairs(int[] cost) {
+        int a = cost[0];
+        int b = cost[1];
+        for (int i = 2; i< cost.Length; i++) {
+            int sum = Math.Min(a, b) + cost[i];
+            a = b;
+            b = sum;
+        }
+        return Math.Min(a, b);
+    }
 } 
 
 // implement queue using stacks
