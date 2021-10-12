@@ -2311,6 +2311,18 @@ class solution {
         }
         return dp[m - 1][n - 1]
     }
+
+    // Integer Break
+    func integerBreak(_ n: Int) -> Int {
+        var dp = Array(repeating: 0, count: n + 1)
+        dp[2] = 1
+        for i in 3..<n + 1 {
+            for j in 1..<i - 1 {
+                dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]))
+            }
+        }
+        return dp[n]
+    }
 }
 
 // Restore IP Addresses
