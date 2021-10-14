@@ -1798,6 +1798,21 @@ class Solution:
             for j in range(1, i + 1):
                 dp[i] += dp[j - 1] * dp[i - j]
         return dp[n]
+    
+    # Partition Equal Subset Sum
+    def canPartition(self, nums: List[int]) -> bool:
+        if nums == None or len(nums) == 0:
+            return False
+        length = len(nums)
+        mySum = sum(nums)
+        if mySum % 2 == 1:
+            return False
+        target = mySum // 2
+        dp = [0] * (target + 1)
+        for i in range(length):
+            for j in range(target, nums[i] - 1, -1):
+                dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])
+        return dp[target] == target
 
 # Sliding Window Maximum
 class MyQueue:
