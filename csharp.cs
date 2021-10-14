@@ -2233,6 +2233,22 @@ public class Solution {
         }
         return res[n];
     }
+
+    // Partition Equal Subset Sum
+    public bool CanPartition(int[] nums) {
+        if (nums == null || nums.Length == 0) return false;
+        int len = nums.Length;
+        int sum = nums.Sum();
+        if (sum % 2 != 0) return false;
+        int target = sum / 2;
+        int[] dp = new int[target + 1];
+        for (int i = 0; i < len; i++) {
+            for (int j = target; j >= nums[i]; j--) {
+                dp[j] = Math.Max(dp[j], dp[j - nums[i]] + nums[i]);
+            }
+        }
+        return dp[target] == target;
+    }
 } 
 
 // implement queue using stacks
