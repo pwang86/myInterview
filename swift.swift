@@ -2336,6 +2336,26 @@ class solution {
         }
         return dp[n]
     }
+
+    // Partition Equal Subset Sum
+    func canPartition(_ nums: [Int]) -> Bool {
+        if nums.count == 0 || nums == nil {
+            return false
+        }
+        let len = nums.count
+        let sum = nums.reduce(0, +)
+        if sum % 2 == 1 {
+            return false
+        }
+        let target = sum / 2
+        var dp = Array(repeating: 0, count: target + 1)
+        for i in 0..<len {
+            for j in stride(from: target, to: nums[i] - 1, by: -1) {
+                dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])
+            }
+        }
+        return target == dp[target]
+    }
 }
 
 // Restore IP Addresses
