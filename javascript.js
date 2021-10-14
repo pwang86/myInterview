@@ -2348,6 +2348,26 @@ var partition = function(s) {
     return dp[n];
 };
 
+// Partition Equal Subset Sum
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+ var canPartition = function(nums) {
+    if (nums == null || nums.length == 0) return false;
+    let len = nums.length;
+    let sum = nums.reduce((a, b) => a + b, 0);
+    if (sum % 2 != 0) return false;
+    let target = sum / 2;
+    let dp = new Array(target + 1).fill(0);
+    for (let i = 0; i < len; i++) {
+        for (let j = target; j >= nums[i]; j--) {
+            dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
+        }
+    }
+    return dp[target] == target;
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
