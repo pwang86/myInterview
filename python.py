@@ -1823,6 +1823,21 @@ class Solution:
             for j in range(target, stones[i] - 1, -1):
                 dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])
         return mySum - 2 * dp[target]
+    
+    # Target Sum 
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        mySum = sum(nums)
+        if abs(target) > mySum:
+            return 0
+        if (mySum + target) % 2:
+            return 0
+        size = (mySum + target) // 2
+        dp = [0] * (size + 1)
+        dp[0] = 1
+        for i in range(len(nums)):
+            for j in range(size, nums[i] - 1, -1):
+                dp[j] += dp[j - nums[i]]
+        return dp[size]
 
 # Sliding Window Maximum
 class MyQueue:
