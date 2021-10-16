@@ -2369,6 +2369,23 @@ class solution {
         }
         return sum - 2 * dp[target]
     }
+
+    // Target Sum
+    func findTargetSumWays(_ nums: [Int], _ target: Int) -> Int {
+        let sum = nums.reduce(0, +)
+        if abs(target) > sum || (sum + target) % 2 == 1 {
+            return 0
+        }
+        let size = (sum + target) >> 1
+        var dp = Array(repeating: 0, count: size + 1)
+        dp[0] = 1
+        for i in 0..<nums.count {
+            for j in stride(from: size, to: nums[i] - 1, by: -1) {
+                dp[j] += dp[j - nums[i]]
+            }
+        }
+        return dp[size]
+    } 
 }
 
 // Restore IP Addresses
