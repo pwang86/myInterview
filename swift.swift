@@ -2356,6 +2356,19 @@ class solution {
         }
         return target == dp[target]
     }
+
+    // Last Stone Weight II
+    func lastStoneWeightII(_ stones: [Int]) -> Int {
+        let sum = stones.reduce(0, +)
+        let target = sum >> 1
+        var dp = Array(repeating: 0, count: target + 1)
+        for i in 0..<stones.count {
+            for j in stride(from: target, to: stones[i] - 1, by: -1) {
+                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])
+            }
+        }
+        return sum - 2 * dp[target]
+    }
 }
 
 // Restore IP Addresses
