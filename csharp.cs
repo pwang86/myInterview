@@ -2262,6 +2262,22 @@ public class Solution {
         }
         return sum - 2 * dp[target];
     }
+
+    // Target Sum 
+    public int FindTargetSumWays(int[] nums, int target) {
+        int sum = nums.Sum();
+        if (Math.Abs(target) > sum) return 0;
+        if ((sum + target) % 2 == 1) return 0;
+        int size = (sum + target) / 2;
+        int[] dp = new int[size + 1];
+        dp[0] = 1;
+        for (int i = 0; i < nums.Length; i++) {
+            for (int j = size; j >= nums[i]; j--) {
+                dp[j] += dp[j - nums[i]];
+            }
+        }
+        return dp[size];
+    } 
 } 
 
 // implement queue using stacks
