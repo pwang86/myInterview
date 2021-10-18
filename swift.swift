@@ -2386,6 +2386,28 @@ class solution {
         }
         return dp[size]
     } 
+
+    // Ones and Zeroes
+    func findMaxForm(_ strs: [String], _ m: Int, _ n: Int) -> Int {
+        var dp = Array(repeating: Array(repeating: 0, count: n + 1), count: m + 1)
+        for k in 0..<strs.count {
+            var zero = 0
+            var one = 0
+            for ch in strs[k] {
+                if ch == "0" {
+                    zero += 1
+                } else {
+                    one += 1
+                }
+            }
+            for i in stride(from: m, to: zero - 1, by: -1) {
+                for j in stride(from: n, to: one - 1, by: -1) {
+                    dp[i][j] = max(dp[i][j], dp[i - zero][j - one] + 1)
+                }
+            }
+        }
+        return dp[m][n]
+    }
 }
 
 // Restore IP Addresses
