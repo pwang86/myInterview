@@ -2406,6 +2406,30 @@ var partition = function(s) {
     return dp[size];
 };
 
+// Ones and Zeroes
+/**
+ * @param {string[]} strs
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+ var findMaxForm = function(strs, m, n) {
+    let dp = new Array(m + 1).fill().map(item => new Array(n + 1).fill(0));
+    for (let str of strs) {
+        let one = 0, zero = 0;
+        for (let ch of str) {
+            if (ch == '0') zero++;
+            else one++;
+        }
+        for (let i = m; i >= zero; i--) {
+            for (let j = n; j >= one; j--) {
+                dp[i][j] = Math.max(dp[i][j], dp[i - zero][j - one] + 1);
+            }
+        }
+    }
+    return dp[m][n];
+};
+
 // Maximize Sum Of Array After K Negations
 /**
  * @param {number[]} nums
