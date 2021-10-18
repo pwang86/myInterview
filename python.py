@@ -1838,6 +1838,21 @@ class Solution:
             for j in range(size, nums[i] - 1, -1):
                 dp[j] += dp[j - nums[i]]
         return dp[size]
+    
+    # Ones and Zeroes
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for str in strs:
+            one = zero = 0
+            for ch in str:
+                if ch == '0':
+                    zero += 1
+                else:
+                    one += 1
+            for i in range(m, zero - 1, -1):
+                for j in range(n, one - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i - zero][j - one] + 1)
+        return dp[m][n]
 
 # Sliding Window Maximum
 class MyQueue:
